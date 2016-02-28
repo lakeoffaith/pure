@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijoy.common.mapper.DoctorMapper">
+	<resultMap id="doctorResult" type="Doctor">
+		<id column="id" property="id"  />
+		<result column="name" property="name"/>
+		<result column="pic" property="pic" />
+		<result column="introduce" property="introduce" />
+		<result column="ghTotal" property="ghTotal" />
+		<result column="ghHighScore" property="ghHighScore" />
+		<association property="department" javaType="Department" column="department_id" 
+		select="com.ijoy.common.mapper.DepartmentMapper.get"></association>
+		<association property="hospital" javaType="Hospital" column="hospital_id" 
+		select="com.ijoy.common.mapper.HospitalMapper.get"></association>
+	</resultMap>
+
+	<!-- 
+	  用户查看自己收藏的医生,浏览过的医生,挂过号的医生
+	 -->
+	 <select id="queryUserCollectDoctorTotalCount" resultType="long" parameterType="map">
+		SELECT count(d.id) FROM doctor d
+			left join  doctor_employee d_e on d.id=d_e.employee_id
+			left join employee e on d_e.employee_id=e.id
+			where e.id=#{employeeId} and d_e.type=#{type}			
+	 </select>
+	<select id="queryUserCollectDoctorRows"  resultMap="doctorResult" >
+		SELECT * FROM doctor d
+			left join  doctor_employee d_e on d.id=d_e.employee_id
+			left join employee e on d_e.employee_id=e.id
+			where e.id=#{employeeId} and d_e.type=#{type}				
+		limit #{baseQuery.startNum},#{baseQuery.pageSize}
+	</select>
+	
+	
+	
+	<!-- 根据查询条件 如医院(list),科室,科室分类 内科   排序  eg:预约人数 ,eg:好评
+
+	-->
+
+	<select id="queryDoctorRows" parameterType="DoctorQuery" resultMap="doctorResult">
+	
+		SELECT d.* FROM doctor d 
+		left join department dep
+		on d.department_id=dep.id
+			<include refid="doctorQueryPageWhereCondition"></include>
+			<choose>
+				<when test="orderStr=='ghHighScore'">
+					order by d.ghHighScore DESC
+				</when>
+				<otherwise>
+					order by d.ghtotal DESC
+				</otherwise>
+			</choose>
+			
+			limit #{startNum},#{pageSize}
+	
+		
+	</select>
+
+	<select id="queryDoctorTotalCount" parameterType="DoctorQuery" resultType="long">
+		SELECT count(d.id) FROM doctor  d
+		left join department dep
+		on d.department_id=dep.id
+		<include refid="doctorQueryPageWhereCondition"></include>
+	
+	</select>
+
+
+	<sql id="doctorQueryPageWhereCondition">
+		<where>
+			<if test="types!=null and types.size!=0">
+			  and dep.type in
+			  <foreach collection="types" item="item" index="index"  open="(" close=")"  separator=",">
+			  		 #{item}
+			  </foreach>
+			</if>
+		</where>
+	</sql>
+
+
+
+
+</mapper>

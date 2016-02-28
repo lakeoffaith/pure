@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+validator.Checked=src/main/webapp/js,src/main/webapp/department.json,src/main/webapp/citypop.json,src/main/webapp/hospital.json
+validator.Revalidate=false
+validator.Unchecked=src/main/webapp/js/gh/citypop.js

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.ijoy.pure</groupId>
+    <artifactId>pure</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>plat</artifactId>
+  <packaging>war</packaging>
+<name>plat</name>
+	<url>http://maven.apache.org</url>
+		<dependencies>
+			<dependency>
+				<groupId>com.oracle</groupId>
+  <artifactId>oracle12</artifactId>
+  <version>12c.0</version>
+			</dependency>
+		</dependencies>
+	<build>
+		<finalName>plat</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.21</version>
+				<configuration>
+					<scanIntervalSeconds>3</scanIntervalSeconds>
+					<stopKey>shutdown</stopKey>
+					<stopPort>9966</stopPort>
+					<reload>manual</reload>
+					<connectors>
+
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>8889</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+					<webAppConfig>
+						<contextPath>/plat</contextPath>
+					</webAppConfig>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

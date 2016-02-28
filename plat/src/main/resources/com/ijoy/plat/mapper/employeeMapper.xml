@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper  namespace="com.ijoy.plat.mapper.EmployeeMapper">
+  	<resultMap type="Employee"  id="employeeResult">
+  		<id  column="id"  property="id"/>
+  		<result  column="realName"  property="realName"/>
+  		<result column="name" property="name" />
+    <result column="cellphone" property="cellphone" />
+    <result column="department" property="department"  />
+    <result column="homePath" property="homePath" />
+    <result column="workPath" property="workPath" />
+    <association property="role"  column="role_id" javaType="Role" select="com.ijoy.plat.mapper.RoleMapper.get"></association> 
+    
+  	</resultMap>
+  		
+  		<!-- 由应用id来获取员工 -->
+   <!-- 由任务id获取员工 -->
+  <select id="getEmployeebyApplicationId" resultMap="employeeResult" parameterType="long">
+  	select e.id,e.name,e.realName,e.cellphone,e.department,e.homePath,e.workPath,e.role_id from Employee e
+    left join Application_Employee a_e on a_e.employee_id=e.id
+    left join Application a on a_e.application_id=a.id
+    where a.id=#{id}
+  </select>
+  <!-- 由任务id获取员工 -->
+  <select id="getEmployeeByTaskId" resultMap="employeeResult"  parameterType="long">
+  	select e.id,e.name,e.realName,e.cellphone,e.department,e.homePath,e.workPath,e.role_id from Employee e
+    left join Task t on t.employee_id=e.id
+    where t.id=#{id}
+  </select>
+  
+  
+  <!-- 获得全查询列表 -->
+  <select id="getAll" resultMap="employeeResult">
+    select * from Employee e
+  </select>
+  
+ 
+  <!-- 根据id获得用户对象 -->
+    <select id="get" resultMap="employeeResult"  parameterType="long">
+     select * 
+     FROM EMPLOYEE 
+     WHERE id=#{id}
+  </select> 
+  
+  <!--  新增用户对象 -->
+   <insert id="insert"  parameterType="employee">
+      insert into Employee (id,realName,name,cellphone,department,homePath,workPath,role_id) values (#{id},#{realName},#{name},#{cellphone},#{department},#{homePath},#{workPath},#{role.id})
+   </insert>
+   
+   <!-- 删除用户对象 -->
+   <delete id="delete">
+     delete from Employee where id=#v#
+   </delete>
+   
+  <!--  更新用户对象 -->
+   <update id="update" parameterType="employee">
+      update Employee set realName=#{realName},name=#{name},cellphone=#{cellphone},department=#{department},homePath=#{homePath},workPath=#{workPath},role_id=#{role.id} where id=#{id}
+   </update>
+   <select id="queryRows" parameterType="EmployeeQuery" resultMap="employeeResult">
+         select *
+         	from (select a.*,rownum rnum
+         	from (select * 
+         	from employee 
+         	<include refid="querySql"/>
+         	order by id,rowid)a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
+   </select>
+   <select id="queryTotalCount"  parameterType="EmployeeQuery"  resultType="long">
+   		select count(id) from employee
+          <include refid="querySql"></include>
+   </select>
+  		
+  		<sql id="querySql">
+  			<where>
+  					<if test="name!=null">
+  							and name like CONCAT('%',#{name},'%')
+  					</if>
+  			</where>
+  		</sql>
+  </mapper>

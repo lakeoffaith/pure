@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.ijoy.plat.mapper.ApplicationMapper">
+	<resultMap type="Application"  id="applicationResult">
+		<id  column="id"  property="id"/>
+		<result column="name"  property="name"/>
+		 <result column="brief" property="brief" />
+    <result column="starttime" property="starttime"  />
+    <result column="endtime" property="endtime"  />
+    <result column="state" property="state" />
+    <result column="docpath" property="docpath" />
+	</resultMap>
+
+ <!-- 获得全查询列表 -->
+  <select id="getAll" resultMap="applicationResult">
+    select * from Application 
+  </select>
+  
+  
+  <!-- 根据id获得用户对象 -->
+    <select id="get" resultMap="applicationResult" >
+     select * from Application where id=#{id}
+  </select> 
+  
+   <!-- 新增用户对象 -->
+   <insert id="insert" parameterType="Application">
+      insert into Application (name,brief,starttime,endtime,state,docpath) values (#{name},#{brief},#{starttime},#{endtime},#{state},#{docpath})
+   </insert>
+   
+   <!-- 删除用户对象 -->
+   <delete id="delete">
+     delete from Application where id=#{id}
+   </delete>
+   
+   <!-- 更新用户对象 -->
+   <update id="update" parameterType="Application">
+      update Application set name=#{name},brief=#{brief},starttime=#{starttime},endtime=#{endtime},state=#{state},docpath=#{docpath} where id=#{id}
+   </update>
+   <select id="queryRows" parameterType="ApplicationQuery"  resultMap="applicationResult">
+        select *
+         	from (select a.*,rownum rnum
+         	from (select * 
+         	from application 
+         	<include refid="querySql"/>
+         	order by id,rowid)a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
+   </select>
+   <select id="queryTotalCount" parameterType="ApplicationQuery"  resultType="long">
+   		 select  count(id) from application
+	   	    <include refid="querySql"></include>
+   </select>
+ <sql id="querySql">
+ 		<where>
+ 			<if test="name!=null">
+ 				and name like CONCAT('%',#{name},'%')
+ 			</if>
+ 		</where>
+ </sql>
+
+</mapper>

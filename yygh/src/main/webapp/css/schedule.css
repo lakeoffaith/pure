@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* CSS Document */
+
+.text-showy{
+	color:#f90;
+}
+.float-right{
+	float:right;
+	
+}
+.float-left{
+	float:left;
+}
+.back-info{
+	background:#31b0d5;
+}
+.schedule{
+	margin-bottom:0px;
+	display:block;
+	margin-left:0px;
+	padding-left:0px;
+	height:100%;
+}
+.schedule >li{
+	padding:5px 5px;
+	margin-left:5px;
+	border:1px solid #efefef;
+	border-radius:10px;
+	display:block;
+	height:50px;
+	width:50px;
+	float:left;
+	text-align:center;
+	cursor:pointer;
+	position:relative;
+	}
+	.pop{
+		position:absolute;
+		border:1px solid #efefef;
+		z-index:999;
+		background-color:#fff;
+		display:block;
+	}
+	.schedule >li>div.pop {
+		
+		top:50px;
+		left:0px;
+		
+	}
+	.pop-md{
+		width:100px;
+		height:80px;
+	}
+.schedule >li.previous-icon,
+.schedule >li.next-icon{
+	
+	padding:10px;
+	
+}	
+
+
+.schedule>li,.schedule>li{
+	color:#337ab7;
+	background-color:#eee;
+}
+.schedule>li:hover,.schedule>li:focus
+{
+	background-color:#23527c;
+}
+
+.schedule >li.nostyle{
+
+	border:none;
+	background-color:white;
+	cursor:default;
+}
+.schedule >li.disvisible{
+	
+	border:none;
+	background-color:white;
+	cursor:default;
+}
+.schedule >li.disable{
+	color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+}
+
+
+

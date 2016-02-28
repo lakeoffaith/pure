@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ijoy.common.mapper.CityMapper">
+	
+	
+
+
+
+	<select id="queryCityRows" parameterType="CityQuery" resultType="City">
+	
+		SELECT * FROM city
+			<include refid="queryPageWhereCondition"></include>
+			
+		limit #{startNum},#{pageSize}
+	</select>
+
+
+	<sql id="queryPageWhereCondition">
+		<where>
+			<if test="level !=null">
+				and level=#{level}
+			</if>
+			<if test="conditionStr=='pinyin_not_null'">
+			   and pinyin is not null
+			</if>
+		</where>
+	</sql>
+
+</mapper>

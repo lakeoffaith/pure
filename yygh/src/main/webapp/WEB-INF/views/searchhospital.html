@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Untitled Document</title>
+    <!-- Bootstrap -->
+	<link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+<link rel="stylesheet" type="text/css" href="css/citypop.css">
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+  </head>
+  <body>
+	<div class="container-fluid">
+    	<div class="row">
+        <iframe src="title.html" scrolling="no" width="100%" height="72px" style="border:none;">
+        </iframe>
+        </div>
+    	
+        <div class="row" style="margin-top:20px;">
+        	<div class="col-md-10 col-md-offset-1">
+          
+<div class="search-condition" style="height:200px;padding-bottom:20px;border-bottom:1px solid #ededed;">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" id="search-condition-tab">
+    <li role="presentation" class="active"><a href="#hos" aria-controls="hos" role="tab" data-toggle="tab">医院</a></li>
+    <li role="presentation"><a href="#dep" aria-controls="dep" role="tab" data-toggle="tab">科室</a></li>
+    <li role="presentation"><a href="#doc" aria-controls="doc" role="tab" data-toggle="tab">医生</a></li>
+  </ul>
+    <div class="choose-city" style="height:30px;margin-top:10px;border-bottom:1px solid #ededed;position:relative;">
+    	
+        <ul class="list-inline" style="position:relative;">
+        	
+            <li>
+            <span class="glyphicon glyphicon-map-marker text-showy" aria-label="choosecity"></span>
+            <span class="text-showy cityPopValue">广东深圳</span></li>
+        	<li id="choose-city-li"><span><mark>更换</mark></span></li>
+        </ul>
+        
+    	
+        
+        <div class="city pop" id="citypop"  style="display: none;">
+                  <div class="search-citys-tt"> <a class="current click" onclick="tabCutover(this,'s-citys1')" href="javascript:void(0)">国内热门<span></span></a> <a class="click" onclick="tabCutover(this,'s-citys2')" href="javascript:void(0)">ABCDE<span></span></a> <a class="click" onclick="tabCutover(this,'s-citys3')" href="javascript:void(0)">FGHJ<span></span></a> <a class="click" onclick="tabCutover(this,'s-citys4')" href="javascript:void(0)">KLMNP<span></span></a> <a class="click" onclick="tabCutover(this,'s-citys5')" href="javascript:void(0)">QRSTW<span></span></a> <a class="click" onclick="tabCutover(this,'s-citys6')" href="javascript:void(0)">XYZ<span></span></a> <a class="click" onclick="tabCutover(this,'s-citys7')" href="javascript:void(0)">港澳台<span></span></a></div>
+                  <div class="search-citys-list click city_all_choose" id="citylistnew">
+                    <div class="s-citys1 click" id="s-citys1" style="display: block;">
+                      <dl>
+                        <dt></dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a href="#">广州</a></li>
+                          </ul>
+                        </dd>
+                      </dl>
+                    </div>
+                    <div class="s-citys2" style="display: none;">
+                      <dl>
+                        <dt>A</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="安阳" href="#">安阳</a></li>
+                            
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>B</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="北京" href="#">北京</a></li>
+                            
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>C</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="潮州" href="#">潮州</a></li>
+                            
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>D</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="东莞" href="#">东莞</a></li>
+                          
+                          </ul>
+                        </dd>
+
+
+
+
+
+                      </dl>
+                      <dl>
+                        <dt>E</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="鄂州" href="#">鄂州</a></li>
+                            
+                          </ul>
+                        </dd>
+                      </dl>
+                    </div>
+                    <div class="s-citys3" style="display: none;">
+                      <dl>
+                        <dt>F</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="佛山" href="#">佛山</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>G</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="广州" href="#">广州</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>H</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="惠州" href="#">惠州</a></li>
+                            
+                          </ul>
+
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>J</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="江门" href="#">江门</a></li>
+                            
+                          </ul>
+                        </dd>
+                      </dl>
+                    </div>
+                    <div class="s-citys7" style="display: none;">
+                      <dl>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="香港" href="#">香港</a></li>
+                          </ul>
+                        </dd>
+                      </dl>
+                    </div>
+                    <div class="s-citys4" style="display: none;">
+                      <dl>
+                        <dt>K</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="开封" href="#">开封</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>L</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="娄底" href="#">娄底</a></li>
+                            
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>M</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="茂名" href="#">茂名</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>N</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="南阳" href="#">南阳</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>P</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="平顶山" href="#">平顶山</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                    </div>
+                    <div class="s-citys5" style="display: none;">
+                      <dl>
+                        <dt>Q</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="清远" href="#">清远</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>R</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="日照" href="#">日照</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>S</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="深圳" href="#">深圳</a></li>
+                            
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>T</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="天门" href="#">天门</a></li>
+                                   </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>W</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="武汉" href="#">武汉</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                    </div>
+                    <div class="s-citys6" style="display: none;">
+                      <dl>
+                        <dt>X</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="湘潭" href="#">湘潭</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>Y</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="阳江" href="#">阳江</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt>Z</dt>
+                        <dd>
+                          <ul>
+                            <li class="click"><a title="珠海" href="#">珠海</a></li>
+                           
+                          </ul>
+                        </dd>
+                      </dl>
+                    </div>
+                  </div>
+                </div>
+    </div>
+    
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="hos">
+   
+    <div class="choose-class">
+    	<ul class="list-inline">
+        	<li>区域：</li>
+            <li class="text-info">全部</li>
+            <li>高新区</li>
+            <li>武侯区</li>
+            <li>青羊区</li>
+            <li>金牛区</li>
+        </ul>
+        <ul class="list-inline">
+        	<li>级别：</li>
+            <li class="text-info">全部</li>
+            <li>特等医院</li>
+            <li>三甲医院</li>
+            <li>二甲医院</li>
+            <li>一甲医院</li>
+        </ul>
+        <ul class="list-inline">
+        	<li>类型：</li>
+            <li class="text-info">全部</li>
+            <li>泌尿外科</li>
+            <li>男性专科</li>
+            <li>健康体检</li>
+        </ul>
+    </div>
+    
+    </div>
+    <div role="tabpanel" class="tab-pane" id="dep">
+    <div class="choose-class">
+    	
+        <ul class="list-inline">
+        	<li>分类：</li>
+            <li class="text-info">全部</li>
+            <li>妇产科</li>
+            <li>内科</li>
+            <li>儿科</li>
+            <li>五官科</li>
+        </ul>
+        <ul class="list-inline">
+        	<li>级别：</li>
+            <li class="text-info">全部</li>
+            <li>国家重点</li>
+            <li>省级重点</li>
+            <li>市级重点</li>
+            <li>普通科室</li>
+        </ul>
+    </div>
+    
+    </div>
+    <div role="tabpanel" class="tab-pane" id="doc">
+    <ul class="list-inline">
+        	<li>科室类型：</li>
+            <li class="text-info">全部</li>
+            <li>妇产科</li>
+            <li>内科</li>
+            <li>儿科</li>
+            <li>五官科</li>
+        </ul>
+       
+    
+    
+    </div>
+  </div>
+
+
+    </div>        
+            
+            <div class="container-fluid">
+            	<div class="row">
+               	  <div class="col-md-8" style="padding-left:0px;">
+                    <div class="list-bar" style="background-color:#fbfbfb;height:40px; margin-bottom:5px;padding:0px -15px;">
+                                
+        <div class="dropdown" style="float:left;">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                预约人次
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">预约人次</a></li>
+                <li><a href="#">好评数</a></li>
+              </ul>
+            </div>           <div style="float:right;margin-top:10px;">
+             <span>共<code>222</code>个医院</span>
+                        </div>
+             
+                    </div>
+        <div class="thumbnail" style="border:none;position:relative;padding-left:170px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:30px;width:150px;height:100px;">
+      <div class="caption" style="padding-right:100px;">
+        <h3 class="text-info">成都第二人民医院<small class="text-showy">[三级甲等]</small></h3>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:30px;">
+        	
+            <p>已预约人数
+            	
+                
+            </p>
+            <p class="text-warning">3924</p>
+           
+        	
+            <p style="float:right;">
+            <a href="#" style="float:right;">收藏</a>
+            </p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+        <div class="thumbnail" style="border:none;position:relative;padding-left:170px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/dep1.jpg" alt="..." style="position:absolute;left:0px;top:30px;width:150px;height:100px;">
+      <div class="caption" style="padding-right:100px;">
+        <h3 class="text-info">皮肤科<small class="text-showy">[区级重点科室]</small></h3>
+        <p>成都第二人民医院</p>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:30px;">
+        	
+            <p>已预约人数
+            	
+                
+            </p>
+            <p class="text-showy">3924</p>
+           
+        	
+            <p style="float:right;">
+            <a href="#" style="float:right;">收藏</a>
+            </p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:170px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/doc1.jpg" alt="..." style="position:absolute;left:0px;top:30px;width:150px;height:100px;">
+      <div class="caption" style="padding-right:100px;">
+        <h3 class="text-info">产科医生<small class="text-showy">[主任]</small></h3>
+        <p>成都市第二人民医院</p>
+        <p>门诊</p>
+         
+        <div class="float-right-tips" style="position:absolute;right:0px;top:30px;">
+        	
+            <p class="text-showy"><span class="h3">9</span>分</p>
+            <p><span class="star-0"></span></p>
+            <p>3924人点评</p>
+           
+           
+        	
+            <p style="float:right;">
+            <a href="#" style="float:right;">收藏</a>
+            </p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:170px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:30px;width:150px;height:100px;">
+      <div class="caption" style="padding-right:100px;">
+        <h3 class="text-info">成都第二人民医院</h3>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:30px;">
+        	
+            <p>已预约人数
+            	
+                
+            </p>
+            <p class="text-warning">3924</p>
+           
+        	
+            <p style="float:right;">
+            <a href="#" style="float:right;">收藏</a>
+            </p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:170px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:30px;width:150px;height:100px;">
+      <div class="caption" style="padding-right:100px;">
+        <h3 class="text-info">成都第二人民医院</h3>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:30px;">
+        	
+            <p>已预约人数
+            	
+                
+            </p>
+            <p class="text-warning">3924</p>
+           
+        	
+            <p style="float:right;">
+            <a href="#" style="float:right;">收藏</a>
+            </p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:170px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:30px;width:150px;height:100px;">
+      <div class="caption" style="padding-right:100px;">
+        <h3 class="text-info">成都第二人民医院</h3>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:30px;">
+        	
+            <p>已预约人数
+            	
+                
+            </p>
+            <p class="text-warning">3924</p>
+           
+        	
+            <p style="float:right;">
+            <a href="#" style="float:right;">收藏</a>
+            </p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:170px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:30px;width:150px;height:100px;">
+      <div class="caption" style="padding-right:100px;">
+        <h3 class="text-info">成都第二人民医院</h3>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:30px;">
+        	
+            <p>已预约人数
+            	
+                
+            </p>
+            <p class="text-warning">3924</p>
+           
+        	
+            <p style="float:right;">
+            <a href="#" style="float:right;">收藏</a>
+            </p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:170px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:30px;width:150px;height:100px;">
+      <div class="caption" style="padding-right:100px;">
+        <h3 class="text-info">成都第二人民医院</h3>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:30px;">
+        	
+            <p>已预约人数
+            	
+                
+            </p>
+            <p class="text-warning">3924</p>
+           
+        	
+            <p style="float:right;">
+            <a href="#" style="float:right;">收藏</a>
+            </p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:170px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:30px;width:150px;height:100px;">
+      <div class="caption" style="padding-right:100px;">
+        <h3 class="text-info">成都第二人民医院</h3>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:30px;">
+        	
+            <p>已预约人数
+            	
+                
+            </p>
+            <p class="text-warning">3924</p>
+           
+        	
+            <p style="float:right;">
+            <a href="#" style="float:right;">收藏</a>
+            </p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:170px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:30px;width:150px;height:100px;">
+      <div class="caption" style="padding-right:100px;">
+        <h3 class="text-info">成都第二人民医院</h3>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:30px;">
+        	
+            <p>已预约人数
+            	
+                
+            </p>
+            <p class="text-warning">3924</p>
+           
+        	
+            <p style="float:right;">
+            <a href="#" style="float:right;">收藏</a>
+            </p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+                    </div>
+                    <div class="col-md-4">
+                    <div class="rec">
+                    	<h3>推荐医院</h3>
+                        <div class="thumbnail" style="border:none;position:relative;padding-left:60px;border-bottom:1px solid #ededed;padding-top:0px;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:15px;width:58px;height:70px;">
+      <div class="caption">
+        <p class="text-info">成都第二人民医院</p>
+        <p>已预约人数：<span class="text-showy">3924</span></p>
+        <p>地址：成都市人民南路四段</p>
+       
+       
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:60px;border-bottom:1px solid #ededed;padding-top:0px;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:15px;width:58px;height:70px;">
+      <div class="caption">
+        <p class="text-info">成都第二人民医院</p>
+        <p>已预约人数：<span class="text-showy">3924</span></p>
+        <p>地址：成都市人民南路四段</p>
+       
+       
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:60px;border-bottom:1px solid #ededed;padding-top:0px;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:15px;width:58px;height:70px;">
+      <div class="caption">
+        <p class="text-info">成都第二人民医院</p>
+        <p>已预约人数：<span class="text-showy">3924</span></p>
+        <p>地址：成都市人民南路四段</p>
+       
+       
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:60px;border-bottom:1px solid #ededed;padding-top:0px;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:15px;width:58px;height:70px;">
+      <div class="caption">
+        <p class="text-info">成都第二人民医院</p>
+        <p>已预约人数：<span class="text-showy">3924</span></p>
+        <p>地址：成都市人民南路四段</p>
+       
+       
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:60px;border-bottom:1px solid #ededed;padding-top:0px;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:15px;width:58px;height:70px;">
+      <div class="caption">
+        <p class="text-info">成都第二人民医院</p>
+        <p>已预约人数：<span class="text-showy">3924</span></p>
+        <p>地址：成都市人民南路四段</p>
+       
+       
+        
+      </div>
+    </div>
+                    </div>
+                    <div class="hot">
+                    
+                    
+                    	<h3>好评医院</h3>
+                        <div class="thumbnail" style="border:none;position:relative;padding-left:60px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:15px;width:58px;height:70px;">
+      <div class="caption" style="padding-right:20px;">
+        <p class="text-info">成都第二人民医院</p>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:0px;">
+        	
+            <span class="sm-cycle">1</span>
+            <p class="text-warning">3333</p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:60px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:15px;width:58px;height:70px;">
+      <div class="caption" style="padding-right:20px;">
+        <p class="text-info">成都第二人民医院</p>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:0px;">
+        	
+            <span class="sm-cycle">1</span>
+            <p class="text-warning">3333</p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:60px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:15px;width:58px;height:70px;">
+      <div class="caption" style="padding-right:20px;">
+        <p class="text-info">成都第二人民医院</p>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:0px;">
+        	
+            <span class="sm-cycle">1</span>
+            <p class="text-warning">3333</p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:60px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:15px;width:58px;height:70px;">
+      <div class="caption" style="padding-right:20px;">
+        <p class="text-info">成都第二人民医院</p>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:0px;">
+        	
+            <span class="sm-cycle">1</span>
+            <p class="text-warning">3333</p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+    <div class="thumbnail" style="border:none;position:relative;padding-left:60px;border-bottom:1px solid #ededed;" >
+      <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:15px;width:58px;height:70px;">
+      <div class="caption" style="padding-right:20px;">
+        <p class="text-info">成都第二人民医院</p>
+        <p>地址：武侯区人民南路四段</p>
+        <p>电话：02812345678</p>
+       
+        <div class="float-right-tips" style="position:absolute;right:0px;top:0px;">
+        	
+            <span class="sm-cycle">1</span>
+            <p class="text-warning">3333</p>
+           
+           
+        </div>
+        
+      </div>
+    </div>
+                    </div>
+                    </div>
+                
+                
+                </div>
+            
+            
+            
+            
+            </div>
+            
+            </div>
+        
+        </div>
+        
+       
+        
+        <div class="row">
+           <iframe src="footer.html" width="100%" height="60px" scrolling="no" style="border:none;margin-top:20px;"></iframe>
+        </div>
+  	</div>
+
+ 
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+	<script src="js/jquery-1.11.2.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed --> 
+	<script src="js/bootstrap.js"></script>
+    <script src="js/gh/global.js"></script>
+    <script src="js/gh/citypop.js"></script>
+</body>
+</html>

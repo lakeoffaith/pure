@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ijoy.common.mapper.DepartmentMapper">
+	<resultMap id="departmentResult" type="Department">
+		<id column="id" property="id"  />
+		<result column="code" property="code" />
+		<result column="pinyin"  property="pinyin"/>
+		<result column="type" property="type" />
+		<result column="level" property="level" />
+		<result column="pic"  property="pic" />
+		<result column="phone" property="phone" />
+		<result column="name" property="name" />
+		<result column="message" property="message" />
+		<result column="ghTotal" property="ghTotal" />
+		<result column="ghHighScore" property="ghHighScore" />
+		<association  property="hospital" column="hospital_id"  javaType="Hospital" select="com.ijoy.common.mapper.HospitalMapper.get"></association>
+	</resultMap>
+	
+	
+	<insert id="insert"  parameterType="Department">
+	insert into  department(id,code,pinyin,type,level,pic,phone,name,message,ghTotal,ghHighScore,hospital_id) values(#{id},#{code},#{pinyin},#{type},#{level},#{pic},#{phone},#{name},#{message},#{ghTotal},#{ghHighScore},#{hospital.id});
+	</insert>
+	
+	
+	<!-- 
+	  用户查看自己收藏的科室,浏览过的科室,挂过号的科室
+	 -->
+	 <select id="queryUserCollectDepartmentTotalCount" resultType="long" parameterType="map">
+		SELECT count(d.id) FROM department d
+			left join  department_employee d_e on d.id=d_e.department_id
+			left join employee e on d_e.employee_id=e.id
+			where e.id=#{employeeId} and d_e.type=#{type}			
+	 </select>
+	<select id="queryUserCollectDepartmentRows" resultMap="departmentResult">
+		SELECT * FROM department d
+			left join  department_employee d_e on d.id=d_e.department_id
+			left join employee e on d_e.employee_id=e.id
+			where e.id=#{employeeId} and d_e.type=#{type}				
+		  limit #{baseQuery.startNum},#{baseQuery.pageSize}
+	</select>
+	
+	
+	
+	<!-- 如 成都四川,医院,科室,科室分类 内科,国家级别  eg:国家重点   排序  eg:预约人数 ,eg:好评 
+	step1:查出所有  成功预约人数
+
+	-->
+
+	<select id="queryDepartmentRows" parameterType="DepartmentQuery" resultMap="departmentResult">
+	
+		SELECT * FROM department
+			<include refid="departmentQueryPageWhereCondition"></include>
+			<choose>
+				<when test="orderStr=='ghHighScore'">
+					order by ghHighScore DESC
+				</when>
+				<otherwise>
+					order by ghtotal DESC
+				</otherwise>
+			</choose>
+			
+		limit #{startNum},#{pageSize}
+	</select>
+
+	<select id="queryDepartmentTotalCount" parameterType="DepartmentQuery" resultType="long">
+		SELECT count(d.id) FROM department  d
+		<include refid="departmentQueryPageWhereCondition"></include>
+	
+	</select>
+
+
+	<sql id="departmentQueryPageWhereCondition">
+		<where>
+			<if test="levels!=null  and levels.size!=0">
+				and level in
+					<foreach collection="levels"  item="item" index="index"  open="("  separator="," close=")">
+							#{item}
+					</foreach>
+			</if>
+			<if test="types!=null and types.size!=0">
+				and type  in
+				 <foreach collection="types"  item="item" index="index"  open="("  separator="," close=")">
+							#{item}
+					</foreach>
+			</if>
+			<if test="name!=null">
+				and name=#{name}
+			</if>
+			<if test="hosId!=null">
+				and hospital_id=#{hosId}
+			</if>
+		</where>
+	</sql>
+
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijoy.plat.mapper.LoginInfoMapper">
+			<resultMap type="LoginInfo" id="loginInfoResult">
+				<id  column="id"  property="id"/>
+				<result column="name"  property="name"/>
+				 <result column="password"  property="password"/>
+				 <result column="state"  property="state"  />
+				 <result column="rememberdays"  property="rememberdays" />
+			</resultMap>
+			 <!-- 获得全查询列表 -->
+  <select id="getAll" resultMap="loginInfoResult">
+    select * from logininfo
+  </select>
+     <!--    查询是否存在此用户 -->
+  <select id="checkExistLoginInfoByName" resultMap="loginInfoResult"  parameterType="string">
+    select *  from LoginInfo where name=#{name}
+  </select>
+  
+ 
+  
+  
+  <!-- 根据id获得用户对象 -->
+    <select id="get" resultMap="loginInfoResult" >
+     select * from LoginInfo where id=#{id}
+  </select> 
+   
+ <!--   新增用户对象 
+       新增用户，新增系统登录信息 -->
+  
+   <insert id="insert" parameterType="LoginInfo">
+      insert into LoginInfo (name,password,state,rememberdays) values (#{name},#{password},#{state},#{rememberdays})
+   </insert>
+   
+  <!--  删除用户对象 -->
+   <delete id="delete">
+     delete from LoginInfo where id=#{id}
+   </delete>
+   
+  <!--  更新用户对象 -->
+   <update id="update"   parameterType="LoginInfo">
+      update LoginInfo set name=#{name},password=#{password},state=#{state},rememberdays=#{rememberdays} where id=#{id}
+   </update>
+<!--    登录 -->
+   <select id="findByLogin" parameterType="LoginInfo" resultMap="loginInfoResult">
+   	 SELECT * 
+   	 FROM LoginInfo where name=#{name} and password=#{password}
+   </select>
+</mapper>

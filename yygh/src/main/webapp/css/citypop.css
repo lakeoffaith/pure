@@ -1,0 +1,115 @@
+.pop {
+	transition-property: display;
+	transition-duration: 0s,0s,0s;
+	/* Firefox 4 */
+	-moz-transition-property: display;
+	-moz-transition-duration: 0s,0s,0s;
+	/* Safari and Chrome */
+	-webkit-transition-property: display;
+	-webkit-transition-duration: 0s,0s,0s;
+	/* Opera */
+	-o-transition-property: display;
+	-o-transition-duration: 0s,0s,0s;
+	color: #FFFFFF;
+	z-index: 999;
+}
+.city{
+	border: 1px solid #ededed;
+	top: 30px;
+	width: 450px;
+	line-height: 30px;
+	background-color: #fff;
+	position: absolute;
+	min-height: 150px;
+
+}
+
+#citypop .search-citys-tt {
+	display: block;
+	background-color: #ebf9ff;
+	padding-left: 15px;
+	position: absolute;
+	left: -1px;
+	border: 1px solid #ededed;
+	padding-left: 2px;
+	width: 450px;
+	line-height: 30px;
+	border-top: 0;
+	height: 35px;
+}
+
+
+#citypop .city_all_choose {
+	position: absolute;
+    top: 38px;
+    left: -1px;
+    border: 1px solid #ededed;
+    padding: 8px 0 0px 0;
+    width: 450px;
+    line-height: 30px;
+    background: #fff;
+    border-top: 0;
+}
+
+
+#citypop .search-citys-tt .current {
+	background-image: url(../images/gh/currbg.png);
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	height: 35px;
+	display: inline-block;
+	color: #0090DB;
+}
+#citypop .search-citys-list li {
+	display:inline-block;
+	width:20%;
+	margin:1px 0px;
+	
+	
+}
+#citypop .search-citys-list li a{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: block;
+}
+#citypop .search-citys-list dt {
+	position: absolute;
+	color: #0090DB;
+	font-weight: 900;
+	left: 0px;
+	/* [disabled]top: 2px; */
+	
+}
+
+
+#citypop .search-citys-list {
+	padding: 5px 0px;
+	background-color: #FFFFFF;
+}
+#citypop .search-citys-list dl{
+	margin: 0px;
+	padding-left: 20px;
+	position: relative;
+}
+#citypop.search-citys-list ul{
+
+	margin:0px;
+}
+
+
+#citypop .search-citys-tt a {
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+	padding-top: 0px;
+	padding-right: 6px;
+	padding-left: 6px;
+	padding-bottom: 0px;
+	outline: none;
+	text-align: center;
+	position: relative;
+	margin-bottom: -1px;
+	transition-duration: 0s,0s,0s;
+	transition-property: all;
+   }

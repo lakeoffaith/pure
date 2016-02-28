@@ -1,0 +1,245 @@
+@charset "utf-8";
+/* CSS Document  for bootstrap project lzg */
+.thumbnail {
+	margin-bottom: 0px;
+}
+
+body {
+	position: absolute;
+	min-height: 100%;
+	width: 100%;
+}
+
+.text-showy {
+	color: #f90;
+}
+
+.bg-color-primary {
+	background-color: #337ab7;
+}
+
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.back-info {
+	background: #31b0d5;
+}
+
+.navbar-brand img {
+	margin: -15px 0px;
+	padding: 7px 0px;
+}
+
+p.navbar-text {
+	height: 50px;
+	padding-top: 10px;
+	font-size: 24px;
+	font-weight: 600;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.quikegh {
+	border: 1px solid #ededed;
+	height: 290px;
+	position: relative;
+}
+
+.quikegh>.header {
+	border-bottom: 1px solid #ededed;
+}
+
+.quikegh .inputBody {
+	position: relative;
+	margin: 10px 0px;
+}
+
+.quikegh .form-horizontal .form-group {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.quikegh .form-group>label {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.quikegh .form-group>label>p {
+	font-weight: normal;
+}
+
+.quikegh .form-group>div {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.quikegh .form-horizontal>button {
+	margin-top: 40px;
+}
+
+.input-group .pop {
+	right: 0px;
+}
+
+.sm-cycle {
+	width: 20px;
+	height: 20px;
+	border-radius: 12px;
+	background-color: #f90;
+	color: #fff;
+	text-align: center;
+	float: right;
+}
+
+.star-5, .star-05, .star-4, .star-15, .star-3, .star-25, .star-2,
+	.star-35, .star-1, .star-45, .star-0 {
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 14px;
+	margin-top: -4px;
+	vertical-align: middle;
+	width: 75px;
+	_overflow: hidden;
+	background-image: url(../images/gh/midstars.gif);
+}
+
+.star-0 {
+	background-position: left 0px;
+}
+
+.text-showy {
+	color: #f90;
+}
+
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.back-info {
+	background: #31b0d5;
+}
+
+.schedule {
+	margin-bottom: 0px;
+	display: block;
+	margin-left: 0px;
+	padding-left: 0px;
+	height: 100%;
+}
+
+.schedule>li {
+	padding: 5px 5px;
+	margin-left: 5px;
+	border: 1px solid #efefef;
+	border-radius: 10px;
+	display: block;
+	height: 50px;
+	width: 50px;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	position: relative;
+}
+
+.pop {
+	position: absolute;
+	border: 1px solid #efefef;
+	z-index: 999;
+	background-color: #fff;
+	display: block;
+}
+
+.schedule>li>div.pop {
+	top: 50px;
+	left: 0px;
+}
+
+.pop-md {
+	width: 100px;
+	height: 80px;
+}
+
+.schedule>li.previous-icon, .schedule>li.next-icon {
+	padding: 10px;
+}
+
+.schedule>li, .schedule>li {
+	color: #337ab7;
+	background-color: #eee;
+}
+
+.schedule>li:hover, .schedule>li:focus {
+	background-color: #23527c;
+}
+
+.schedule>li.nostyle {
+	border: none;
+	background-color: white;
+	cursor: default;
+}
+
+.schedule>li.disvisible {
+	border: none;
+	background-color: white;
+	cursor: default;
+}
+
+.schedule>li.disable {
+	color: #777;
+	cursor: not-allowed;
+	background-color: #fff;
+}
+
+/* 
+conditionBar--start
+ */
+.conditionBar {
+	background-color: white;
+}
+
+.conditionBar   li {
+	background-color: #2e6da4;
+	overflow: hidden;
+	white-space: nowrap;
+	position: relative;
+	padding-bottom: 0px;
+}
+
+.conditionBar  li>a {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	color: #eea236;
+}
+
+.conditionBar-mid  li {
+	padding-left: 10px;
+	padding-right: 20px;
+	padding-top: 5px;
+	border-radius: 4px;
+	width: 150px;
+	margin-right:15px;
+	font-size: large;
+}
+
+.conditionBar-sm  li {
+	padding-left: 5px;
+	padding-right: 20px;
+	font-size: small;
+	border-radius: 3px;
+	margin-right:10px;
+	width: 80px;
+}
+
+/**
+    	conditionBar --end
+    	*/

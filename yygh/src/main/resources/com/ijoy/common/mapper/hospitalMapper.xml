@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ijoy.common.mapper.HospitalMapper">
+	<resultMap id="hospitalResult" type="Hospital">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="domain" property="domain"  />
+		<result column="logo" property="logo" />
+		<result column="pic" property="pic" />
+		<result column="address" property="address" />
+		<result column="x" property="x" />
+		<result column="y" property="y" />
+		<result column="tel" property="tel" />
+		<result column="fax" property="fax" />
+		<result column="zipcode" property="zipcode" />
+		<result column="url" property="url" />
+		<result column="mail" property="mail" />
+		<result column="gobus" property="gobus" />
+		<result column="level" property="level" />
+		<result column="nature" property="nature" />
+		<result column="mtype" property="mtype" />
+		<result column="comment" property="comment" />
+		<result column="count" property="count" />
+		<result column="ghTotal" property="ghTotal" />
+		<result column="ghHighScore" property="ghHighScore"/>
+		<association property="city"  javaType="City"  column="city_id" select="com.ijoy.common.mapper.CityMapper.get"></association>
+	</resultMap>
+	
+	
+	<update id="update" parameterType="Hospital">
+	update hospital set name=#{name},domain=#{domain},logo=#{logo},pic=#{pic},city_id=#{city.id},address=#{address},
+	x=#{x},y=#{y},tel=#{tel},fax=#{fax},zipcode=#{zipcode},url=#{url},mail=#{mail},gobus=#{gobus},
+	level=#{level},nature=#{nature},mtype=#{mtype},comment=#{comment},count=#{count},ghTotal=#{ghTotal},
+	ghHighScore=#{ghHighScore) where id=#{id}
+	
+	</update>
+	
+	<insert id="insert"  parameterType="Hospital" >
+    	insert into hospital(id,name,domain,logo,pic,city_id,address,x,y,tel,fax,zipcode,url,mail,gobus,level,nature,mtype,comment,count,ghTotal,ghHighScore )
+	values (#{id},#{name},#{domain},#{logo},#{pic},#{city.id},#{address},#{x},#{y},#{tel},#{fax},#{zipcode},#{url},#{mail},#{gobus},#{level},#{nature},
+	#{mtype},#{comment},#{count},#{ghTotal},#{ghHighScore})
+	</insert>
+
+	
+
+	<!-- 
+	  用户查看自己收藏的医院,浏览过的医院,挂过号的医院-->
+	 <select id="queryUserCollectHospitalTotalCount" resultType="long" parameterType="map">
+		SELECT count(h.id) FROM hospital h
+			left join hospital_employee h_e on h.id=h_e.hospital_id
+			left join employee e on h_e.employee_id=e.id
+			where e.id=#{employeeId} and h_e.type=#{type}
+	 </select>
+	<select id="queryUserCollectHospitalRows" resultMap="hospitalResult">
+	
+		SELECT * FROM hospital h
+		    left join hospital_employee h_e on h.id=h_e.hospital_id
+		    left join employee e on h_e.employee_id=e.id
+		    where e.id=#{employeeId} and h_e.type=#{type}
+	   limit #{baseQuery.currentPage-1}*#{baseQuery.pageSize},#{baseQuery.pageSize}
+	</select>
+	
+	
+	<!-- 根据查询条件 如 省份,城市,区域,级别,类型  排序  eg:预约人数 ,eg:好评
+	-->
+
+	<select id="queryHospitalRows" parameterType="HospitalQuery" resultMap="hospitalResult">
+		SELECT * FROM hospital
+			<include refid="hospitalQueryPageWhereCondition"></include>
+			<choose>
+				
+				<when test="orderStr!=null">
+					order by #{orderStr} DESC
+				</when>
+				<otherwise>
+					order by ghtotal DESC
+				</otherwise>
+			</choose>
+			
+			limit #{startNum},#{pageSize}
+	</select>
+
+	<select id="queryHospitalTotalCount" parameterType="HospitalQuery" resultType="long">
+		SELECT count(h.id) FROM hospital  h
+		<include refid="hospitalQueryPageWhereCondition"></include>
+	
+	</select>
+
+
+	<sql id="hospitalQueryPageWhereCondition">
+		<where>
+			<if test="levels!=null  and levels.size!=0">
+				and level in
+				 <foreach item="item" index="index"  collection="levels"
+                         open="(" separator="," close=")" >
+                        #{item}
+                </foreach>
+			</if>
+				<if test="types!=null  and types.size!=0">
+				and type  in
+				 <foreach collection="types"  item="item" index="index" 
+                          open="(" separator="," close=")">
+                        #{item}
+                </foreach>
+			</if>
+			<if test="name!=null">
+				and name=#{name}
+			</if>
+			<if test="cityId!=null">
+			  and city_id=#{cityId}
+			</if>
+		</where>
+	</sql>
+	
+
+
+
+</mapper>

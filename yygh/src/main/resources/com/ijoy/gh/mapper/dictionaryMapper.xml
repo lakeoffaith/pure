@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ijoy.gh.mapper.DictionaryMapper">
+	<resultMap id="dictionaryResult" type="Dictionary">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="type" property="type" />
+	</resultMap>
+
+<select id="queryDictionaryRows" parameterType="DictionaryQuery" resultMap="dictionaryResult">
+	
+		SELECT * FROM dictionary
+			<include refid="dictionaryQueryPageWhereCondition"></include>
+			
+		limit #{startNum},#{pageSize}
+	</select>
+
+	<select id="queryDictionaryTotalCount" parameterType="DictionaryQuery" resultType="long">
+		SELECT count(d.id) FROM dictionary  d
+		<include refid="dictionaryQueryPageWhereCondition"></include>
+	
+	</select>
+
+
+	<sql id="dictionaryQueryPageWhereCondition">		
+	<where>
+			<if test="type!=null">
+				and type like CONCAT('%',#{type},'%') 
+			</if>
+		</where>
+	</sql>
+
+
+
+
+</mapper>

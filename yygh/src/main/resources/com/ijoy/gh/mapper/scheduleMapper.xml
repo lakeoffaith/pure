@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ijoy.gh.mapper.ScheduleMapper">
+	<resultMap id="scheduleResult" type="Schedule">
+		<id column="id" property="id" />
+		<result column="numbers" property="numbers"  />
+		<result column="date" property="date" />
+		<result column="cost" property="cost" />
+		<result column="residueNumbers" property="residueNumbers" />
+		<result column="noonType" property="noonType" />
+		<association property="doctor" javaType="Doctor" column="doctor_id" 
+		select="com.ijoy.common.mapper.DoctorMapper.get"></association>
+	</resultMap>
+	
+	
+	
+	
+	<select id="querySchedules"  parameterType="ScheduleQuery"  resultMap="scheduleResult">
+		SELECT * FROM schedule
+		<where>
+			<if test="doctorId>0">
+				and doctor_id=#{doctorId}
+			</if>
+			<if test="startDate!=null">
+				and schedule_date>=#{startDate}
+			</if>
+			<if test="endDate!=null">
+			<![CDATA[
+			and schedule_date<=#{endDate}
+			]]>
+			</if>
+		</where>
+	</select>
+	
+		
+		<select id="queryTotalCount"  parameterType="ScheduleQuery" resultType="Long">
+			select count(id) from schedule
+			<include refid="querySql"></include>
+		</select>
+		
+		<select  id="queryRows"  parameterType="ScheduleQuery"  resultMap="scheduleResult">
+				select * from schedule
+				<include refid="querySql"></include>
+				limit #{startNum} ,#{pageSize}
+		</select>
+			
+			<sql id="querySql">
+				<where>
+						<if test="doctor_id!=null">
+							and doctor_id=#{doctor_id}
+						</if>
+						<if test="startDate!=null and endDate!=null">
+								and date>=#{startDate} and date  <![CDATA[ <  ]]>  #{endDate}
+						</if>
+				
+				</where>
+				
+			</sql>
+
+
+
+</mapper>

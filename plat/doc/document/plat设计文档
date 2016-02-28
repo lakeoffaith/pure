@@ -1,0 +1,4 @@
+一：登陆
+    去登陆页面/loginInfo/login
+    拦截：登陆拦截。
+	配置AutoLogonFilter(自动登陆)，进入AuthInterceptor(权限拦截器)，如果用户不存在session中，抛出AuthException(权限异常)，spring配置SimpleMappingExceptionResolver 重新定向到/loginInfo/login，

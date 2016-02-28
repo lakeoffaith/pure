@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ijoy.gh.mapper.OrderItemMapper">
+	<resultMap id="orderItemResult" type="OrderItem">
+		<id column="id" property="id" />
+		
+		<result column="date" property="date"/>
+		<result column="orderNum" property="orderNum" />
+		<result column="state" property="state" />
+		<result column="takePassword" property="takePassword"  />
+		<result column="score" property="score" />
+		<result column="message" property="message"  />
+		<association property="hospital" javaType="Hospital" column="hospital_id" 
+		select="com.ijoy.common.mapper.HospitalMapper.get"></association>
+		<association property="department" javaType="Department" column="department_id"
+		select="com.ijoy.common.mapper.DepartmentMapper.get"></association>
+		<association property="doctor" javaType="Doctor" column="doctor_id"
+		select="com.ijoy.common.mapper.DoctorMapper.get"></association>
+		<association property="employee" javaType="Employee" column="employee_id"
+		select="com.ijoy.common.mapper.EmployeeMapper.get"></association>
+		<association property="schedule" javaType="Schedule" column="schedule_id" 
+		select="com.ijoy.gh.mapper.ScheduleMapper.get"></association>
+	</resultMap>
+
+  <insert id="insert"  parameterType="OrderItem">
+  	insert into orderItem(hospital_id,department_id,doctor_id,schedule_id,date,orderNum,state,takePassword,
+  	employee_id,score,message) values (#{hospital.id},#{department.id},#{doctor.id},#{schedule.id},#{date},
+  	#{orderNum},#{state},#{takePassword},#{employee.id},#{score},#{message})
+  
+  </insert>
+
+<update id="update" parameterType="OrderItem">
+	update orderItem set 
+	hospital_id=#{hospital.id},
+	department_id=#{department.id},
+	doctor_id=#{doctor.id},
+	schedule_id=#{schedule.id},
+	date=#{date},
+	orderNum=#{orderNum},
+	state=#{state},
+	takePassword=#{takePassword},
+	employee_id=#{employee.id},
+	score=#{score},
+	message=#{message}
+	where id=#{id}
+
+</update>
+
+<select id="queryTotalCount"  parameterType="OrderItemQuery" resultType="long">
+	select count(id) from orderItem
+	<include refid="querySql"></include>
+</select>
+
+<select id="queryRows"  parameterType="OrderItemQuery"  resultMap="orderItemResult">
+	select * from orderItem
+	<include refid="querySql"></include>
+	limit #{startNum} ,#{pageSize}
+</select>
+
+<sql id="querySql">
+	<where>
+		<if test="userId!=null">
+			and employee_id=#{userId}
+		</if>		
+	</where>
+
+</sql>
+
+</mapper>
