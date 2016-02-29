@@ -12,7 +12,7 @@ public interface IFeedbackService  {
 	public void update(Feedback t);
 	public Feedback  get(Long  id);
 	public List<Feedback> getAll();
-	public PageResult<Feedback> queryFeedbacks(BaseQuery baseQuery);
+	public PageResult<Feedback> queryPage(BaseQuery baseQuery);
 
 }
 

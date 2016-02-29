@@ -14,6 +14,11 @@ public class RoleQuery extends BaseQuery {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "RoleQuery [name=" + name + "]";
+	}
+
 
     
 }

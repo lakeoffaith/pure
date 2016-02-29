@@ -30,13 +30,18 @@ public abstract class BaseQuery {
 		return pageSize;
 	}
 	public void setPageSize(Long pageSize) {
-		this.pageSize = pageSize;
+		if(pageSize!=null){
+			this.pageSize = pageSize;
+		}
+		
 	}
 	public Long getCurrentPage() {
 		return currentPage;
 	}
 	public void setCurrentPage(Long currentPage) {
-		this.currentPage = currentPage;
+		if(currentPage!=null){
+			this.currentPage = currentPage;
+		}
 	}
 	@Override
 	public String toString() {

@@ -26,11 +26,11 @@
   
    <!-- 新增用户对象 -->
    <insert id="insert" parameterType="Application">
-      insert into Application (name,brief,starttime,endtime,state,docpath) values (#{name},#{brief},#{starttime},#{endtime},#{state},#{docpath})
+      insert into Application (id,name,brief,starttime,endtime,state,docpath) values (application_seq.nextval,#{name},#{brief},#{starttime},#{endtime},#{state},#{docpath})
    </insert>
    
    <!-- 删除用户对象 -->
-   <delete id="delete">
+   <delete id="delete"  parameterType="long">
      delete from Application where id=#{id}
    </delete>
    
@@ -55,7 +55,7 @@
  <sql id="querySql">
  		<where>
  			<if test="name!=null">
- 				and name like CONCAT('%',#{name},'%')
+ 				and name like '%' || #{name} || '%'
  			</if>
  		</where>
  </sql>

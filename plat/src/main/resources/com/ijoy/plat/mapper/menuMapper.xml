@@ -65,7 +65,7 @@
   
    <!-- 新增用户对象 -->
    <insert id="insert" parameterType="menu">
-      insert into Menu (id,name,url,orderid,type,parent_id,iconname) values (#{id},#{name},#{url},#{orderid},#{type},#{parent_id},#{iconname})
+      insert into Menu (id,name,url,orderid,type,parent_id,iconname) values (menu_seq.nextval,#{name},#{url},#{orderid},#{type},#{parent_id},#{iconname})
    </insert>
     
     <delete id="deleteAll">

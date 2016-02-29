@@ -33,11 +33,13 @@
   
    <!-- 新增用户对象 -->
    <insert id="insert"   parameterType="Role">
-      insert into Role (name,describe) values (#{name},#{describe})
+   	  <selectKey   resultType="long"  keyProperty="id"  order="BEFORE">
+		select ROLE_SEQ.nextval as id from dual
+		</selectKey>
+      insert into Role (id,name,describe) values (#{id},#{name},#{describe})
    </insert>
-   
    <!-- 删除用户对象 -->
-   <delete id="delete">
+   <delete id="delete"  parameterType="long">
      delete from Role where id=#{id}
    </delete>
    
@@ -62,7 +64,7 @@
 	<sql id="querySql">
 		<where>
 			<if test="name!=null">
-				and name like CONCAT('%',#{name},'%')
+				and name like '%' || #{name}  || '%'
 			</if>
 		</where>
 	</sql>

@@ -32,4 +32,12 @@ public class EmployeeQuery extends BaseQuery {
 		this.deptId = deptId;
 	}
 
+	@Override
+	public String toString() {
+		return "EmployeeQuery [name=" + name + ", email=" + email + ", deptId=" + deptId + ", getEndNum()="
+				+ getEndNum() + ", getStartNum()=" + getStartNum() + "]";
+	}
+
+	
+	
 }

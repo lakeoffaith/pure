@@ -26,6 +26,7 @@ public interface IMenuService{
 	void deleteAll();
 	List<Menu> getMenuByMenuName(String string);
 
-	public PageResult<Menu> queryforPage(BaseQuery  baseQuery);
+	public PageResult<Menu> queryPage(BaseQuery  baseQuery);
+
 }
 

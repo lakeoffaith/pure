@@ -5,14 +5,14 @@ public class Menu implements Comparable<Menu>{
 	public static final int PERMISSIONMENU = 2;
 	public static int INDEXMENU=1; //表示首页的权限元素(菜单)
 	private Long id;
-	private String name;
-	private String url;
+	private String name="";
+	private String url="";
 	private Long parent_id;
-	private String iconCls;
-	private Long orderid;
+	private String iconCls="";
+	private Long orderid=null;
 	private int type;   //默认为1 为普通菜单   2为菜单下面的按钮权限。
 	private State state;  //为了jtree控制输出
-	private String iconname;
+	private String iconname="";
 	private Long childNum;  //默认为没有子类
 	public Menu(){
 		

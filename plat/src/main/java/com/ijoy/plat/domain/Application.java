@@ -8,11 +8,11 @@ import java.util.List;
 public class Application {
 	private Long id;
 	private String name;
-	private String brief;
-	private Date starttime;
-	private Date endtime;
+	private String brief="";
+	private Date starttime=new Date();
+	private Date endtime=new Date();
 	private int state;
-	private String docpath;
+	private String docpath="";
 	private List<Employee> employeeList=new ArrayList();
 	public Long getId() {
 		return id;

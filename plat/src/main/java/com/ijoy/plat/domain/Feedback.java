@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Feedback {
 	private Long id;
-	private String content;
-	private Date time;
+	private String content="";
+	private Date time=new Date();
 	private Employee employee;
 	public Long getId() {
 		return id;

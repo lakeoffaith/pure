@@ -21,33 +21,35 @@ public class RoleServiceImpl  implements IRoleService {
 	}
 	@Override
 	public Long insert(Role t) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.insert(t);
 	}
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		mapper.delete(id);
 		
 	}
 	@Override
 	public void update(Role t) {
-		// TODO Auto-generated method stub
+		mapper.update(t);
 		
 	}
 	@Override
 	public Role get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return mapper.get(id);
 	}
 	@Override
 	public List<Role> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.getAll();
 	}
 	@Override
 	public PageResult<Role> queryPage(BaseQuery baseQuery) {
-		// TODO Auto-generated method stub
-		return null;
+		Long totalCount = mapper.queryTotalCount(baseQuery);
+		if(totalCount>0){
+			List<Role> rows = mapper.queryRows(baseQuery);
+			return new PageResult<>(totalCount, rows, baseQuery.getPageSize(), baseQuery.getCurrentPage());
+		}
+		return new PageResult<>();
 	}
 
 
