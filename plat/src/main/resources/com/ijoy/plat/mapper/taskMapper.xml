@@ -29,7 +29,7 @@
   
    <!-- 新增用户对象 -->
    <insert id="insert"  parameterType="Task">
-      insert into Task (name,month,taskcycle,describe,type,state,starttime,endtime,employee_id) values (#{name},#{month},#{taskcycle},#{describe},#{type},#{state},#{starttime},#{endtime},#{employee.id})
+      insert into Task (id,name,month,taskcycle,describe,type,state,starttime,endtime,employee_id) values (task_seq.nextval,#{name},#{month},#{taskcycle},#{describe},#{type},#{state},#{starttime},#{endtime},#{employee.id})
    </insert>
    
    <!-- 删除用户对象 -->
@@ -60,7 +60,7 @@
    <sql id="querySql">
    	<where>
    		<if test="name!=null">
-   			and name like CONCAT('%',#{name},'%')
+   			and name like '%' || #{name} || '%'
    		</if>
    	
    	</where>

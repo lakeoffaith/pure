@@ -37,7 +37,7 @@ public class MenuServiceTest extends BaseTest{
 	public void queryTest(){
 		MenuQuery menuQuery = new MenuQuery();
 		menuQuery.setParent_id(1L);
-		PageResult<Menu> query = menuService.queryforPage(menuQuery);
+		PageResult<Menu> query = menuService.queryPage(menuQuery);
 		int size = query.getRows().size();
 		System.out.println(size);
 		
@@ -64,7 +64,7 @@ public class MenuServiceTest extends BaseTest{
 		query.setCurrentPage(2L);
 		query.setPageSize(10L);
 		System.out.println(query);
-		 PageResult<Menu> queryforPage = menuService.queryforPage(query);
+		 PageResult<Menu> queryforPage = menuService.queryPage(query);
 		System.out.println(queryforPage);
 		
 	}

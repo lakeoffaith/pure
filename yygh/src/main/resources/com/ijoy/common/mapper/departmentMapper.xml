@@ -49,30 +49,33 @@
 
 	-->
 
-	<select id="queryDepartmentRows" parameterType="DepartmentQuery" resultMap="departmentResult">
-	
-		SELECT * FROM department
-			<include refid="departmentQueryPageWhereCondition"></include>
-			<choose>
+	<select id="queryRows" parameterType="DepartmentQuery" resultMap="departmentResult">
+	       
+	        select *
+         	from (select a.*,rownum rnum
+         	from (select * 
+         	from department 
+         	<include refid="querySql"/>
+         	<choose>
 				<when test="orderStr=='ghHighScore'">
-					order by ghHighScore DESC
+					order by ghHighScore DESC,id,rowid
 				</when>
 				<otherwise>
-					order by ghtotal DESC
+					order by ghtotal DESC,id,rowid
 				</otherwise>
-			</choose>
-			
-		limit #{startNum},#{pageSize}
+			</choose> )a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
 	</select>
 
-	<select id="queryDepartmentTotalCount" parameterType="DepartmentQuery" resultType="long">
+	<select id="queryTotalCount" parameterType="DepartmentQuery" resultType="long">
 		SELECT count(d.id) FROM department  d
-		<include refid="departmentQueryPageWhereCondition"></include>
+		<include refid="querySql"/>
 	
 	</select>
 
 
-	<sql id="departmentQueryPageWhereCondition">
+	<sql id="querySql">
 		<where>
 			<if test="levels!=null  and levels.size!=0">
 				and level in

@@ -39,36 +39,36 @@
 
 	-->
 
-	<select id="queryDoctorRows" parameterType="DoctorQuery" resultMap="doctorResult">
-	
-		SELECT d.* FROM doctor d 
+	<select id="queryRows" parameterType="DoctorQuery" resultMap="doctorResult">
+	     select *
+         	from (select a.*,rownum rnum
+         	from (SELECT d.* FROM doctor d 
 		left join department dep
 		on d.department_id=dep.id
-			<include refid="doctorQueryPageWhereCondition"></include>
-			<choose>
+         	<include refid="querySql"/>
+         	<choose>
 				<when test="orderStr=='ghHighScore'">
-					order by d.ghHighScore DESC
+					order by ghHighScore DESC,id,rowid
 				</when>
 				<otherwise>
-					order by d.ghtotal DESC
+					order by ghtotal DESC,id,rowid
 				</otherwise>
-			</choose>
-			
-			limit #{startNum},#{pageSize}
-	
+			</choose> )a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
 		
 	</select>
 
-	<select id="queryDoctorTotalCount" parameterType="DoctorQuery" resultType="long">
+	<select id="queryTotalCount" parameterType="DoctorQuery" resultType="long">
 		SELECT count(d.id) FROM doctor  d
 		left join department dep
 		on d.department_id=dep.id
-		<include refid="doctorQueryPageWhereCondition"></include>
+		<include refid="querySql"></include>
 	
 	</select>
 
 
-	<sql id="doctorQueryPageWhereCondition">
+	<sql id="querySql">
 		<where>
 			<if test="types!=null and types.size!=0">
 			  and dep.type in

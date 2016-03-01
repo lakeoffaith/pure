@@ -163,7 +163,7 @@ public abstract class Page {
 		
 		
 		
-		builder.append("每页<select id='pageSelect'> ");
+		builder.append("每页<select id='pageSelect' >   ");
 		for (int i = 0; i < arrays.length; i++) {
 			builder.append("<option>");
 			builder.append(arrays[i]+"</option>");

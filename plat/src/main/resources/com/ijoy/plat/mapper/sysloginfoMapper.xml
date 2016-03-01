@@ -27,7 +27,7 @@
   
    <!-- 新增用户对象 -->
    <insert id="insert"  parameterType="Sysloginfo">
-      insert into Sysloginfo (id,content) values (#{id},#{content})
+      insert into Sysloginfo (id,content) values (sysloginfo_seq.nextval,#{content})
    </insert>
    
    <!-- 删除用户对象 -->
@@ -59,7 +59,7 @@
    	<sql id="querySql">
    		<where>
    			<if test="content!=null">
-   				and content like CONCAT('%',#{content},'%')
+   				and content like '%' || #{content} || '%'
    			</if>
    		</where>
    	</sql>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -8,6 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
+  	<base  href="<%=basePath%>">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -35,7 +36,7 @@
   </head>
 
   <body>
-  	<div class="modal-dialog mid-modal" role="document">
+     <div class="modal-dialog mid-modal"  sysloginfo="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -43,37 +44,28 @@
         </div>
         <div class="modal-body">
          
-        <form action="sysloginfo/save.action" class="form-horizontal" id="domainFormID" method="post">
-      					<!-- //表单令牌 -->
-      				<s:token></s:token>
-                          <s:if test="id!=null">
-            <div class="form-group">
-              <div>序号</div>
-              <div><s:textfield cssClass="form-control" name="id" readonly="true"/>
-              </div>
-            </div>
-            </s:if>
-                            <div class="form-group">
-                            	<div>日志内容</div>
-                            	<div><s:textfield cssClass="form-control" name="content"/></div>
+        <form action="sysloginfo" class="form-horizontal" id="domainFormID" method="post">
+        <!-- //表单令牌 -->
+      				<!-- <s:token></s:token> -->
+            <c:if test="${sysloginfo.id!=null }">
+           <div class="form-group hidden"  >
+                            	<label  class="col-sm-2  col-md-offset-1 control-label">序号</label>
+                            	<div class="col-sm-4">
+                            		<input  class="form-control"  name="id"  readonly="true"  value="${sysloginfo.id}">
+                            	</div>
                           </div>
-                           <div class="form-group">
-                            	<div>日志类型</div>
-                            	<div><s:textfield cssClass="form-control" name="type"/></div>
-                          </div>
-                          <div class="form-group">
-                            	<div>登录时间</div>
-                            	<div><s:textfield cssClass="form-control" name="lastLoginTime"/></div>
-                          </div>
-                          <div class="form-group">
-                            	<div>下线时间</div>
-                            	<div><s:textfield cssClass="form-control" name="lastLoginTime"/></div>
-                          </div>
-                          <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">确定保存</button>
-              </div>
-            </div>
+            </c:if>
+             <div class="form-group">
+							    <label  class="col-sm-2  col-md-offset-1 control-label">系统日志内容</label>
+							    <div class="col-sm-4">
+							      <input  class="form-control" name="content"  value="${sysloginfo.content}">
+							    </div>
+							  </div>
+       <div class="form-group">
+                         		 <div class="col-sm-offset-2 col-sm-10">
+					                <button type="submit" class="btn btn-primary">确定保存</button>
+					              </div>
+                          </div> 
           </form>
            </div>
       </div>
@@ -91,9 +83,7 @@
     <!--common script for all pages-->
     <script src="js/common-scripts.js"></script>
 
-    <!--script for this page only-->
-    <script src="js/dynamic-table.js"></script>
     
-   </form>
+   
   </body>
 </html>

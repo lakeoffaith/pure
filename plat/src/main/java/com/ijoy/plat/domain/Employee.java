@@ -14,6 +14,14 @@ public class Employee {
 	private String workPath;
 	private Role role;
 	private List<Application> applicationList;
+	
+	
+	public Employee() {
+		super();
+	}
+	public Employee(long id) {
+		this.id=id;
+	}
 	public Long getId() {
 		return id;
 	}

@@ -7,14 +7,14 @@ import java.util.List;
 public class Task {
 	private Long id;
 	private int month;
-	private String name;
+	private String name="";
 	private int taskcycle;
-	private String describe;
+	private String describe="";
 	private int type;
 	private int state;
-	private Date starttime;
-	private Date endtime;
-	private Employee employee;
+	private Date starttime=new Date();
+	private Date endtime=new Date();
+	private Employee employee=new Employee(1L);
 	private List<TaskItem> taskItems=new ArrayList();
 	public Long getId() {
 		return id;

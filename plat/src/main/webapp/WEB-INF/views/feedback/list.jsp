@@ -74,7 +74,7 @@
 								  	
 								  	<form action="feedback" method="get"  id="domainForm"   style="display: inline-block;" >
 								  	<label >登录账号</label>
-								  		<input name="name"  id="name"  Class="form-control" Style="width:100px;display: inline-block;"  value="${feedbackQuery.content}">
+								  		<input name="content"  id="name"  Class="form-control" Style="width:100px;display: inline-block;"  value="${feedbackQuery.content}">
 								  		<input  name="pageSize"  id="pageSize"   type="hidden"  value="${pageResult.pageSize}">
 								  		<input  name="currentPage"  id="currentPage"   type="hidden"  value="${pageResult.currentPage}" >
 								  			<label for="searchDomainID" class="btn btn-info " ><i class="icon-search">&nbsp;查询</i></label>

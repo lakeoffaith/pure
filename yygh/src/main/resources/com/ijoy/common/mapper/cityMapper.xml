@@ -6,27 +6,29 @@
 <mapper namespace="com.ijoy.common.mapper.CityMapper">
 	
 	
-
-
-
-	<select id="queryCityRows" parameterType="CityQuery" resultType="City">
-	
-		SELECT * FROM city
-			<include refid="queryPageWhereCondition"></include>
-			
-		limit #{startNum},#{pageSize}
-	</select>
-
-
-	<sql id="queryPageWhereCondition">
-		<where>
-			<if test="level !=null">
+     <select id="queryRows" parameterType="CityQuery"  resultType="City">
+        select *
+         	from (select a.*,rownum rnum
+         	from (select * 
+         	from city 
+         	<include refid="querySql"/>
+         	order by id,rowid)a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
+   </select>
+   <select id="queryTotalCount" parameterType="CityQuery"  resultType="long">
+   		 select  count(id) from city
+	   	    <include refid="querySql"></include>
+   </select>
+ <sql id="querySql">
+ 		<where>
+ 			<if test="level !=null">
 				and level=#{level}
 			</if>
 			<if test="conditionStr=='pinyin_not_null'">
 			   and pinyin is not null
 			</if>
-		</where>
-	</sql>
+ 		</where>
+ </sql>
 
 </mapper>
