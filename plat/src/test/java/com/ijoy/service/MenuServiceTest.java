@@ -49,12 +49,12 @@ public class MenuServiceTest extends BaseTest{
 	 */
 	@Test
 	public void getMenuListByRoleIDAndTypeTest() {
-		Role role=new Role();
+/*		Role role=new Role();
 		role.setId(1L);
 		List<Menu> menus= menuService.getMenuListByRoleANDType(role,1);
 		System.out.println("menus:"+menus);
 		List<Menu> menujson = Menu.formatJson(menus);
-		System.out.println(menujson);
+		System.out.println(menujson);*/
 	}
 	
 	//分页测试

@@ -19,11 +19,11 @@ public class ResourceSaveTest extends BaseTest{
 	
 	//添加插入菜单脚本
 	@Test
-	public void insertMenuTest(){
+	public void insertMenuTest(){/*
 		//清空数据Menu数据表
 		menuService.deleteAll();
 		//插入管理系统
-		/*int id, String name, String url, Long parent_id, int orderid,int type,String iconname*/
+		int id, String name, String url, Long parent_id, int orderid,int type,String iconname
 		menuService.insert(new Menu(1,"管理系统","",null,1,1,"icon-cogs"));
 		menuService.insert(new Menu(2,"应用管理","",null,2,1,"icon-tablet"));
 		menuService.insert(new Menu(3,"个人办公","",null,3,1,"icon-user"));
@@ -96,7 +96,7 @@ public class ResourceSaveTest extends BaseTest{
 		
 		
 		
-	}
+	*/}
 	
 	//更新中间表
 	@Test
