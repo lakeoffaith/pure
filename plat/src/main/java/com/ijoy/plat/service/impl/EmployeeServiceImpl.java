@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.ijoy.plat.domain.Employee;
 import com.ijoy.plat.mapper.EmployeeMapper;
 import com.ijoy.plat.mapper.LoginInfoMapper;
-import com.ijoy.plat.query.BaseQuery;
 import com.ijoy.plat.query.EmployeeQuery;
 import com.ijoy.plat.query.PageResult;
 import com.ijoy.plat.service.IEmployeeService;

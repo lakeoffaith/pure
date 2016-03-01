@@ -1,12 +1,69 @@
 
 
-
+function doModelDomain(domainName,method){
+	doModelDomain(domainName,method,null);
+}
 /*type可以为*/
 function doModelDomain(domainName,method, id){
-	var url=domainName+"/"+id+"?method="+method;
-	  $('#myModal').removeData('bs.modal');
-      $('#myModal').modal({remote: url});
-      $('#myModal').modal('show');
+	
+	
+	
+	var url=domainName;
+	url=id==null?url:url+"/"+id;
+	url=method==null?url:url+"?method="+method;
+	
+	if(method=='delete'){
+		console.debug(url);
+		$.ajax({
+			url:url,
+			type:"get",
+			async:false,
+			dataType:"json",
+			success:function(data){
+				console.debug(data);
+				if(data.success){
+				 location.href=domainName;
+				}
+			}
+		});
+		return;
+	}else if(method=='batchDelete'){
+		var checkChilds=$("#checkboxes").parents("table").find("tbody").find("input[type='checkbox']:checked");
+		//如果没有选中
+		if(checkChilds.length==0){
+			alert("请选中再删除");
+			return;
+		}
+		//定义数组
+		var ids=[];
+		$.each(checkChilds,function(i,e){
+			ids.push($(e).parent().next("td").text());
+		});
+		var jsondata= {ids:ids.join(','),};
+		$.ajax({
+			type:"get",
+			url:url,
+			async:false,
+			data:jsondata,
+			dataType:"json",
+			success:function(data){
+				if(data.success){
+					location.href=domainName;
+				}
+			}
+		});
+		return;
+	}else if(method=='search'){
+		$("#domainForm").submit();
+		return;
+	}else{
+		  $('#myModal').removeData('bs.modal');
+	      $('#myModal').modal({remote: url});
+	      $('#myModal').modal('show');
+	}
+	
+	
+
 	
 	/*	var url=domainName;
 		if(id!=null){
@@ -68,33 +125,7 @@ $(function(){
 		});
 	});	
 });
-  //事件
-function batchDeleteDomain(domain){
-	var url=domain+"/deleteBatch";
-	var checkChilds=$("#checkboxes").parents("table").find("tbody").find("input[type='checkbox']:checked");
-	//如果没有选中
-	if(checkChilds.length==0){
-		alert("请选中再删除");
-		return;
-	}
-	//定义数组
-	var ids=[];
-	$.each(checkChilds,function(i,e){
-		ids.push($(e).parent().next("td").text());
-	});
-	var jsondata= {ids:ids.join(','),};
-	$.ajax({
-		type:"post",
-		url:url,
-		async:false,
-		data:jsondata,
-		dataType:"json",
-		success:function(data){
-			alert("批量删除"+data.message);
-		}
-	});
-	$("#domainForm").submit();
-}
+
 	
 		
 
@@ -106,7 +137,7 @@ function batchDeleteDomain(domain){
 	   var pageSelect=$("#pageSelect");
 	   pageSelect.width('40px');
    	//获得初始的每页数据条数
-   	var pageSize=$("input[name='baseQuery.pageSize']").val();
+   	var pageSize=$("input[name='pageSize']").val();
    	//将baseQuery.pageSize的值给select;
    	pageSelect.val(pageSize);
    	pageSelect.change(function () {goPage(0,$(this).val());});
@@ -118,11 +149,11 @@ function batchDeleteDomain(domain){
    //3:方法
    function goPage(currentPage,pageSize){
 		if(currentPage!=0){
-		$("input[name='baseQuery.currentPage']").val(currentPage);
+		$("input[name='currentPage']").val(currentPage);
 		}
 		if(pageSize!=0){
-			$("input[name='baseQuery.currentPage']").val(1);
-			$("input[name='baseQuery.pageSize']").val(pageSize);
+			$("input[name='currentPage']").val(1);
+			$("input[name='pageSize']").val(pageSize);
 		}
 		$("#domainForm").submit();
 	}

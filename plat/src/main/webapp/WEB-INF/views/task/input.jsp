@@ -13,20 +13,20 @@
     <meta name="description" content="">
     <meta name="author" content="Mosaddek">
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" href="<%=path%>/img/favicon.html">
+    <link rel="shortcut icon" href="img/favicon.html">
 
     <title>IJOY无线数字医疗系统</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<%=path%>/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<%=path%>/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="<%=path%>/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="<%=path%>/css/style.css" rel="stylesheet">
-    <link href="<%=path%>/css/style-responsive.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
 
-    <link href="<%=path%>/css/res-style.css" rel="stylesheet" />
+    <link href="css/res-style.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -35,7 +35,7 @@
   </head>
 
   <body>
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog mid-modal" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -103,20 +103,20 @@
       </div>
     </div>
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="<%=path%>/js/jquery.js"></script>
-    <script src="<%=path%>/js/model/domain.js"></script>
-    <script src="<%=path%>/js/bootstrap.min.js"></script>
-    <script src="<%=path%>/js/jquery.scrollTo.min.js"></script>
-    <script src="<%=path%>/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script type="<%=path%>/text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
-    <script type="<%=path%>/text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/model/domain.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
 
 
     <!--common script for all pages-->
-    <script src="<%=path%>/js/common-scripts.js"></script>
+    <script src="js/common-scripts.js"></script>
 
     <!--script for this page only-->
-    <script src="<%=path%>/js/dynamic-table.js"></script>
+    <script src="js/dynamic-table.js"></script>
     
    </form>
   </body>

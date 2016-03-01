@@ -25,6 +25,7 @@
     <link href="css/style-responsive.css" rel="stylesheet" />
     <link href="css/res-style.css" rel="stylesheet" />
     <link href="css/model/ijoymodel.css" rel="stylesheet" />
+   <link href="css/model/ijoypagination.css" rel="stylesheet" />
     <script src="js/jquery.js"></script>
      <!-- domain.js for domain -->
 
@@ -64,16 +65,22 @@
                               <th colspan="10" class="oprow-btn">
                               	<div class="row">
                               	<div class="col-lg-8 col-md-8 col-sm-8">
-                               		  <!-- <label for="newInputDomainID" class="btn btn-info " ><i class="icon-plus">&nbsp;新增</i></label>
+                               		 <!-- <label for="newInputDomainID" class="btn btn-info " ><i class="icon-plus">&nbsp;新增</i></label>
     								<input type="button" id="newInputDomainID" class="hidden"   onclick="doDomain('employee','input')"></input> -->
     								<label for="batchDeleteDomainID" class="btn btn-danger " ><i class="icon-trash">&nbsp;批量删除</i></label>
-    								<input type="button" id="batchDeleteDomainID" class="hidden"  style="margin-left:10px"  onclick="batchDeleteDomain('employee')"></input>
+    								<input type="button" id="batchDeleteDomainID" class="hidden"  style="margin-left:10px"  onclick="doModelDomain('employee','batchDelete')"></input>
     								</div>
     								<div class="col-lg-4 col-md-4 col-sm-4" align="right">
+								  	
+								  	<form action="employee" method="get"  id="domainForm"   style="display: inline-block;" >
 								  	<label >登录账号</label>
-								  	<input name="baseQuery.name" id="name" cssClass="form-control" cssStyle="width:100px;">
+								  		<input name="name"  id="name"  Class="form-control" Style="width:100px;display: inline-block;"  value="${employeeQuery.name}">
+								  		<input  name="pageSize"  id="pageSize"   type="hidden"  value="${pageResult.pageSize}">
+								  		<input  name="currentPage"  id="currentPage"   type="hidden"  value="${pageResult.currentPage}" >
 								  			<label for="searchDomainID" class="btn btn-info " ><i class="icon-search">&nbsp;查询</i></label>
-    								<input type="button" id="searchDomainID" class="hidden" style="float: right"  onclick="doDomain('employee','search')"></input>
+    								<input type="button" id="searchDomainID" class="hidden" style="float: right"  onclick="doModelDomain('employee','search')"></input>
+								  	</form>
+								  
     								</div>
     								</div>
                               </th>
@@ -101,7 +108,7 @@
                               <td class="hidden-phone">${r.role.name}</td>
                               <td class="hidden-phone">${r.cellphone}</td>
                               <td>
-                                  	<label for="viewDomainID" class="btn btn-success btn-xs" title="查看" onclick="doModelDomain('employee','goUpdate','${r.id}')"><i class="icon-file"></i></label>
+                                  	<label for="viewDomainID" class="btn btn-success btn-xs" title="查看" onclick="doModelDomain('employee','get','${r.id}')"><i class="icon-file"></i></label>
     								<input type="button" id="viewDomainID" class="hidden"   ></input>
                                    <label for="inputDomainID" class="btn btn-primary btn-xs" title="编辑" onclick="doModelDomain('employee','goUpdate','${r.id}')"><i class="icon-pencil"></i></label>
     								<input type="button" id="inputDomainID" class="hidden"   ></input>
@@ -117,7 +124,7 @@
                   </div>
               </div>
               <!-- page end-->
-              <page:htmlPage pageNo="${pageResult.currentPage}" url='employee/list.action' totalSum="${pageResult.totalCount}" showPage="5" pageSize="${pageResult.pageSize}"/>
+              <page:htmlPage pageNo="${pageResult.currentPage}" url='employee'  totalSum="${pageResult.totalCount}"  showPage="5" pageSize="${pageResult.pageSize}"/>
     <!-- js placed at the end of the document so the pages load faster -->
 
    			  <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>

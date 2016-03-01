@@ -42,13 +42,13 @@ public class FeedbackServiceImpl   implements IFeedbackService {
 	}
 
 	@Override
-	public PageResult<Feedback> queryFeedbacks(BaseQuery baseQuery) {
+	public PageResult<Feedback> queryPage(BaseQuery baseQuery) {
 		Long totalCount = mapper.queryTotalCount(baseQuery);
 		if(totalCount>0){
 			List<Feedback> rows = mapper.queryRows(baseQuery);
 			return new PageResult<>(totalCount, rows, baseQuery.getPageSize()	, baseQuery.getCurrentPage());
 		}
-		return null;
+		return new PageResult<>();
 	}
 	
 }

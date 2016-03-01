@@ -108,7 +108,7 @@ public class MenuServiceImpl  implements IMenuService {
 
 
 	@Override
-	public PageResult<Menu> queryforPage(BaseQuery baseQuery) {
+	public PageResult<Menu> queryPage(BaseQuery baseQuery) {
 		 Long totalCount = mapper.queryTotalCount(baseQuery);
 		 if(totalCount>0){
 			 List<Menu> rows = mapper.queryRows(baseQuery);

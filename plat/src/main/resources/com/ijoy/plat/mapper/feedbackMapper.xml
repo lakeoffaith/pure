@@ -20,7 +20,7 @@
   
    <!-- 新增用户对象 -->
    <insert id="insert" parameterType="Feedback">
-      insert into Feedback (content) values (#{content})
+      insert into Feedback (id,content) values (feedback_seq.nextval,#{content})
    </insert>
    
    <!-- 删除用户对象 -->
@@ -49,7 +49,7 @@
 	 <sql id="querySql">
 	 	<where>
 	 		<if test="content!=null">
-	 		and content like CONCAT('%',#{content},'%')
+	 		and content like '%' || #{content} || '%'
 	 		</if>
 	 	</where>
 	 </sql>

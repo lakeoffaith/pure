@@ -120,7 +120,6 @@
    					var menuhtml="";
    	   				
    	   				$.each(data.results,function(i,n){
-   	   					console.debug(n);
    	   					if(n.parent_id==null){
    	   						menuhtml+="<li class='sub-menu' data-menu_id="+n.id+">";
    	   						

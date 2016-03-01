@@ -91,5 +91,6 @@ public class Employee {
 				+ ", workPath=" + workPath + ", role=" + (role==null?null:role.getId())
 				+ ", applicationList=" + applicationList + "]";
 	}
+
 	
 }
