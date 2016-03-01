@@ -134,13 +134,21 @@ $(function(){
 //2:加载完后初始化   
    //初始化页面page下拉控件
    $(function(){
-	   var pageSelect=$("#pageSelect");
-	   pageSelect.width('40px');
+	   var $pageSelect=$("#pageSelect");
+	   $pageSelect.width('40px');
    	//获得初始的每页数据条数
    	var pageSize=$("input[name='pageSize']").val();
    	//将baseQuery.pageSize的值给select;
-   	pageSelect.val(pageSize);
-   	pageSelect.change(function () {goPage(0,$(this).val());});
+   	$.each($pageSelect.find("option"),function(e,v){
+   		console.debug("--------");
+   		console.debug($(v).html());
+   		console.debug(pageSize);
+   		if($(v).html()==pageSize){
+   			$(v).attr("selected","selected");
+   			return;
+   		}
+   	});
+   	$pageSelect.change(function () {goPage(0,$(this).val());});
    	
        
    });

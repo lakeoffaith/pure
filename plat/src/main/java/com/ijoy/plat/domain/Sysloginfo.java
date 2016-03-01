@@ -5,12 +5,12 @@ import java.util.Date;
 public class Sysloginfo {
 	private Long id;
 	private int type=0;
-	private String content;
-	private Date lastLoginTime;
-	private Date lastExitTime;
-	private Date currentLoginTime;
-	private Date currentExitTime;
-	private String ip;
+	private String content="";
+	private Date lastLoginTime=new Date();
+	private Date lastExitTime=new Date();
+	private Date currentLoginTime=new Date();
+	private Date currentExitTime=new Date();
+	private String ip="";
 	public Long getId() {
 		return id;
 	}

@@ -67,30 +67,32 @@
 	<!-- 根据查询条件 如 省份,城市,区域,级别,类型  排序  eg:预约人数 ,eg:好评
 	-->
 
-	<select id="queryHospitalRows" parameterType="HospitalQuery" resultMap="hospitalResult">
-		SELECT * FROM hospital
-			<include refid="hospitalQueryPageWhereCondition"></include>
-			<choose>
-				
-				<when test="orderStr!=null">
-					order by #{orderStr} DESC
+	<select id="queryRows" parameterType="HospitalQuery" resultMap="hospitalResult">
+		  select *
+         	from (select a.*,rownum rnum
+         	from (select * 
+         	from hospital 
+         	<include refid="querySql"/>
+         	<choose>
+				<when test="orderStr=='ghHighScore'">
+					order by ghHighScore DESC,id,rowid
 				</when>
 				<otherwise>
-					order by ghtotal DESC
+					order by ghtotal DESC,id,rowid
 				</otherwise>
-			</choose>
-			
-			limit #{startNum},#{pageSize}
+			</choose> )a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
 	</select>
 
-	<select id="queryHospitalTotalCount" parameterType="HospitalQuery" resultType="long">
+	<select id="queryTotalCount" parameterType="HospitalQuery" resultType="long">
 		SELECT count(h.id) FROM hospital  h
-		<include refid="hospitalQueryPageWhereCondition"></include>
+		<include refid="querySql"></include>
 	
 	</select>
 
 
-	<sql id="hospitalQueryPageWhereCondition">
+	<sql id="querySql">
 		<where>
 			<if test="levels!=null  and levels.size!=0">
 				and level in

@@ -12,20 +12,31 @@
 
 <select id="queryDictionaryRows" parameterType="DictionaryQuery" resultMap="dictionaryResult">
 	
-		SELECT * FROM dictionary
-			<include refid="dictionaryQueryPageWhereCondition"></include>
-			
-		limit #{startNum},#{pageSize}
+		  select *
+         	from (select a.*,rownum rnum
+         	from (select * 
+         	from dictionary 
+         	<include refid="querySql"/>
+         	<choose>
+				<when test="orderStr=='ghHighScore'">
+					order by ghHighScore DESC,id,rowid
+				</when>
+				<otherwise>
+					order by ghtotal DESC,id,rowid
+				</otherwise>
+			</choose> )a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
 	</select>
 
 	<select id="queryDictionaryTotalCount" parameterType="DictionaryQuery" resultType="long">
 		SELECT count(d.id) FROM dictionary  d
-		<include refid="dictionaryQueryPageWhereCondition"></include>
+		<include refid="querySql"></include>
 	
 	</select>
 
 
-	<sql id="dictionaryQueryPageWhereCondition">		
+	<sql id="querySql">		
 	<where>
 			<if test="type!=null">
 				and type like CONCAT('%',#{type},'%') 

@@ -55,9 +55,21 @@
 </select>
 
 <select id="queryRows"  parameterType="OrderItemQuery"  resultMap="orderItemResult">
-	select * from orderItem
-	<include refid="querySql"></include>
-	limit #{startNum} ,#{pageSize}
+	select *
+         	from (select a.*,rownum rnum
+         	from (select * 
+         	from orderItem 
+         	<include refid="querySql"/>
+         	<choose>
+				<when test="orderStr=='ghHighScore'">
+					order by ghHighScore DESC,id,rowid
+				</when>
+				<otherwise>
+					order by ghtotal DESC,id,rowid
+				</otherwise>
+			</choose> )a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
 </select>
 
 <sql id="querySql">

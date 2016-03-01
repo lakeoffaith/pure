@@ -17,38 +17,33 @@ public class TaskServiceImpl  implements ITaskService {
 	private TaskMapper mapper;
 	@Override
 	public Long insert(Task t) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.insert(t);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+		mapper.delete(id);
 	}
-
 	@Override
 	public void update(Task t) {
-		// TODO Auto-generated method stub
-		
+		mapper.update(t);
 	}
-
 	@Override
 	public Task get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.get(id);
 	}
-
 	@Override
 	public List<Task> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.getAll();
 	}
-
 	@Override
 	public PageResult<Task> queryPage(TaskQuery baseQuery) {
-		// TODO Auto-generated method stub
-		return null;
+		Long totalCount = mapper.queryTotalCount(baseQuery);
+		if(totalCount>0){
+			List<Task> rows = mapper.queryRows(baseQuery);
+			return new PageResult<>(totalCount, rows, baseQuery.getPageSize()	, baseQuery.getCurrentPage());
+		}
+		return new PageResult<>();
 	}
 	
 }

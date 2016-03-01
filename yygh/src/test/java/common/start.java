@@ -95,15 +95,13 @@ public class start extends BaseTest{
 			DictionaryMapper dictionaryMapper;
 			public void loadDictionaryData(){
 				Dictionary dictionary;
-				dictionary = new Dictionary("特等医院","hos-level-0");
+				dictionary = new Dictionary("三甲医院","hos-level-0");
 				dictionaryMapper.insert(dictionary);
-				dictionary = new Dictionary("三甲医院","hos-level-1");
+				dictionary = new Dictionary("三乙医院","hos-level-1");
 				dictionaryMapper.insert(dictionary);
-				dictionary = new Dictionary("三乙医院","hos-level-2");
+				dictionary = new Dictionary("二甲医院","hos-level-2");
 				dictionaryMapper.insert(dictionary);
-				dictionary = new Dictionary("二甲医院","hos-level-3");
-				dictionaryMapper.insert(dictionary);
-				dictionary = new Dictionary("二乙医院","hos-level-4");
+				dictionary = new Dictionary("二乙医院","hos-level-3");
 				dictionaryMapper.insert(dictionary);
 				dictionary = new Dictionary("综合医院","hos-type-1");
 				dictionaryMapper.insert(dictionary);

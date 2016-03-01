@@ -19,7 +19,7 @@ public class ResourceSaveTest extends BaseTest{/*
 	
 	//添加插入菜单脚本
 	@Test
-	public void insertMenuTest(){
+	public void insertMenuTest(){/*
 		//清空数据Menu数据表
 		menuService.deleteAll();
 		//插入管理系统
@@ -96,7 +96,7 @@ public class ResourceSaveTest extends BaseTest{/*
 		
 		
 		
-	}
+	*/}
 	
 	//更新中间表
 	@Test

@@ -18,11 +18,11 @@ values('2','admin3','admin3','1','1');
 
 insert into
 SYSLOGINFO(id,content)
-values(1,'用户1的登陆信息');
+values(SYSLOGINFO_SEQ.NEXTVAL,'用户1的登陆信息');
 
 insert into
 SYSLOGINFO(id,content)
-values(2,'用户2的登陆信息');
+values(SYSLOGINFO_SEQ.NEXTVAL,'用户2的登陆信息');
 
 
 insert into
@@ -145,11 +145,11 @@ values(FEEDBACK_SEQ.NEXTVAL,'系统不错');
 
 insert into
 TASK(id,name,month,taskcycle,describe,type,state,employee_id)
-values(1,'无线网安装',4,4,'科室无线网络覆盖',1,1,1);
+values(TASK_SEQ.NEXTVAL,'无线网安装',4,4,'科室无线网络覆盖',1,1,1);
 
 insert into
 TASKITEM(id,itemCycle,itemtype,itemdescribe,department,state,task_id,employee_id)
-values(1,1,1,'无线网安装一阶段','信息科',2,1,2);
+values(TASKITEM_SEQ.NEXTVAL,1,1,'无线网安装一阶段','信息科',2,1,2);
 
 
 

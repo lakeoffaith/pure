@@ -25,7 +25,7 @@ public class FeedbackServiceTest extends BaseTest{
 	@Test
 	public void queryTest(){
 		BaseQuery baseQuery=new FeedbackQuery();
-		PageResult<Feedback> pageResult = feedbackService.queryFeedbacks(baseQuery);
+		PageResult<Feedback> pageResult = feedbackService.queryPage(baseQuery);
 		System.out.println(pageResult.getRows().size());
 	}
 	

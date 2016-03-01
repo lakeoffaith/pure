@@ -106,7 +106,7 @@
    					and parent_id=#{parent_id}
    				</if>
    				<if test="name!=null">
-   					and name=#{name}
+   					and name like '%' || #{name} || '%'
    				</if>
    			</where>
    </sql>

@@ -107,6 +107,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/model/domain.js"></script>
     <script src="js/jquery-1.8.3.min.js"></script>
+     <script src="js/ijoy/global.js"></script>
       <script  type="text/javascript">
       
   	$(function() {
@@ -123,7 +124,7 @@
    	   					if(n.parent_id==null){
    	   						menuhtml+="<li class='sub-menu' data-menu_id="+n.id+">";
    	   						
-   	   						if(n.url!=null && n.url!='#'){
+   	   						if(!jsValidateIsNull(n.url)){
    	   						var urlval=console.debug(n.url);
    	   						menuhtml+="<a href="+n.url;
    	   						}else{
