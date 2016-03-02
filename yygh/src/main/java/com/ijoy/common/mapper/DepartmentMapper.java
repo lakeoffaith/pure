@@ -24,9 +24,9 @@ public interface DepartmentMapper{
 	public Department get(Long id);
 	
 
-	public List<Department> queryDepartmentRows(BaseQuery basequery);
+	public List<Department> queryRows(BaseQuery basequery);
 
-	public Long queryDepartmentTotalCount(BaseQuery basequery);
+	public Long queryTotalCount(BaseQuery basequery);
 
 	public Long queryUserCollectDepartmentTotalCount(
 			HashMap<String, Object> hashMap);

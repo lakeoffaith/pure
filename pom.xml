@@ -27,7 +27,11 @@
 
 
 		<!-- oracle -->
-			
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>oracle12</artifactId>
+			<version>12c.0</version>
+		</dependency>
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -153,7 +157,7 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-		
+
 		<!-- 调用医院的接口 -->
 		<dependency>
 			<groupId>com.squareup.okhttp</groupId>
@@ -161,7 +165,7 @@
 			<version>2.7.2</version>
 		</dependency>
 
-  <!-- springmvc 返回json -->
+		<!-- springmvc 返回json -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>

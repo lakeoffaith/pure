@@ -14,7 +14,7 @@ public interface DictionaryMapper{
 	/*
 	 * curd 模块
 	 */
-	@Insert("insert into dictionary(name,type) values (#{name},#{type})")
+	@Insert("insert into dictionary(id,name,type) values (dictionary_seq.nextval,#{name},#{type})")
 	public Long insert(Dictionary dictionary);
 
 	public void delete(Long id);
@@ -27,9 +27,9 @@ public interface DictionaryMapper{
 	@Select("select * from dictionary")
 	public List<Dictionary> getAll();
 
-	public List<Dictionary> queryDictionaryRows(DictionaryQuery baseQuery);
+	public List<Dictionary> queryRows(DictionaryQuery baseQuery);
 
-	public Long queryDictionaryTotalCount(DictionaryQuery baseQuery);
+	public Long queryTotalCount(DictionaryQuery baseQuery);
 	
 
 }

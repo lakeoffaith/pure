@@ -36,7 +36,7 @@ import com.ijoy.gh.test.BaseTest;
 
 public class start extends BaseTest{
 	      
-	     @Test
+	    /* @Test*/
 	     public void fire() throws Exception{
 	    	 clearData();
 	    	 loadData();
@@ -93,6 +93,7 @@ public class start extends BaseTest{
 			}
 			@Autowired
 			DictionaryMapper dictionaryMapper;
+			
 			public void loadDictionaryData(){
 				Dictionary dictionary;
 				dictionary = new Dictionary("三甲医院","hos-level-0");
@@ -125,7 +126,9 @@ public class start extends BaseTest{
 			 * 
 			 * @return
 			 */
+			
 			public void loadDictionaryData_Dep(){
+				System.out.println(dictionaryMapper+"-----------------");
 				Dictionary dictionary;
 				dictionary = new Dictionary("国家重点","dep-level-0");
 				dictionaryMapper.insert(dictionary);
@@ -162,6 +165,7 @@ public class start extends BaseTest{
 	   */
 			@Autowired
 		      public RegionMapper regionMapper;
+			@Test
 		public void  loadRegionData(){
 			Map  fileMap=new HashMap<>();
 			fileMap.put("region", "name");
@@ -174,7 +178,7 @@ public class start extends BaseTest{
 			}
 			try {
 				for (int i = 0; i < regionList.size(); i++) {
-				regionMapper.insert(regionList.get(i));
+				/*regionMapper.insert(regionList.get(i));*/
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -386,7 +390,7 @@ public class start extends BaseTest{
 			
 			@Autowired
 			ScheduleMapper scheduleMapper;
-			@Test
+			/*@Test*/
 			public void loadTestScheduleData() throws Exception{
 				Schedule schedule = new Schedule();
 				schedule=new Schedule(doctorMapper.get(2L), new SimpleDateFormat("yyyy-MM-dd").parse("2016-01-30"), 10, new BigDecimal("15.00"), 1);

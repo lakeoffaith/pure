@@ -23,7 +23,7 @@
  <sql id="querySql">
  		<where>
  			<if test="level !=null">
-				and level=#{level}
+				and p_level=#{level}
 			</if>
 			<if test="conditionStr=='pinyin_not_null'">
 			   and pinyin is not null

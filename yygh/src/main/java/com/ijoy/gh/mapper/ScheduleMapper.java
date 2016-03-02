@@ -16,7 +16,7 @@ public interface ScheduleMapper{
 	/*
 	 * curd 模块
 	 */
-	@Insert("insert into schedule(doctor_id,date,numbers,cost,residueNumbers,noonType) values(#{doctor.id},#{date},#{numbers},#{cost},#{residueNumbers},#{noonType})")
+	@Insert("insert into schedule(id,doctor_id,p_date,numbers,cost,residueNumbers,noonType) values(schedule_seq.nextval,#{doctor.id},#{date},#{numbers},#{cost},#{residueNumbers},#{noonType})")
 	public Long insert(Schedule schedule);
 
 	public void delete(Long id);

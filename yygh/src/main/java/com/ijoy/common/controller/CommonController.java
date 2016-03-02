@@ -29,12 +29,12 @@ public class CommonController {
 		CityQuery cityQuery=new CityQuery();
 		cityQuery.setPageSize(BaseQuery.MAXPAGESIZE_1000);
 		cityQuery.setLevel(City.HOT_LEVEL_ONE);
-		List<City>   hotCities=cityService.queryCityRows(cityQuery);
+		List<City>   hotCities=cityService.queryCityPage(cityQuery).getRows();
 		CityQuery chineseCitiesQuery=new CityQuery();
 		//条件为拼音不能为空就行
 		  chineseCitiesQuery.setPageSize(BaseQuery.MAXPAGESIZE_10000);
 		  chineseCitiesQuery.setConditionStr("pinyin_not_null");
-		List<City> chineseCities=cityService.queryCityRows(chineseCitiesQuery);
+		List<City> chineseCities=cityService.queryCityPage(chineseCitiesQuery).getRows();
 		Map<String,Object> map = new HashMap<>();
 		map.put("hotCities", hotCities);
 		map.put("chineseCities", chineseCities);

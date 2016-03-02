@@ -20,9 +20,9 @@ public class HospitalServiceImpl  implements HospitalService {
 
 	@Override
 	public PageResult<Hospital> queryHospital(BaseQuery basequery) {
-		Long totalCount=hospitalMapper.queryHospitalTotalCount(basequery);
+		Long totalCount=hospitalMapper.queryTotalCount(basequery);
 		if(totalCount>0){
-			List<Hospital> rows= hospitalMapper.queryHospitalRows(basequery);
+			List<Hospital> rows= hospitalMapper.queryRows(basequery);
 			
 			return new PageResult<>(totalCount, rows, basequery.getPageSize(), basequery.getCurrentPage());
 		}

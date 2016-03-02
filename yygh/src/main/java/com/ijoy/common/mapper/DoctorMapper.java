@@ -17,7 +17,7 @@ public interface DoctorMapper{
 	/*
 	 * curd 模块
 	 */
-	@Insert("insert into doctor(name,department_id,hospital_id,introduce) values(#{name},#{department.id},#{hospital_id},#{introduce})")
+	@Insert("insert into doctor(id,name,department_id,hospital_id,introduce) values(doctor_seq.nextval,#{name},#{department.id},#{hospital_id},#{introduce})")
 	public Long insert(Doctor doctor);
 
 	public void delete(Long id);
@@ -32,9 +32,9 @@ public interface DoctorMapper{
 	@Select("select * from doctor")
 	public List<Doctor> getAll();
 
-	public Long queryDoctorTotalCount(BaseQuery basequery);
+	public Long queryTotalCount(BaseQuery basequery);
 
-	public List<Doctor> queryDoctorRows(BaseQuery basequery);
+	public List<Doctor> queryRows(BaseQuery basequery);
 
 	public Long queryUserCollectDoctorTotalCount(HashMap<String, Object> hashMap);
 
