@@ -48,10 +48,10 @@
          	<include refid="querySql"/>
          	<choose>
 				<when test="orderStr=='ghHighScore'">
-					order by ghHighScore DESC,id,rowid
+					order by d.ghHighScore DESC,d.id,d.rowid
 				</when>
 				<otherwise>
-					order by ghtotal DESC,id,rowid
+					order by d.ghtotal DESC,d.id,d.rowid
 				</otherwise>
 			</choose> )a
          	where <![CDATA[ rownum <  #{endNum}]]>)

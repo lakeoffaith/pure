@@ -43,7 +43,7 @@ public class DictionaryServiceImpl  implements DictionaryService {
 			List<Dictionary> rows=dictionaryMapper.queryRows(baseQuery);
 			return new PageResult<Dictionary>(totalCount, rows, baseQuery.getPageSize(), baseQuery.getCurrentPage());
 		}
-		return null;
+		return new PageResult<>();
 	}
 	
 }

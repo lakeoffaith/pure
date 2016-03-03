@@ -138,7 +138,7 @@
  
  function loadYyLog(userId){
 	 $.ajax({
-		 url:"use/center/3",
+		 url:"use/center/2",
 		 type:"GET",
 		 dataType:"json",
 		 success:function(data){

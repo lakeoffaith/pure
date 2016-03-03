@@ -47,14 +47,8 @@
          	from (select * 
          	from schedule 
          	<include refid="querySql"/>
-         	<choose>
-				<when test="orderStr=='ghHighScore'">
-					order by ghHighScore DESC,id,rowid
-				</when>
-				<otherwise>
-					order by ghtotal DESC,id,rowid
-				</otherwise>
-			</choose> )a
+         	order by p_date DESC
+              )a
          	where <![CDATA[ rownum <  #{endNum}]]>)
          	where rnum>=#{startNum}
 		</select>

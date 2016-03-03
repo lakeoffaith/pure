@@ -126,7 +126,7 @@ public class start extends BaseTest{
 			 * 
 			 * @return
 			 */
-			
+			@Test
 			public void loadDictionaryData_Dep(){
 				System.out.println(dictionaryMapper+"-----------------");
 				Dictionary dictionary;
@@ -165,7 +165,6 @@ public class start extends BaseTest{
 	   */
 			@Autowired
 		      public RegionMapper regionMapper;
-			@Test
 		public void  loadRegionData(){
 			Map  fileMap=new HashMap<>();
 			fileMap.put("region", "name");

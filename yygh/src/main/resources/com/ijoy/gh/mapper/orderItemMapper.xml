@@ -26,8 +26,8 @@
 	</resultMap>
 
   <insert id="insert"  parameterType="OrderItem">
-  	insert into orderItem(hospital_id,department_id,doctor_id,schedule_id,p_date,orderNum,state,takePassword,
-  	employee_id,score,message) values (#{hospital.id},#{department.id},#{doctor.id},#{schedule.id},#{date},
+  	insert into orderItem(id,hospital_id,department_id,doctor_id,schedule_id,p_date,orderNum,state,takePassword,
+  	employee_id,score,message) values (orderitem_seq.nextval,#{hospital.id},#{department.id},#{doctor.id},#{schedule.id},#{date},
   	#{orderNum},#{state},#{takePassword},#{employee.id},#{score},#{message})
   
   </insert>
@@ -60,14 +60,7 @@
          	from (select * 
          	from orderItem 
          	<include refid="querySql"/>
-         	<choose>
-				<when test="orderStr=='ghHighScore'">
-					order by ghHighScore DESC,id,rowid
-				</when>
-				<otherwise>
-					order by ghtotal DESC,id,rowid
-				</otherwise>
-			</choose> )a
+         	order by p_date DESC)a
          	where <![CDATA[ rownum <  #{endNum}]]>)
          	where rnum>=#{startNum}
 </select>

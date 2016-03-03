@@ -48,6 +48,17 @@ public class ApplicationServiceImpl  implements IApplicationService {
 		}
 		    return new PageResult<>();
 	}
-	
+
+	@Override
+	public PageResult<Application> queryApplicationJoinEmployeePage(BaseQuery applicationQuery) {
+		Long totalCount = mapper.queryApplicationJoinEmployeeTotalCount(applicationQuery);
+		System.out.println(totalCount);
+		if(totalCount>0){
+			List<Application> rows = mapper.queryApplicationJoinEmployeeRows(applicationQuery);
+			System.out.println(rows.size());
+			return new PageResult<>(totalCount, rows, applicationQuery.getPageSize()	, applicationQuery.getCurrentPage());
+		}
+		    return new PageResult<>();
+	}
 }
 

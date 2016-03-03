@@ -142,6 +142,9 @@ public class OrderItemServiceImpl  implements OrderItemService {
 	
 	
 	private OrderItem  initOrderItem(Employee employee, Schedule schedule, int orderNum, String takePassword) {
+		System.out.println("---------------------------------");
+		System.out.println(schedule);
+		System.out.println(schedule.getDoctor().getDepartment());
 		OrderItem order = new OrderItem();
 		order.setHospital(schedule.getDoctor().getDepartment().getHospital());
 		order.setDepartment(schedule.getDoctor().getDepartment());
