@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ijoy.common.comutil.Ajaxresult;
+import com.ijoy.common.domain.Hospital;
 import com.ijoy.common.query.HospitalQuery;
+import com.ijoy.common.query.PageResult;
 import com.ijoy.common.service.HospitalService;
 
 @Controller
@@ -27,13 +29,17 @@ public class HospitalController {
 	 * @throws Exception
 	 * index/main.jsp   根据城市id来获得医院的json
 	 */
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(params={"for=json"},method=RequestMethod.GET)
 	@ResponseBody
 	public Ajaxresult search(@ModelAttribute HospitalQuery baseQuery) throws Exception{
-		System.out.println(baseQuery);
-		System.out.println(baseQuery.getLevels());
-		List hospitals = hospitalService.queryHospital(baseQuery).getRows();
-		return new Ajaxresult(true,hospitals);
+		try {
+			PageResult<Hospital> pageResult = hospitalService.queryPage(baseQuery);
+			return new Ajaxresult(true, pageResult);
+		} catch (Exception e) {
+			return new Ajaxresult(false, "查询医院列表出错");
+		}
+		
+		
 	}
 	
 	@RequestMapping(params="type=html",method=RequestMethod.GET)

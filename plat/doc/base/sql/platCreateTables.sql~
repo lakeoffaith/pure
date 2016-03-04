@@ -114,7 +114,8 @@ CREATE TABLE APPLICATION(
 	starttime Date,
 	endtime Date,
 	state NUMBER(2),
-	docpath VARCHAR(100)
+	docpath VARCHAR(100),
+	url VARCHAR(100)
 );
 
 

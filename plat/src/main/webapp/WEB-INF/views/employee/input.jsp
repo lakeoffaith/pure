@@ -30,6 +30,7 @@
 <link href="css/style-responsive.css" rel="stylesheet" />
 
 <link href="css/res-style.css" rel="stylesheet" />
+
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
 <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -60,9 +61,9 @@
 							class="col-md-6">
 							<form action="employee" id="domainFormID" class="form-horizontal"
 								method="post">
-								//保存所选的应用的序列
-								<input type="hidden"  id="ItemStrInput">
-								
+								<!-- 保存所选的应用的序列 -->
+								 <input type="hidden" name="applicationIds"  id="ItemStrInput">
+
 								<c:if test="${employee.id !=null}">
 									<div class="form-group hidden">
 										<label class="col-sm-2  col-md-offset-1 control-label">序号</label>
@@ -121,57 +122,80 @@
 								</div>
 							</form>
 						</div>
-						<div
-							style=" padding-left: 20px; display: block"
-							class="col-md-6">
-											<div class="row"  >
-													<select  ><option  selected="selected">预约挂号</option><option>院长决策</option></select>
-													<button>增加应用</button>
-											</div>			
-											<script type="text/javascript">
+						<div style="padding-left: 20px; display: block" class="col-md-6">
+							<div class="row">
+								<select id="notOwnApplicationSelectId"><option
+										selected="selected">预约挂号</option>
+									<option>院长决策</option></select>
+								<button onclick="addItem()">增加应用</button>
+							</div>
+							<script type="text/javascript">
+												
+												
 											       //将tbody里面的内容的id拼成,
 													function freshAjaxItemStr(){
-											    	     $td=$("#itemData").find("tbody td:eq(0)");
+											    	     $td=$("#itemData").find("tbody tr");
 											    	     var itemStr="";
 											    	    $.each($td,function(e,v){
-											    	    	id=$(v).attr("data-item_id");
+											    	    	id=$(v).find("td:eq(0)").attr("data-item_id");
+											    	    	console.debug("-----------------------"+id);
 											    	    	itemStr+=id+",";
 											    	    });
 											    	    itemStr=  itemStr.substring(0, itemStr.length-1);
+											    	    console.debug(itemStr);
 											    	    $("#ItemStrInput").val(itemStr);
 											    	     
-											       }
+											       };
+											       function addItem(){
+											    	   id=$("#notOwnApplicationSelectId").find("option[selected=selected]").attr("data-id");
+											    	   name=$("#notOwnApplicationSelectId").find("option[selected=selected]").html();
+											    	   if(jsValidateIsNull(id) || jsValidateIsNull(name)){
+											    		   alter("请先选择应用");
+											    		   return;
+											    	   };
+											    	   str="<tr><td data-item_id="+id+">"+name+"</td><td><button onclick='deleteItem(this)'>删除</button></td></tr>";
+											    	   $("#itemData").find("tbody").append(str);
+											    	   $("#notOwnApplicationSelectId").find("option[selected=selected]").remove();
+											    	 $firstOption= $("#notOwnApplicationSelectId").find("option:eq(0)");
+											    	  if(jsValidateIsNull($firstOption)){
+											    		  $("#notOwnApplicationSelectId").val("无剩余应用");	
+											    	  }else {
+											    		  $firstOption.attr("selected","selected");
+													};
+													//更新id 为itemStr 里的内容
+										 			freshAjaxItemStr();
+												};
 													function deleteItem(item){
 											 			$(item).parents("tr").remove();
 											 			//更新id 为itemStr 里的内容
 											 			freshAjaxItemStr();
-											 		}
-											</script>				
-											<div  class="row"  id="itemData">
-														<table  >
-																<thead>
-																		<tr>
-																				<th>应用名称</th>
-																				<th>操作</th>
-																		</tr>
-																</thead>
-																<tbody>
-																		<tr>
-																				<td data-item_id='2'>预约挂号</td>
-																				<td>
-																						<button  onclick="deleteItem(this)">删除</button>
-																				</td>
-																		</tr>
-																		<tr>
-																				<td data-item_id='2'>预约挂号</td>
-																				<td>
-																						<button  onclick="deleteItem(this)">删除</button>
-																				</td>
-																		</tr>
-																</tbody>
-														</table>
-											</div>
+											 		};
+											</script>
+							<div class="row" id="itemData">
+								<table>
+									<thead>
+										<tr>
+											<th>应用名称</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td data-item_id='2'>预约挂号</td>
+											<td>
+												<button onclick="deleteItem(this)">删除</button>
+											</td>
+										</tr>
+										<tr>
+											<td data-item_id='2'>预约挂号</td>
+											<td>
+												<button onclick="deleteItem(this)">删除</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
+						</div>
 					</div>
 
 				</div>
@@ -199,6 +223,70 @@
 	<script src="js/common-scripts.js"></script>
 	<!--script for this page only-->
 	<script src="js/dynamic-table.js"></script>
+   <script src="js/ijoy/global.js"></script>
+	<script type="text/javascript">
 	
+	
+	
+	
+	function loadOwnApplication(employee_id,$table){
+		var baseQuery={};
+		baseQuery.employee_id=employee_id;
+		baseQuery.pageSize=10;
+		console.debug(baseQuery);
+		$.ajax({
+			url:"application?"+"for=json",
+			type:"get",
+			data:baseQuery,
+			dataType:"json",
+			success:function(data){
+				if(data.success){
+					$table.find("tbody").empty();
+					str="";
+					$.each(data.results,function(e,v){
+						 str+="<tr><td data-item_id="+v.id+">"+v.name+"</td><td><button  onclick='deleteItem(this)'>删除</button></td></tr>";
+					});
+					$table.find("tbody").append(str);
+				}
+			}
+		});
+	};
+	/* notOwnApplicationSelectId */
+	function loadNotOwnApplication(employee_id){
+		$select=$("#notOwnApplicationSelectId");
+		var baseQuery={};
+		baseQuery.notEmployee_id=employee_id;
+		baseQuery.pageSize=20;
+		console.debug(baseQuery);
+		$.ajax({
+			url:"application?"+"for=json",
+			type:"get",
+			data:baseQuery,
+			dataType:"json",
+			success:function(data){
+				if(data.success){
+					$select.empty();
+					str="";
+					$.each(data.results,function(e,v){
+						 str+="<option data-id="+v.id+">"+v.name+"</option>";
+					});
+					$select.append(str);
+					$select.find("option:eq(0)").attr("selected","selected");
+				}
+			}
+		})
+	};
+	$(function(){
+		//更新id 为itemStr 里的内容
+			freshAjaxItemStr();
+		var employee_id=$("input[name=id]").val();
+		 //给notOwnApplicationSelectId加载选项
+		 	loadNotOwnApplication(employee_id);
+		   
+		 //loadOwnApplicatio  加载用户已经拥有的应用
+		 loadOwnApplication(employee_id,$("#itemData"));
+		 
+	});
+	</script>
 </body>
 </html>

@@ -230,7 +230,9 @@
                                   <div class="col-lg-12 col-md-12 col-sm-12">
                                       <section class="panel panel-m0">
                                           <div class="panel-body">
-                                              <ul class="summary-list">
+                                          	
+                                          
+                                              <ul class="summary-list"  id="OwnApplicationUlId">
                                                  
                                                     <li>
                                                       <a href="javascript:;">
@@ -383,7 +385,7 @@
                       </section>
                       <!--revenue end-->
                   </div>
-                  <div id="examplefirst"  class="col-lg-12 col-md-12 col-sm-12" style="height: 250px;width: 100%;padding: 0px; "></div>
+                  <div id="examplefirst"  class="col-lg-12 col-md-12 col-sm-12" style="height: 250px;width: 100%;padding: 0px;margin-top: 200px "></div>
               </div>
     </section>
   </section>
@@ -414,11 +416,42 @@
     <script src="js/morris-script.js"></script>
     <script src="js/all-chartjs.js"></script>
     <script src="js/sparkline-chart.js"></script>
-   
+    <script type="text/javascript">
+                                          			function loadOwnApplication(employee_id,$ul){
+                                          				
+                                          				var baseQuery={};
+                                          				baseQuery.employee_id=employee_id;
+                                          				$.ajax({
+                                          					url:"application?"+"for=json",
+                                          					data:baseQuery,
+                                          					type:"get",
+                                          					dataType:"json",
+                                          					success:function(data){
+                                          						if(data.success){
+                                          							$ul.empty();
+                                          							str="";
+                                          							$.each(data.results,function(e,v){
+                                          								str+="<li onclick='goNewTab(\""+v.url+"\")'><img src='img/app14.png'>"+v.name+"</li>"
+                                          							});
+                                          							$ul.append(str);
+                                          						}
+                                          					}
+                                          				});
+                                          			}
+                                          		$(function(){
+                                          			employee_id=2;
+                                          			loadOwnApplication(employee_id,$("#OwnApplicationUlId"));
+                                          			
+                                          		});
+                                          	
+                                          	</script>
   <script>
 
-      //owl carousel
-
+    /*   浏览器新打开一个tab */
+		function goNewTab(url){
+    	  window.open(url);
+      }	;
+      
       $(document).ready(function() {
           $("#owl-demo").owlCarousel({
               navigation : true,

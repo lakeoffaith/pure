@@ -31,7 +31,14 @@
   	<filter-name>characterEncodingFilter</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
- 
+ <!-- 	引入自定义标签 -->
+	<jsp-config>
+			<taglib>
+						<taglib-uri>ption</taglib-uri>
+						<taglib-location>/WEB-INF/tld/page.tld</taglib-location>
+			</taglib>
+	</jsp-config>
+	
   
  
   

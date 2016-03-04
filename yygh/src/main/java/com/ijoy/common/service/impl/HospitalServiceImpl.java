@@ -10,6 +10,7 @@ import com.ijoy.common.domain.Employee;
 import com.ijoy.common.domain.Hospital;
 import com.ijoy.common.mapper.HospitalMapper;
 import com.ijoy.common.query.BaseQuery;
+import com.ijoy.common.query.HospitalQuery;
 import com.ijoy.common.query.PageResult;
 import com.ijoy.common.service.HospitalService;
 
@@ -19,7 +20,7 @@ public class HospitalServiceImpl  implements HospitalService {
 	private HospitalMapper hospitalMapper;
 
 	@Override
-	public PageResult<Hospital> queryHospital(BaseQuery basequery) {
+	public PageResult<Hospital> queryPage(HospitalQuery  basequery) {
 		Long totalCount=hospitalMapper.queryTotalCount(basequery);
 		if(totalCount>0){
 			List<Hospital> rows= hospitalMapper.queryRows(basequery);

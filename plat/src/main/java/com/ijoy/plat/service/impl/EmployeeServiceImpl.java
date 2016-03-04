@@ -2,9 +2,11 @@ package com.ijoy.plat.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ijoy.common.comutil.StringUtil;
 import com.ijoy.plat.domain.Employee;
 import com.ijoy.plat.mapper.EmployeeMapper;
 import com.ijoy.plat.mapper.LoginInfoMapper;
@@ -50,6 +52,23 @@ public class EmployeeServiceImpl  implements IEmployeeService {
 			return new PageResult<>(totalCount, rows, baseQuery.getPageSize()	, baseQuery.getCurrentPage());
 		}
 		return new PageResult<>();
+	}
+	@Override
+	public void modifyOwnApplications(Long employeeId,String applicationIds) {
+				
+				//删除employee_application 中间表的关联数据，
+		mapper.deleteJoinApplication(employeeId);
+		    System.out.println(employeeId+"-----------------------------------");
+			  //增加需要新增的数据到employee_application;
+		String[] str = applicationIds.split(",");
+		for (int i = 0; i < str.length; i++) {
+			if (StringUtils.isNotBlank(str[i])) {
+				Long applicationId=Long.valueOf(str[i]);
+				System.out.println(employeeId+"=======================");
+				mapper.insertJoinApplication(employeeId,applicationId);
+			}
+			
+		}
 	}
 	
 	
