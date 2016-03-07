@@ -5,11 +5,16 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ijoy.plat.domain.Employee;
 import com.ijoy.plat.domain.LoginInfo;
@@ -20,7 +25,7 @@ import com.ijoy.plat.service.ILoginInfoService;
 import com.ijoy.plat.service.IMenuService;
 import com.ijoy.plat.service.ISysloginfoService;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
-
+@Component
 public class CookieUtil {
 	 //保存cookie时的cookieName
     public final static String LOGINCOOKIE = "logincookie";
@@ -31,11 +36,24 @@ public class CookieUtil {
     //保存Cookie到客户端-------------------------------------------------------------------------
     //在CheckLogonServlet.java中被调用
     //传递进来的user对象中封装了在登陆时填写的用户名与密码
-    private static ILoginInfoService loginInfoService;
-    private static IEmployeeService employeeService;
-    private static IMenuService menuService;
-    private static ISysloginfoService sysloginfoService;
-    public static void saveCookie(LoginInfo loginInfo,HttpServletRequest request,HttpServletResponse response) {
+    @Autowired
+    private  ILoginInfoService loginInfoService;
+    @Autowired
+    private  IEmployeeService employeeService;
+    @Autowired
+    private IMenuService menuService;	
+    @Autowired
+    private ISysloginfoService sysloginfoService;
+    
+    private static  CookieUtil cookieUtil;
+    
+    @PostConstruct
+    public void init(){
+    	cookieUtil=this;
+    	cookieUtil.loginInfoService=this.loginInfoService;
+    }
+    
+	public static void saveCookie(LoginInfo loginInfo,HttpServletRequest request,HttpServletResponse response) {
     		//cookie的有效期
     		long validTime = System.currentTimeMillis() +cookieMaxAge*loginInfo.getRememberdays();
            //MD5加密用户详细信息   //
@@ -51,10 +69,8 @@ public class CookieUtil {
            Cookie cookie = new Cookie(LOGINCOOKIE, cookieValueBase64);
            //存登录信息保存的cookie天数(这个值应该大于或等于validTime)
            cookie.setMaxAge(cookieMaxAge*loginInfo.getRememberdays());
-           //这个一定得设置，不能从jsp中读取cookie
-           cookie.setSecure(true);
-           cookie.setPath("/");
            //向客户端写入
+           cookie.setPath("/plat");
            response.addCookie(cookie);
     }
     //读取Cookie,自动完成登陆操作----------------------------------------------------------------
@@ -84,6 +100,10 @@ public class CookieUtil {
            System.out.println("cookieValueAfterDecode===="+cookieValueAfterDecode);
            //对解码后的值进行分拆,得到一个数组,如果数组长度不为3,就是非法登陆
            String cookieValues[] = cookieValueAfterDecode.split(":");
+           for (int i = 0; i < cookieValues.length; i++) {
+        	   System.out.println(i+"   :");
+			System.out.println(cookieValues[i]);
+		}
            if(cookieValues.length!=4){
         	   clearCookie(response);
                chain.doFilter(request, response);
@@ -108,8 +128,7 @@ public class CookieUtil {
            }
            //取出cookie中的用户名,并到数据库中检查这个用户名,
            String username = cookieValues[0];
-           System.out.println("loginInfoService=="+loginInfoService);
-           LoginInfo existLoginInfo = loginInfoService.findExistLoginInfoByName(username);
+           LoginInfo existLoginInfo = cookieUtil.getLoginInfoService().findExistLoginInfoByName(username);
            
            //如果user返回不为空,就取出密码,使用用户名+密码+有效时间+ webSiteKey进行MD5加密
            if(existLoginInfo!=null){
@@ -121,12 +140,12 @@ public class CookieUtil {
                 	  /** 1 将用户登录用户放入session中
       				 * 根据LoginInfo来获得Employee相同的id*/
       				 
-      				Employee employee=employeeService.findEmployeeByLoginInfoID(existLoginInfo.getId());
+      				Employee employee=cookieUtil.getEmployeeService().findEmployeeByLoginInfoID(existLoginInfo.getId());
       				UserContext.setUser(employee,request);
       				
       				/* * 2 将权限放入session中*/
       				 
-      				List<Menu> menulist = menuService.getMenuListByRole(employee.getRole());
+      				List<Menu> menulist = cookieUtil.getMenuService().getMenuListByRole(employee.getRole());
       				UserContext.setUserMenus(menulist,request);
       				
       				 
@@ -134,11 +153,11 @@ public class CookieUtil {
       				 /** 4 修改登录日志*/
       				 
       				//1:获得sysloginfo
-      				Sysloginfo sysloginfo = sysloginfoService.get(employee.getId());
+      				Sysloginfo sysloginfo = cookieUtil.getSysloginfoService().get(employee.getId());
       				sysloginfo.setLastLoginTime(sysloginfo.getCurrentLoginTime());
       				sysloginfo.setLastExitTime(sysloginfo.getCurrentExitTime());
       				sysloginfo.setCurrentLoginTime(new Date());
-      				sysloginfoService.update(sysloginfo);
+      				cookieUtil.getSysloginfoService().update(sysloginfo);
       				
       				chain.doFilter(request, response);
       				return;

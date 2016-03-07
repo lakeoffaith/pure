@@ -3,6 +3,7 @@ package com.ijoy.plat.web.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,7 +47,6 @@ public class LoginInfoController {
 		
 		
 		//默认不记住密码
-		private int rememberFlag=0;
 	    private boolean stringRegex(String in,String regex){
 	    	return in.matches(regex);
 	    }
@@ -58,8 +58,8 @@ public class LoginInfoController {
 			 String name=loginInfo.getName();
 			 String password=loginInfo.getPassword();
 			if(stringRegex(name,"^[a-zA-Z](?![a-zA-Z]+$)\\w{4,10}$") && stringRegex(password, "^[a-zA-Z](?![a-zA-Z]+$)\\w{4,10}$")){
-				/*MD5Util.JM(MD5Util.MD5(password))*/
-			 loginInfo = loginInfoService.findByLogin(new LoginInfo(name,password ));
+				/**/
+			 loginInfo = loginInfoService.findByLogin(new LoginInfo(name,MD5Util.JM(MD5Util.MD5(password)) ));
 				 System.out.println("enter check "+loginInfo);
 				if (loginInfo != null) {// 登录成功
 					
@@ -67,9 +67,8 @@ public class LoginInfoController {
 					 /*根据LoginInfo来获得Employee相同的id*/
 					 
 					Employee employee=employeeService.findEmployeeByLoginInfoID(loginInfo.getId());
-					System.out.println(employee);
 					UserContext.setUser(employee,request);
-					
+					System.out.println(request.getSession().getAttribute("user")+"=================================================");
 					/* * 2 将权限放入session中*/
 					 
 					List<Menu> menulist = menuService.getMenuListByRole(employee.getRole());
@@ -89,8 +88,8 @@ public class LoginInfoController {
 					sysloginfo.setIp(request.getRemoteAddr());
 					sysloginfoService.update(sysloginfo);
 					 /*如果记住密码,将用户放入cookie中,默认保留一天*/
-					 
-					if(rememberFlag==1){
+					 System.out.println("======================"+loginInfo.getRememberdays());
+					if(loginInfo.getRememberdays()>0){
 						//保存cookie
 						CookieUtil.saveCookie(loginInfo, request, response);
 					}else {
