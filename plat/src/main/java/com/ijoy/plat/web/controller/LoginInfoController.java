@@ -113,7 +113,6 @@ public class LoginInfoController {
 		 */
 	    @RequestMapping("/login")
 		public String login() throws Exception {
-	    	
 			//在记住密码的情况下如果执意访问这个页面也是能行的，换用户登录。
 			return "login";
 		}

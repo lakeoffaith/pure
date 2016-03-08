@@ -29,10 +29,8 @@
 <body>
 	<%@ include file="/WEB-INF/views/title.jsp"%>
 	<div class="container-fluid" style="margin-bottom: 60px;">
-
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-10 col-md-offset-1">
-
 				<div class="search-condition"
 					style="height: 200px; padding-bottom: 20px; border-bottom: 1px solid #ededed;">
 					<!-- Nav tabs -->
@@ -219,7 +217,8 @@
 					'levels' : levels.substring(0, levels.length - 1),
 					'types' : types.substring(0, types.length - 1)
 				};
-
+				//加上城市d
+				baseQuery.cityId=$(".cityPopValue").attr("data-id");
 				//加上排序的
 				baseQuery.orderStr = $("#OrderDropdownDivId").attr("data-val");
 				//加上分页的
@@ -236,6 +235,7 @@
 		//根据已有的条件查找医院
 		function loadHospital() {
 			var ConditionBar = $("#searchConditionBar");
+			var cityId=$("span.cityPopValue").attr("data-id");
 			var levels = "";
 			var types = "";
 			$.each(ConditionBar.find("li"), function(e, v) {
@@ -253,6 +253,7 @@
 
 			//加上排序的
 			baseQuery.orderStr = $("#OrderDropdownDivId").attr("data-val");
+			baseQuery.cityId=cityId;
 			console.debug("----------------------------");
 			console.debug(baseQuery);
 			initHosDiv(baseQuery);
@@ -298,6 +299,7 @@
 		function cityClick(v) {
 			if (cityClickCommon(v)) {
 				//执行方法
+				loadHospital();
 			}
 
 		}
@@ -381,9 +383,28 @@
 															+ "</p><p style='float: right'><a href='#' style='float: right;'>收藏</a></p></div></div></div>";
 													str += e_str;
 												});
-								$("#hospitals-div").append(str);
-								$("#hospitals-div").append("<ul class='pagination'>"+
-										"<li><a href='javascript:void(0);' onclick='goPage(1,0)'>1</a></li><li><a href='javascript:void(0);' onclick='goPage(2,0)'>2</a></li></ul>");
+								$("#hospitals-div").append(str);$("#hospitals-div").append("<div   class='col-md-offset-4 col-md-4'><ul class='pagination'>"+
+								"<li><a href='javascript:void(0);' onclick='goPage(1,0)'>1</a></li><li><a href='javascript:void(0);' onclick='goPage(2,0)'>2</a></li></ul><div>");
+								if(!jsValidateIsNull(str)){
+									var pageItemStr="<div   class='col-md-offset-4 col-md-4'><ul class='pagination'>";
+									var totalCount=d.obj.totalCount;
+									console.debug("baseQuery:    "+baseQuery);
+									var currentPage=baseQuery.currentPage;
+									var i=0;
+									var j=0;
+									i=currentPage-2;
+									j=currentPage+2;
+									i=i<0?0:i;
+									j=j>totalCount?totalCount:j;
+									var k;
+									for  (k>=i; k <=j; k++) {
+										pageItemStr+="<li><a href='javascript:void(0);' onclick='goPage("+k+",0)'>"+k+"</a></li>";
+									}
+									
+									pageItemStr+="</ul><div>";
+									$("#hospitals-div").append(pageItemStr);
+								}
+								
 								
 								
 							}

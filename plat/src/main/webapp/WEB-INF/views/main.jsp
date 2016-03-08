@@ -39,12 +39,10 @@
     <style type="text/css">
     
     </style>
-    
-   
   </head>
 
   <body>
-  <section id="main-content">
+  <section id="main-content"  data-employee_id="${sessionScope.user.id }">
           <section class="wrapper ">
               <!--state overview start-->
               <div class="row" style="padding: 0px; ">
@@ -63,37 +61,38 @@
                                       <i class="icon-user"></i>
                                   </div>
                                   <div class="value">
-                                      <h4>1293689</h4>
+                                      <h4>${allEmployeeCount }</h4>
                                       <p>新用户</p>
                                   </div>
                               </section>
                           </div> 
-                          <div class="col-lg-3 col-md-3 col-sm-3">
+                          <div class="col-lg-3 col-md-3 col-sm-3" >
                               <section class="panel">
                                   <div class="symbol red">
                                       <i class="icon-user-md"></i>
                                   </div>
                                   <div class="value">
-                                      <h4>2489663</h4>
+                                      <h4>5673454</h4>
                                       <p>就诊人次</p>
                                   </div>
                               </section>
                           </div>
-                          <div class="col-lg-3 col-md-3 col-sm-3">
+                          <div class="col-lg-3 col-md-3 col-sm-3" >
                               <section class="panel">
                                   <div class="symbol yellow">
                                       <i class="icon-paste"></i>
                                   </div>
                                   <div class="value">
-                                      <h4>31</h4>
+                                      <h4>${ownTaskItemCount }</h4>
                                       <p>我的任务</p>
                                   </div>
                               </section>
                           </div>
-                          <div class="col-lg-3 col-md-3 col-sm-3">
+                          
+                          <div class="col-lg-3 col-md-3 col-sm-3"  id="ownApplicationDivId">
                               <section class="panel">
                                   <div class="symbol blue">
-                                      <i class="icon-unlock"></i>
+                                      <a href="application" ><i class="icon-unlock"></i></a>
                                   </div>
                                   <div class="value">
                                       <h4>6</h4>
@@ -434,12 +433,13 @@
                                           								str+="<li onclick='goNewTab(\""+v.url+"\")'><img src='img/app14.png'>"+v.name+"</li>"
                                           							});
                                           							$ul.append(str);
+                                          							$("#ownApplicationDivId").find("h4").html(data.results.length);
                                           						}
                                           					}
                                           				});
                                           			}
                                           		$(function(){
-                                          			employee_id=2;
+                                          			employee_id=$("#main-content").attr("data-employee_id");
                                           			loadOwnApplication(employee_id,$("#OwnApplicationUlId"));
                                           			
                                           		});

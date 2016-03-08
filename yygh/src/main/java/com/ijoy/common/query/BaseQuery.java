@@ -2,8 +2,8 @@ package com.ijoy.common.query;
 
 
 public abstract class BaseQuery {
-	public static final Long MAXPAGESIZE_1000 = null;
-	public static final Long MAXPAGESIZE_10000 = null;
+	public static final Long MAXPAGESIZE_1000 = 1000L;
+	public static final Long MAXPAGESIZE_10000 = 10000L;
 	private Long pageSize = 10L;
 	private Long currentPage = 1L;
 	private Long endNum;
