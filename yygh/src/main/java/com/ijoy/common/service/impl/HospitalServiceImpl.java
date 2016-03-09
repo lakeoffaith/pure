@@ -92,6 +92,11 @@ public class HospitalServiceImpl  implements HospitalService {
 		return hospitalMapper.get(id);
 	}
 
+	@Override
+	public void insertHospitalJoinEmployee(Long hospital_id, Long employee_id, Long type) {
+				hospitalMapper.insertHospitalJoinEmployee(hospital_id,employee_id,type);
+	}
+
 
 	
 }

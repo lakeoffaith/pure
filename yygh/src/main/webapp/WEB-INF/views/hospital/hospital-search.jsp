@@ -57,7 +57,7 @@
 							<li><span class="glyphicon glyphicon-map-marker text-showy"
 								aria-label="choosecity"></span> <span
 								class="text-showy cityPopValue">广东深圳</span></li>
-							<li id="choose-city-li"><span><mark>更换</mark></span></li>
+							<li id="choose-city-li"><a><span><mark>更换</mark></span></a></li>
 
 
 
@@ -176,6 +176,7 @@
 	<script src="js/bootstrap.js"></script>
 	<script src="js/gh/global.js"></script>
 	<script src="js/gh/citypop.js"></script>
+	<script src="js/model/domain.js"></script>
 	<script>
 	  //点击下一页
 	  function goPage(){
@@ -330,7 +331,7 @@
 												d.results,
 												function(e, v) {
 													var e_str = "";
-													e_str += "<li  onclick='addCondition(this)' data-id='"
+													e_str += "<li  onclick='addCondition(this)'  class='click' data-id='"
 															+ v.type
 															+ "'>"
 															+ v.name + "</li>";
@@ -342,17 +343,29 @@
 						}
 					});
 		}
-       
+       /**
+       		collectHospital  收藏医院
+       */
+       function collectHospital(dom_this,domainName,method,id){
+    	   var resultData=doModelDomain(domainName, method, id);
+    	   console.debug(resultData);
+    	   if(resultData.success){
+    		   $(dom_this).html("已收藏");
+    	   };
+       }
 		function initHosDiv(baseQuery) {
 			var str = "";
 			$
 					.ajax({
 						url : "hospital?for=json",
 						type : "GET",
+						async:false,
 						data : baseQuery,
 						dataType : "json",
 						success : function(d) {
 							if (d.success) {
+								baseQuery.pageSize=d.obj.pageSize;
+								baseQuery.currentPage=d.obj.currentPage;
 								$("#hospitals-div").empty();
 								$
 										.each(
@@ -368,7 +381,7 @@
 															+ v.id
 															+ "\")'>"
 															+ "<div class='caption'  style='padding-right: 100px;''>"
-															+ "<h3 class='text-info'  onclick='show(\"hospital\",\""
+															+ "<h3 class='text-info  click'    onclick='show(\"hospital\",\"" 
 															+ v.id
 															+ "\")'>"
 															+ v.name
@@ -380,24 +393,25 @@
 															+ "</p><div class='float-right-tips' style='position: absolute; right: 0px; top: 30px;'><p>已预约人数</p>"
 															+ "<p class='text-warning'>"
 															+ v.ghTotal
-															+ "</p><p style='float: right'><a href='#' style='float: right;'>收藏</a></p></div></div></div>";
+															+ "</p><p style='float: right'><a href='javascript:;' onclick='collectHospital(this,\"hospital\",\"collect\",\""+v.id+"\")' style='float: right;'>收藏</a></p></div></div></div>";
 													str += e_str;
 												});
-								$("#hospitals-div").append(str);$("#hospitals-div").append("<div   class='col-md-offset-4 col-md-4'><ul class='pagination'>"+
-								"<li><a href='javascript:void(0);' onclick='goPage(1,0)'>1</a></li><li><a href='javascript:void(0);' onclick='goPage(2,0)'>2</a></li></ul><div>");
+								$("#hospitals-div").append(str);
 								if(!jsValidateIsNull(str)){
 									var pageItemStr="<div   class='col-md-offset-4 col-md-4'><ul class='pagination'>";
-									var totalCount=d.obj.totalCount;
-									console.debug("baseQuery:    "+baseQuery);
-									var currentPage=baseQuery.currentPage;
+									var totalPage=d.obj.totalPage;
+									var currentPage=d.obj.currentPage;
+									console.debug(currentPage);
+									console.debug(totalPage);
 									var i=0;
 									var j=0;
 									i=currentPage-2;
 									j=currentPage+2;
-									i=i<0?0:i;
-									j=j>totalCount?totalCount:j;
+									i=i<=0?1:i;
+									j=j>totalPage?totalPage:j;
+									j=j<=5?5:j;
 									var k;
-									for  (k>=i; k <=j; k++) {
+									for  (k=i; k <=j; k++) {
 										pageItemStr+="<li><a href='javascript:void(0);' onclick='goPage("+k+",0)'>"+k+"</a></li>";
 									}
 									
@@ -434,10 +448,10 @@
 															+ v.pic
 															+ " alt="
 															+ v.name
-															+ " style='position: absolute; left: 0px; top: 15px; width: 58px; height: 70px;' onclick='show(\"hospital\",\""
+															+ " style='position: absolute; left: 0px; top: 15px; width: 58px; height: 70px;'  onclick='show(\"hospital\",\""
 															+ v.id
 															+ "\")'>"
-															+ "<div class='caption'><p class='text-info' onclick='show(\"hospital\",\""
+															+ "<div class='caption'><p class='text-info click'  onclick='show(\"hospital\",\""
 															+ v.id
 															+ "\")'>"
 															+ v.name
@@ -483,7 +497,7 @@
 															+ " style='position: absolute; left: 0px; top: 15px; width: 58px; height: 70px;' onclick='show(\"hospital\",\""
 															+ v.id
 															+ "\")'>"
-															+ "<div class='caption'  style='padding-right: 20px;''><p class='text-info' onclick='show(\"hospital\",\""
+															+ "<div class='caption'  style='padding-right: 20px;''><p class='text-info click' onclick='show(\"hospital\",\""
 															+ v.id
 															+ "\")'>"
 															+ v.name
@@ -520,7 +534,7 @@
 			});
 
 			//加载医院列表
-			initHosDiv();
+			initHosDiv({"pageSize":10,"currentPage":1});
 
 			//加载推荐医院列表jstl
 			initRecHosDiv({

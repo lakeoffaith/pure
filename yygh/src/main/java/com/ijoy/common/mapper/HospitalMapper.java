@@ -3,6 +3,7 @@ package com.ijoy.common.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
@@ -37,6 +38,9 @@ public interface HospitalMapper{
 
 	public List<Hospital> queryUserCollectHospitalRows(
 			HashMap<String, Object> hashMap);
+
+	@Insert("insert into hospital_employee(hospital_id,employee_id,type)  values  (#{0},#{1},#{2})")
+	public void insertHospitalJoinEmployee(Long hospital_id, Long employee_id, Long type);
 	
 
 }

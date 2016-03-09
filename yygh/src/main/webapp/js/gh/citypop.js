@@ -73,7 +73,6 @@ $(function(){
 						});
 					}
 					if(cityall.length>0){
-						console.debug(cityall);
 						var arrayChar=['ABCDE','FGHJ','KLMNP','QRSTW','XYZ'];
 						var cityTabl="";
 						for (var i = 0; i < arrayChar.length; i++) {

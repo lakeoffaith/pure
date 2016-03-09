@@ -29,7 +29,7 @@ public class MenuController {
 	private IMenuService service;
 	
 	//加载菜单
-	@RequestMapping("/load")
+	@RequestMapping(value="/load",method=RequestMethod.GET)
 	@ResponseBody
 		 public Ajaxresult loadMenu(HttpServletRequest request){
 		System.out.println("menu    load");

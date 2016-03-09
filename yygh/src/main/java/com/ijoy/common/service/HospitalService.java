@@ -21,6 +21,15 @@ public interface HospitalService extends BaseCurdService<Hospital> {
 
 	public PageResult<Hospital> queryPage(HospitalQuery baseQuery);
 
+	/**
+	 * 用户与医院的关系进行保存
+	 * @param hospital_id		医院id
+	 * @param employee_id	用户id
+	 * @param type					关系类型
+	 * type=1为收藏
+	 */
+	public void insertHospitalJoinEmployee(Long hospital_id, Long employee_id, Long type);
+
 
 
 

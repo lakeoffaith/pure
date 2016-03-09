@@ -1,5 +1,7 @@
 package com.ijoy.common.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ijoy.common.comutil.Ajaxresult;
+import com.ijoy.common.comutil.Context.UserContext;
+import com.ijoy.common.domain.Employee;
 import com.ijoy.common.domain.Hospital;
 import com.ijoy.common.query.HospitalQuery;
 import com.ijoy.common.query.PageResult;
@@ -54,6 +58,18 @@ public class HospitalController {
 		return "hospital/show";
 	}
 	
-	
+	@RequestMapping(value="/{id}",params="method=collect",method=RequestMethod.GET)
+	@ResponseBody
+	public Ajaxresult collect(@PathVariable Long id,HttpServletRequest request){
+		Employee employee = UserContext.getUser(request);
+		try {
+			hospitalService.insertHospitalJoinEmployee(id,employee.getId(),Hospital.TYPE_COLLECT);
+			return new Ajaxresult(true,"收藏成功");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return new Ajaxresult(false, "收藏失败");
+		}
+		
+	}
 
 }
