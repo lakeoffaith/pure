@@ -1,0 +1,17 @@
+访问方式
+	 /application               type        参数               结果
+				    get                            返回结果集的显示页面   
+				    get           for=json          放回结果集的json类型
+	                            get           methode=goSave    返回新增页面
+				    get           method=batchDelete  删除批量  json
+
+	/application/id		    get           method=goUpdate     返回更新页面
+        /application/id		    get           method=view        返回查看页面
+				    post                              新增或者更新
+	/application/id             get           method=delete       删除 放回json
+	
+	
+	
+
+	
+					

@@ -185,16 +185,17 @@
    function addHosByCity(cityId){
 	   if(!jsValidateIsNull(cityId)){
 		   $.ajax({
-			  url:"hospital",
+			  url:"hospital?for=json",
 			  type:"GET",
 			  data:{"cityId":cityId,"pageSize":'200'},
 			 dataType:"json",
 			  async:true,
 			  success:function(d){
-				 if(d.success && d.results.length>0){
+				  console.debug(d.obj.rows);
+				 if(d.success && d.obj.rows.length>0){
 					 $("#hosDropDownMenuUl").html();
 					  var hosAddStr="";
-					  $.each(d.results,function(e,v){
+					  $.each(d.obj.rows,function(e,v){
 						 hosAddStr+="<li onclick='hosClick(this)'><a href='javascript:void(0)' data-id="+v.id+">"+v.name+"</a></li>";
 					  });
 					  $("#hosDropDownMenuUl").append(hosAddStr);
@@ -213,10 +214,10 @@
 					dataType:"json",
 			  async:true,
 			  success:function(d){
-				  if(d.success && d.results.length>0){
+				  if(d.success && d.obj.rows.length>0){
 					  $("#depDropDownMenuUl").html();
 					  var depAddStr="";
-					  $.each(d.results,function(e,v){
+					  $.each(d.obj.rows,function(e,v){
 						  depAddStr+="<li onclick='depClick(this)'><a href='javascript:void(0)' data-id="+v.id+">"+v.name+"</a></li>";
 					  });
 					  $("#depDropDownMenuUl").append(depAddStr);

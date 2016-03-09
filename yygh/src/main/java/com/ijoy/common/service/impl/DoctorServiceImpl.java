@@ -20,10 +20,10 @@ public class DoctorServiceImpl  implements DoctorService {
 
 	@Override
 	public PageResult<Doctor> queryDoctor(BaseQuery basequery) {
-		Long totalCount=doctorMapper.queryDoctorTotalCount(basequery);
+		Long totalCount=doctorMapper.queryTotalCount(basequery);
 		LOGGER.debug("totalCount::"+totalCount);
 		if(totalCount>0){
-			List<Doctor> rows= doctorMapper.queryDoctorRows(basequery);
+			List<Doctor> rows= doctorMapper.queryRows(basequery);
 			return new PageResult<>(totalCount, rows, basequery.getPageSize(), basequery.getCurrentPage());
 		}
 		return new PageResult<>();

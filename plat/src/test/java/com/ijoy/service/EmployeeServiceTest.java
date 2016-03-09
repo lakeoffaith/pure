@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ijoy.plat.domain.Employee;
 import com.ijoy.plat.domain.Role;
+import com.ijoy.plat.query.ApplicationQuery;
 import com.ijoy.plat.service.IEmployeeService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,7 +19,7 @@ public class EmployeeServiceTest {
 	@Autowired
 	private IEmployeeService employeeService;
 
-	
+
 	
 	//查询所有的用户
 	@Test

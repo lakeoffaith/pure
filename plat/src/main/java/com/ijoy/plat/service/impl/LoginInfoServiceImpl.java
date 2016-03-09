@@ -64,20 +64,17 @@ public class LoginInfoServiceImpl  implements ILoginInfoService {
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+			mapper.delete(id);
 	}
 
 	@Override
 	public void update(LoginInfo t) {
-		// TODO Auto-generated method stub
-		
+			mapper.update(t);
 	}
 
 	@Override
 	public LoginInfo get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.get(id);
 	}
 
 	@Override

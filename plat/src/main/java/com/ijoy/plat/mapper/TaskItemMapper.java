@@ -15,9 +15,10 @@ public interface TaskItemMapper {
 
 	public List<TaskItem> getAll();
 
-	public List<TaskItem> queryTaskItemRows(BaseQuery query);
-
-	public Long queryTaskItemCount(BaseQuery query);
+	public List<TaskItem> queryRows(BaseQuery query);
+	public Long queryTotalCount(BaseQuery baseQuery);
 	
 	public List<TaskItem> getTaskItemListByTaskId(Long id);
+
+	
 }

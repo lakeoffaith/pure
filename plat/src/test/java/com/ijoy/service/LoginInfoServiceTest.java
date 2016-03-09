@@ -104,4 +104,17 @@ public class LoginInfoServiceTest extends BaseTest{
 		String jm = MD5Util.JM(MD5Util.MD5(password));
 		System.out.println(jm);
 	}
+	
+	/*
+	 * 手动更新密码
+	 */
+	@Test
+	public void updatePassword(){
+		String password="admin3";
+		String jm = MD5Util.JM(MD5Util.MD5(password));
+		LoginInfo loginInfo = loginInfoService.get(2L);
+		loginInfo.setPassword(jm);
+		System.out.println(loginInfo);
+		loginInfoService.update(loginInfo);
+	}
 }

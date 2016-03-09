@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ijoy.common.comutil.HttpYY;
-import com.ijoy.common.domain.Department;
-import com.ijoy.common.domain.Doctor;
 import com.ijoy.common.domain.Employee;
-import com.ijoy.common.domain.Hospital;
 import com.ijoy.common.mapper.DepartmentMapper;
 import com.ijoy.common.mapper.DoctorMapper;
 import com.ijoy.common.mapper.HospitalMapper;
@@ -145,6 +142,9 @@ public class OrderItemServiceImpl  implements OrderItemService {
 	
 	
 	private OrderItem  initOrderItem(Employee employee, Schedule schedule, int orderNum, String takePassword) {
+		System.out.println("---------------------------------");
+		System.out.println(schedule);
+		System.out.println(schedule.getDoctor().getDepartment());
 		OrderItem order = new OrderItem();
 		order.setHospital(schedule.getDoctor().getDepartment().getHospital());
 		order.setDepartment(schedule.getDoctor().getDepartment());

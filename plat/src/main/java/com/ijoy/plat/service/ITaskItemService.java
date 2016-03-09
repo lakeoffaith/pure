@@ -3,6 +3,8 @@ package com.ijoy.plat.service;
 import java.util.List;
 
 import com.ijoy.plat.domain.TaskItem;
+import com.ijoy.plat.query.BaseQuery;
+import com.ijoy.plat.query.PageResult;
 
 
 public interface ITaskItemService  {
@@ -16,5 +18,7 @@ public interface ITaskItemService  {
 	public List<TaskItem> getAll();	
 	
 	List<TaskItem> getTaskItemListByTaskId(Long id);
+	
+	public PageResult<TaskItem> queryPage(BaseQuery baseQuery);
 }
 

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ijoy.common.comutil.Ajaxresult;
-import com.ijoy.plat.domain.Application;
 import com.ijoy.plat.domain.TaskItem;
 import com.ijoy.plat.service.ITaskItemService;
 
@@ -41,22 +40,33 @@ public class TaskItemController {
 	//更新单个
 	
 	@RequestMapping(value="/{id}",params="type=update",method=RequestMethod.GET)
-	public Ajaxresult update(@ModelAttribute Application application){
+	public Ajaxresult update(@ModelAttribute TaskItem taskItem){
 		return null;
 	}
 	//进入新增单个
 	@RequestMapping(params="type=goSave",method=RequestMethod.GET)
 	public String goSave(){
-		return "application/input";
+		return "taskItem/input";
 	}
 	
 	//保存单个
 	@RequestMapping(method=RequestMethod.POST)
-	public Ajaxresult save(@ModelAttribute Application application){
-		return null;
+	@ResponseBody
+	public Ajaxresult save(@ModelAttribute TaskItem taskItem){
+		System.out.println("taskItem   "+taskItem);
+		try {
+			service.insert(taskItem);
+			return new  Ajaxresult(true,taskItem);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return new  Ajaxresult(false, "新增子项目失败");
+		}
+		
+		
 	}
 	//删除单个
-	@RequestMapping(value="/{id}",params="type=delete",method=RequestMethod.GET)
+	@RequestMapping(value="/{id}",params="method=delete",method=RequestMethod.GET)
+	@ResponseBody
 	public Ajaxresult delete(@PathVariable Long id){
 		try {
 			service.delete(id);

@@ -22,7 +22,7 @@ public class EmployeeController {
 	public Ajaxresult get(HttpServletRequest request){
 		Employee employee=(Employee) request.getSession().getAttribute("USE_IN_SESSION");
 		if(employee==null){
-			employee=employeeService.get(3L);
+			employee=employeeService.get(2L);
 		}
 		return new Ajaxresult(true, employee);
 	}

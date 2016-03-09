@@ -237,7 +237,7 @@
 										d.results,
 										function(e, v) {
 											var e_str = "";
-											e_str += "<li  onclick='addCondition(this)' data-id='"+v.type+"'>"+v.name+"</li>";
+											e_str += "<li  class='click' onclick='addCondition(this)' data-id='"+v.type+"'>"+v.name+"</li>";
 											str += e_str;
 										});
 						$ulVar.append(str);
@@ -260,7 +260,7 @@
 								var e_str="";
 								e_str+="<div class='thumbnail' style='border: none; position: relative; padding-left: 170px; border-bottom: 1px solid #ededed;'>"+
 								"<img src="+v.pic+" alt="+v.name+" style='position: absolute; left: 0px; top: 30px; width: 150px; height: 100px;' onclick='show(\"doctor\",\""+v.id+"\")'>"+
-								"<div class='caption'  style='padding-right: 100px;'><h3 class='text-info' onclick='show(\"doctor\",\""+v.id+"\")'>"+v.name+"<small class='text-showy'>[主任]</small></h3>"+
+								"<div class='caption'  style='padding-right: 100px;'><h3 class='text-info click' onclick='show(\"doctor\",\""+v.id+"\")'>"+v.name+"<small class='text-showy'>[主任]</small></h3>"+
 								"<p>"+v.hospital.name+"</p><p>"+v.department.name+"</p><div class='float-right-tips' style='position: absolute; right: 0px; top: 30px;'>"+
 								"<p class='text-showy'><span class='h3'>9</span>分</p><p><span class='star-0'></span></p><p>"+v.ghHighScore+"好评</p><p style='float: right;''><a href='#' style='float: right;'>收藏</a></p></div></div></div>";
 								str+=e_str;
@@ -279,15 +279,13 @@
 				dataType:"json",
 				success:function(d){
 					if(d.success && d.results.length>0){
-						
 							var str="<h3>推荐科室</h3>";
-							
 							$("#doctors-rec-div").empty();
 							$.each(d.results,function(e,v){
 								var e_str="";
 								e_str+="	<div class='thumbnail' style='border: none; position: relative; padding-left: 60px; border-bottom: 1px solid #ededed; padding-top: 0px;'>"+
 								"<img src="+v.pic+" alt="+v.name+" style='position: absolute; left: 0px; top: 15px; width: 58px; height: 70px;'  onclick='show(\"doctor\",\""+v.id+"\")'>"+
-								"<div class='caption'><p class='text-info' onclick='show(\"doctor\",\""+v.id+"\")'>"+v.name+"</p><p>已预约人数：<span class='text-showy'>"+v.ghTotal+"</span>"+
+								"<div class='caption'><p class='text-info click' onclick='show(\"doctor\",\""+v.id+"\")'>"+v.name+"</p><p>已预约人数：<span class='text-showy'>"+v.ghTotal+"</span>"+
 									"</p><p>医院："+v.hospital.name+"</p></div></div>";
 								str+=e_str;
 							});

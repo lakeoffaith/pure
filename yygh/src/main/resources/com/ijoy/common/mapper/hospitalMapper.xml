@@ -19,10 +19,10 @@
 		<result column="url" property="url" />
 		<result column="mail" property="mail" />
 		<result column="gobus" property="gobus" />
-		<result column="level" property="level" />
+		<result column="p_level" property="level" />
 		<result column="nature" property="nature" />
 		<result column="mtype" property="mtype" />
-		<result column="comment" property="comment" />
+		<result column="p_comment" property="comment" />
 		<result column="count" property="count" />
 		<result column="ghTotal" property="ghTotal" />
 		<result column="ghHighScore" property="ghHighScore"/>
@@ -33,13 +33,13 @@
 	<update id="update" parameterType="Hospital">
 	update hospital set name=#{name},domain=#{domain},logo=#{logo},pic=#{pic},city_id=#{city.id},address=#{address},
 	x=#{x},y=#{y},tel=#{tel},fax=#{fax},zipcode=#{zipcode},url=#{url},mail=#{mail},gobus=#{gobus},
-	level=#{level},nature=#{nature},mtype=#{mtype},comment=#{comment},count=#{count},ghTotal=#{ghTotal},
+	p_level=#{level},nature=#{nature},mtype=#{mtype},p_comment=#{comment},count=#{count},ghTotal=#{ghTotal},
 	ghHighScore=#{ghHighScore) where id=#{id}
 	
 	</update>
 	
 	<insert id="insert"  parameterType="Hospital" >
-    	insert into hospital(id,name,domain,logo,pic,city_id,address,x,y,tel,fax,zipcode,url,mail,gobus,level,nature,mtype,comment,count,ghTotal,ghHighScore )
+    	insert into hospital(id,name,domain,logo,pic,city_id,address,x,y,tel,fax,zipcode,url,mail,gobus,p_level,nature,mtype,p_comment,count,ghTotal,ghHighScore )
 	values (#{id},#{name},#{domain},#{logo},#{pic},#{city.id},#{address},#{x},#{y},#{tel},#{fax},#{zipcode},#{url},#{mail},#{gobus},#{level},#{nature},
 	#{mtype},#{comment},#{count},#{ghTotal},#{ghHighScore})
 	</insert>
@@ -86,7 +86,7 @@
 	</select>
 
 	<select id="queryTotalCount" parameterType="HospitalQuery" resultType="long">
-		SELECT count(h.id) FROM hospital  h
+		SELECT count(id) FROM hospital 
 		<include refid="querySql"></include>
 	
 	</select>
@@ -95,7 +95,7 @@
 	<sql id="querySql">
 		<where>
 			<if test="levels!=null  and levels.size!=0">
-				and level in
+				and p_level in
 				 <foreach item="item" index="index"  collection="levels"
                          open="(" separator="," close=")" >
                         #{item}

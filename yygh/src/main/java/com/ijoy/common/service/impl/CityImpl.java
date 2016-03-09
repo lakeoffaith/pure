@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ijoy.common.domain.City;
 import com.ijoy.common.mapper.CityMapper;
 import com.ijoy.common.query.CityQuery;
+import com.ijoy.common.query.PageResult;
 import com.ijoy.common.service.CityService;
 
 @Service
@@ -18,8 +19,14 @@ public class CityImpl implements CityService {
 	
 	
 	@Override
-	public List<City> queryCityRows(CityQuery cityQuery) {
-		return cityMapper.queryCityRows(cityQuery);
+	public PageResult<City>  queryCityPage(CityQuery cityQuery) {
+		Long totalCount = cityMapper.queryTotalCount(cityQuery);
+		if(totalCount>0){
+			List<City> rows = cityMapper.queryRows(cityQuery);
+			return new PageResult<>(totalCount, rows, cityQuery.getPageSize(), cityQuery.getCurrentPage());
+		}
+		return new PageResult<>();
+		
 	}
 	
 	

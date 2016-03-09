@@ -19,6 +19,8 @@ public interface IEmployeeService  {
 
 	public PageResult<Employee> queryEmployees(EmployeeQuery  baseQuery);
 
+	public void modifyOwnApplications(Long employeeId, String applicationIds);
+
 
 
 

@@ -66,7 +66,6 @@
         <property name="suffix" value=".jsp" />  <!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑  -->  
     </bean>  
     
-    
 	<!-- <bean id="systemLogUtils" class="cn.ijoy.utils.SystemLogUtils">
 	</bean>
 	<aop:config>

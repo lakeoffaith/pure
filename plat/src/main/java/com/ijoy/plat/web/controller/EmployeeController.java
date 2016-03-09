@@ -2,6 +2,7 @@ package com.ijoy.plat.web.controller;
 
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,11 +62,16 @@ public class EmployeeController {
 		
 		//更新，保存
 		@RequestMapping(method=RequestMethod.POST)
-		public String save(@ModelAttribute("employee") Employee employee){
+		public String save( @Param("applicationIds")  String applicationIds, @ModelAttribute("employee") Employee employee ){
 			System.out.println("++++++++++++++++++++==");
+			System.out.println(applicationIds);
 			System.out.println(employee);
 			if(employee.getId()!=null){
 				employeeService.update(employee);
+				
+				if(applicationIds!=null){
+					employeeService.modifyOwnApplications(employee.getId(),applicationIds);
+				}
 			}
 			return  "redirect:employee";
 		}

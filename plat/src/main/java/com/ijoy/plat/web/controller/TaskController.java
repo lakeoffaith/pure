@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ijoy.common.comutil.Ajaxresult;
 import com.ijoy.plat.domain.Task;
 import com.ijoy.plat.query.TaskQuery;
+import com.ijoy.plat.service.IEmployeeService;
 import com.ijoy.plat.service.ITaskService;
 
 
@@ -24,6 +25,9 @@ import com.ijoy.plat.service.ITaskService;
 public class TaskController {
 	@Autowired
 	private ITaskService  service;
+	
+	@Autowired
+	private IEmployeeService employeeService;
 	
 	/*
 	 * 更新domain的适合，保存信息更新不丢失。
@@ -78,6 +82,17 @@ public  ModelAndView  list(@ModelAttribute TaskQuery taskQuery){
 @RequestMapping(params="method=goSave",method=RequestMethod.GET)
 public String goSave(){
 	return "task/input";
+}
+
+//进入新增 子项目单个
+@RequestMapping(value="/{id}",params="method=goAddItem",method=RequestMethod.GET)
+public ModelAndView goAddItem(@PathVariable Long id){
+	ModelAndView mv = new ModelAndView();
+	mv.addObject("task", service.get(id));
+	//选择负责人
+	mv.addObject("employees", employeeService.getAll());
+	mv.setViewName("task/inputItem");
+	return mv;
 }
 
 //删除单个

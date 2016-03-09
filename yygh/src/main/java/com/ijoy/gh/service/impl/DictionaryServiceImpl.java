@@ -38,12 +38,12 @@ public class DictionaryServiceImpl  implements DictionaryService {
 
 	@Override
 	public PageResult<Dictionary> queryDictionary(DictionaryQuery baseQuery) {
-		Long totalCount=dictionaryMapper.queryDictionaryTotalCount(baseQuery);
+		Long totalCount=dictionaryMapper.queryTotalCount(baseQuery);
 		if( totalCount>0){
-			List<Dictionary> rows=dictionaryMapper.queryDictionaryRows(baseQuery);
+			List<Dictionary> rows=dictionaryMapper.queryRows(baseQuery);
 			return new PageResult<Dictionary>(totalCount, rows, baseQuery.getPageSize(), baseQuery.getCurrentPage());
 		}
-		return null;
+		return new PageResult<>();
 	}
 	
 }

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ijoy.common.comutil.Ajaxresult;
+import com.ijoy.common.domain.Department;
 import com.ijoy.common.query.DepartmentQuery;
+import com.ijoy.common.query.PageResult;
 import com.ijoy.common.service.DepartmentService;
 
 @Controller
@@ -25,8 +27,8 @@ public class DepartmentController {
 	@ResponseBody
 	public Ajaxresult search(@ModelAttribute DepartmentQuery baseQuery) throws Exception{
 		System.out.println(baseQuery);
-		List departments = departmentService.queryDepartment(baseQuery).getRows();
-		return new Ajaxresult(true, departments);
+		PageResult<Department> pageResult = departmentService.queryDepartmentPage(baseQuery);
+		return new Ajaxresult(true, pageResult);
 	}
 	
 	

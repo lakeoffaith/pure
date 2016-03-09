@@ -8,6 +8,15 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.ijoy.common.comutil.CookieUtil;
+import com.ijoy.common.comutil.UserContext;
+import com.ijoy.plat.domain.Employee;
 
 public class AutoLogonFilter implements Filter{
 
@@ -15,14 +24,11 @@ public class AutoLogonFilter implements Filter{
 	public void destroy() {
 		
 	}
-
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,
 			FilterChain chain) throws IOException, ServletException {
-		System.out.println("enter AUTOLOGONFilter");
-		chain.doFilter(req, resp);
-		return ;
-		/*HttpServletRequest request=(HttpServletRequest) req;
+		System.out.println("AutoLogonFilter");
+		HttpServletRequest request=(HttpServletRequest) req;
 		HttpServletResponse response=(HttpServletResponse) resp;
 		
 		//查看用户是否登录
@@ -48,7 +54,7 @@ public class AutoLogonFilter implements Filter{
 			return;
 		}
 		//cookieValue不为空
-		CookieUtil.readCookieAndLogon(chain, request, response);*/
+		CookieUtil.readCookieAndLogon(chain, request, response);
 		
 	}
 

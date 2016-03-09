@@ -9,7 +9,7 @@
 		<result column="code" property="code" />
 		<result column="pinyin"  property="pinyin"/>
 		<result column="type" property="type" />
-		<result column="level" property="level" />
+		<result column="p_level" property="level" />
 		<result column="pic"  property="pic" />
 		<result column="phone" property="phone" />
 		<result column="name" property="name" />
@@ -21,7 +21,7 @@
 	
 	
 	<insert id="insert"  parameterType="Department">
-	insert into  department(id,code,pinyin,type,level,pic,phone,name,message,ghTotal,ghHighScore,hospital_id) values(#{id},#{code},#{pinyin},#{type},#{level},#{pic},#{phone},#{name},#{message},#{ghTotal},#{ghHighScore},#{hospital.id});
+	insert into  department(id,code,pinyin,type,p_level,pic,phone,name,message,ghTotal,ghHighScore,hospital_id) values(#{id},#{code},#{pinyin},#{type},#{level},#{pic},#{phone},#{name},#{message},#{ghTotal},#{ghHighScore},#{hospital.id});
 	</insert>
 	
 	
@@ -58,10 +58,10 @@
          	<include refid="querySql"/>
          	<choose>
 				<when test="orderStr=='ghHighScore'">
-					order by ghHighScore DESC,id,rowid
+					order by ghHighScore DESC
 				</when>
 				<otherwise>
-					order by ghtotal DESC,id,rowid
+					order by ghtotal DESC
 				</otherwise>
 			</choose> )a
          	where <![CDATA[ rownum <  #{endNum}]]>)
@@ -69,7 +69,7 @@
 	</select>
 
 	<select id="queryTotalCount" parameterType="DepartmentQuery" resultType="long">
-		SELECT count(d.id) FROM department  d
+		SELECT count(id) FROM department
 		<include refid="querySql"/>
 	
 	</select>
@@ -78,7 +78,7 @@
 	<sql id="querySql">
 		<where>
 			<if test="levels!=null  and levels.size!=0">
-				and level in
+				and p_level in
 					<foreach collection="levels"  item="item" index="index"  open="("  separator="," close=")">
 							#{item}
 					</foreach>

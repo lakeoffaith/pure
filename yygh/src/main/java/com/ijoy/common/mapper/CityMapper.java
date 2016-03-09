@@ -11,7 +11,7 @@ import com.ijoy.common.query.CityQuery;
 
 public interface CityMapper {
 	
-	@Insert("insert into city(id,province_id,level,name,pinyin,zip) values (#{id},#{province_id},#{level},#{name},#{pinyin},#{zip})")
+	@Insert("insert into city(id,province_id,p_level,name,pinyin,zip) values (#{id},#{province_id},#{level},#{name},#{pinyin},#{zip})")
 	public void insert (City city);
   
 	@Select("select * from city where id=#{id}")
@@ -24,7 +24,8 @@ public interface CityMapper {
      public void update(City oldCity);
 
     
-	public List<City> queryCityRows(CityQuery cityQuery);
+	public List<City> queryRows(CityQuery cityQuery);
 
+	 public Long queryTotalCount(CityQuery cityQuery);
 	
 }

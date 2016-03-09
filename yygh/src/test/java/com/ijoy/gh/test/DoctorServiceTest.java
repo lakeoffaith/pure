@@ -22,7 +22,7 @@ public class DoctorServiceTest extends BaseTest {
 	public void queryDoctorTest(){
 		DoctorQuery doctorQuery = new DoctorQuery();
 		/*doctorQuery.setType("DT1");*/
-		doctorQuery.setDepartmentId(1L);
+		/*doctorQuery.setDepartmentId(1L);*/
 	   PageResult<Doctor> queryDoctor = doctorService.queryDoctor(doctorQuery);
 	   logger.debug("queryDoctor::"+queryDoctor);
 	}

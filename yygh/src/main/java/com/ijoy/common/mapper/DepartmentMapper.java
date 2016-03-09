@@ -3,6 +3,7 @@ package com.ijoy.common.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -21,12 +22,13 @@ public interface DepartmentMapper{
 	public void update(Department department);
 	
 	@Select("select * from department where id=#{id}")
+	@ResultMap("departmentResult")
 	public Department get(Long id);
 	
 
-	public List<Department> queryDepartmentRows(BaseQuery basequery);
+	public List<Department> queryRows(BaseQuery basequery);
 
-	public Long queryDepartmentTotalCount(BaseQuery basequery);
+	public Long queryTotalCount(BaseQuery basequery);
 
 	public Long queryUserCollectDepartmentTotalCount(
 			HashMap<String, Object> hashMap);

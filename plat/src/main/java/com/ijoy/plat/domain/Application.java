@@ -13,6 +13,7 @@ public class Application {
 	private Date endtime=new Date();
 	private int state;
 	private String docpath="";
+	private String url="";
 	private List<Employee> employeeList=new ArrayList();
 	public Long getId() {
 		return id;
@@ -63,6 +64,15 @@ public class Application {
 	}
 	public void setEmployeeList(List<Employee> employeeList) {
 		this.employeeList = employeeList;
+	}
+	
+	
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	@Override
 	public String toString() {

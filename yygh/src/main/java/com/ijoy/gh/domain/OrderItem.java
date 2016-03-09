@@ -30,7 +30,7 @@ public class OrderItem {
 	private String takePassword;  //取号密码
 	private Employee employee;
 	private int score;     //这条预约的评分
-	private String message;  //这条预约的评价
+	private String message="";  //这条预约的评价
 	public Long getId() {
 		return id;
 	}

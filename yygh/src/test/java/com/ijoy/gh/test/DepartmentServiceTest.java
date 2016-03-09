@@ -34,8 +34,8 @@ public class DepartmentServiceTest extends BaseTest {
 		List<Long> hospitalIdList=new ArrayList<>();
 		/*hospitalIdList.add(1L);*/
 		/*hospitalIdList.add(2L);*/
-		departmentQuery.setList(hospitalIdList);
-		PageResult<Department> queryDepartment = departmentService.queryDepartment(departmentQuery);
+/*		departmentQuery.setList(hospitalIdList);*/
+		PageResult<Department> queryDepartment = departmentService.queryDepartmentPage(departmentQuery);
 		System.out.println(queryDepartment);
 	}
 	

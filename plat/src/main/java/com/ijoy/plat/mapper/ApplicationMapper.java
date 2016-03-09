@@ -18,5 +18,9 @@ public interface ApplicationMapper {
 	public List<Application> queryRows(BaseQuery query);
 
 	public Long queryTotalCount(BaseQuery query);
+	
 
+	public Long queryApplicationJoinEmployeeTotalCount(BaseQuery applicationQuery);
+
+	public List<Application> queryApplicationJoinEmployeeRows(BaseQuery applicationQuery);
 }
