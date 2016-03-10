@@ -87,9 +87,9 @@
     	<div class="header">
             <ul class="list-inline">
             	<li><h2>快速挂号</h2></li>
-            	<li><a href="hospital?type=html">找医院</a></li>
-                <li><a href="department?type=html">找科室</a></li>
-                <li><a href="doctor?type=html">找医生</a></li>
+            	<li><a href="hospital">找医院</a></li>
+                <li><a href="department">找科室</a></li>
+                <li><a href="doctor">找医生</a></li>
             </ul>
         </div>
  
@@ -208,7 +208,7 @@
    function addDepartmentByHosId(hosId){
 	   if(!jsValidateIsNull(hosId)){
 		   $.ajax({
-			  url:"department",
+			  url:"department?for=json",
 			 type:"GET",
 			 data:{"hosId":hosId,"pageSize":'200'},
 					dataType:"json",

@@ -18,6 +18,7 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/global.css">
 <link rel="stylesheet" type="text/css" href="css/citypop.css">
+<link rel="stylesheet" type="text/css" href="css/model/ijoypagination.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -36,9 +37,9 @@
 					style="height: 200px; padding-bottom: 20px; border-bottom: 1px solid #ededed;">
 					<!-- Nav tabs -->
 				<ul class="nav  nav-pills">
-						<li role="presentation" ><a href="hospital?type=html">医院</a></li>
-						<li role="presentation" class="active" ><a href="department?type=html">科室</a></li>
-						<li role="presentation" ><a href="doctor?type=html">医生</a></li>
+						<li role="presentation" ><a href="hospital">医院</a></li>
+						<li role="presentation" class="active" ><a href="department">科室</a></li>
+						<li role="presentation" ><a href="doctor">医生</a></li>
 					</ul>
 					<div class="choose-city"
 						style="height: 30px; margin-top: 10px; border-bottom: 1px solid #ededed; position: relative;">
@@ -100,39 +101,30 @@
 
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-8" style="padding-left: 0px;">
-							<div class="list-bar"
-								style="background-color: #fbfbfb; height: 40px; margin-bottom: 5px; padding: 0px -15px;">
-
-								<div class="dropdown" style="float: left;">
-									<button class="btn btn-default dropdown-toggle" type="button"
-										id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="true">
-										预约人次 <span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-										<li><a href="#">预约人次</a></li>
-										<li><a href="#">好评数</a></li>
-									</ul>
-								</div>
-								<div style="float: right; margin-top: 10px;">
-									<span>共<code>222</code>个科室
-									</span>
-								</div>
-
-
-
-
-
-							</div>
-							<div id="departments-dev">
-							
-							
-							</div>
-
-
-
+							<div class="col-md-8" >
+					<div class="list-bar"
+						style="background-color: #fbfbfb; height: 40px; margin-bottom: 5px; padding: 0px -15px;">
+						<div class="dropdown" style="float: left;" data-val="ghTotal"
+							id="OrderDropdownDivId">
+							<button class="btn btn-default dropdown-toggle" type="button"
+								id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="true">
+								预约人次 <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="javascript:;" data-val="ghTotal">预约人次</a></li>
+								<li><a href="javascript:;" data-val="ghHighScore">好评数</a></li>
+							</ul>
 						</div>
+
+						<div style="float: right; margin-top: 10px;">
+							<span>共<code>222</code>个科室
+							</span>
+						</div>
+					</div>
+					
+					<div  id="departments-dev"></div>
+				</div>
 						<div class="col-md-4">
 							<div  id="departments-rec-div">
 							
@@ -165,34 +157,78 @@
 	<script src="js/bootstrap.js"></script>
 	<script src="js/gh/global.js"></script>
 	<script src="js/gh/citypop.js"></script>
+	<script src="js/model/domain.js"></script>
 	<script>
-	//处理查询条件查询结果
-	function loadSearchData(){
-		var ConditionBar=$("#searchConditionBar");
-		var levels="";
-		var types="";
-		$.each(ConditionBar.find("li"),function(e,v){
-			var jsOb=JSON.parse($(v).attr("data"))
-			if(jsOb.name=='level'){
-				levels+=jsOb.value+",";
-			}else if(jsOb.name="type"){
-				types+=jsOb.value+",";
+	function initOrderDropDown(){
+		$("#OrderDropdownDivId").find("ul.dropdown-menu").find("li").on(
+				"click",
+				function() {
+					var str = $(this).find("a").attr("data-val");
+					var show = $(this).find("a").html();
+					console.debug(str + "    =================");
+					$("#OrderDropdownDivId").attr("data-val", str);
+
+					console.debug(str + "    ================="
+							+ $("#OrderDropdownDivId").attr("data-val"));
+					$("#OrderDropdownDivId").find("button").html(
+							show + "<span class='caret'></span>");
+					loadSearchData();
+				});
+}
+	//分页数据
+	 function goPage(currentPage,pageSize){
+		 var ConditionBar = $("#searchConditionBar");
+			var levels = "";
+			var types = "";
+			$.each(ConditionBar.find("li"), function(e, v) {
+				var jsOb = JSON.parse($(v).attr("data"))
+				if (jsOb.name == 'level') {
+					levels += jsOb.value + ",";
+				} else if (jsOb.name = "type") {
+					types += jsOb.value + ",";
+				}
+			})
+			var baseQuery = {
+				'levels' : levels.substring(0, levels.length - 1),
+				'types' : types.substring(0, types.length - 1)
+			};
+			//加上城市d
+			baseQuery.cityId=$(".cityPopValue").attr("data-id");
+			//加上排序的
+			baseQuery.orderStr = $("#OrderDropdownDivId").attr("data-val");
+			//加上分页的
+			if(currentPage!=0  && currentPage!=null){
+				baseQuery.currentPage=currentPage;
 			}
-		})
-		var baseQuery={'levels':levels.substring(0, levels.length-1),'types':types.substring(0, types.length-1)};
-		initDepartments(baseQuery);
-	}
-	function checkExist(dataType,dataId,$ConditionBar){
-		var flag=false;
-		$.each($ConditionBar.find("li"),function(e,v){
-		var 	jsonObjectV=JSON.parse($(v).attr("data"));
-			if(jsonObjectV.value ==dataId &&  jsonObjectV.name==dataType){
-				flag=true;
-			} 
-		});
-		if(flag)return true;
-		return false;
-	}
+			if(pageSize!=0 && pageSize!=null){
+				baseQuery.pageSize=pageSize;
+			}
+			
+			initDepartmentDiv(baseQuery);
+   }
+	
+		//处理查询条件查询结果
+		function loadSearchData(){
+			var ConditionBar = $("#searchConditionBar");
+			var cityId=$("span.cityPopValue").attr("data-id");
+			var levels="";
+			var types="";
+			$.each(ConditionBar.find("li"),function(e,v){
+				var jsOb=JSON.parse($(v).attr("data"))
+				if(jsOb.name=='level'){
+					levels+=jsOb.value+",";
+				}else if(jsOb.name="type"){
+					types+=jsOb.value+",";
+				}
+			})
+			var baseQuery={'levels':levels.substring(0, levels.length-1),'types':types.substring(0, types.length-1)};
+			//加上排序的
+			baseQuery.orderStr = $("#OrderDropdownDivId").attr("data-val");
+			baseQuery.cityId=cityId;
+			console.debug("----------------------------");
+			console.debug(baseQuery);
+			initDepartmentDiv(baseQuery);
+		}
 	/* 添加查询条件的标签*/
 	function addCondition(v){
 		var dataId=$(v).attr("data-id");   //dataJson为json
@@ -208,6 +244,22 @@
 				loadSearchData();
 		}
 	}
+	function checkExist(dataType,dataId,$ConditionBar){
+		var flag=false;
+		$.each($ConditionBar.find("li"),function(e,v){
+		var 	jsonObjectV=JSON.parse($(v).attr("data"));
+			if(jsonObjectV.value ==dataId &&  jsonObjectV.name==dataType){
+				flag=true;
+			} 
+		});
+		if(flag)return true;
+		return false;
+	}
+
+	
+	
+
+
 	/*删除条件*/
 	function removeCondition(v){
 	$(v).parent("li").remove();
@@ -219,6 +271,7 @@
 		function cityClick(v) {
 			if (cityClickCommon(v)) {
 				//执行方法
+				loadSearchData();
 			}
 
 		}
@@ -252,30 +305,60 @@
 			});
 	}
 	
+    /**
+		collectDepartment  收藏科室
+*/
+function collectDepartment(dom_this,domainName,method,id){
+   var resultData=doModelDomain(domainName, method, id);
+   console.debug(resultData);
+   if(resultData.success){
+	   $(dom_this).html("已收藏");
+   };
+}
 	
-	
-		function initDepartments(baseQuery){
+		function initDepartmentDiv(baseQuery){
 			var str="";
 			$.ajax({
-				url:"department",
+				url:"department?for=json",
 				type:"GET",
 				data:baseQuery,
 				dataType:"json",
 				success:function(d){
 				 	if(d.success){
-						
 						$("#departments-dev").empty();
-						$.each(d.results,function(e,v){
+						$.each(d.obj.rows,function(e,v){
 							var e_str="";
 							e_str+="<div class='thumbnail'  style='border: none; position: relative; padding-left: 170px; border-bottom: 1px solid #ededed;'>"+
-							"<img src="+v.pic+" alt="+v.name+" style='position: absolute; left: 0px; top: 30px; width: 150px; height: 100px;' onclick='show(\"department\",\""+v.id+"\")'>"+
-							"<div class='caption'  style='padding-right: 100px;'><h3 class='text-info'  onclick='show(\"department\",\""+v.id+"\")'>"+v.name+"<small class='text-showy'>[区级重点科室]</small>"+
+							"<img src="+v.pic+" alt="+v.name+" style='position: absolute; left: 0px; top: 30px; width: 150px; height: 100px;' onclick='doModelDomain(\"department\",null,\""+v.id+"\")'>"+
+							"<div class='caption'  style='padding-right: 100px;'><h3 class='text-info click'  onclick='doModelDomain(\"department\",null,\""+v.id+"\")'>"+v.name+"<small class='text-showy'>[区级重点科室]</small>"+
 							"</h3><p>医院："+v.hospital.name+"</p><p>地址："+v.hospital.address+"</p><p>电话："+v.phone+"</p>"+
 								"<div class='float-right-tips' style='position: absolute; right: 0px; top: 30px;'><p>已预约人数</p><p class='text-showy'>"+v.ghTotal+"</p>"+
-									"<p style='float: right;'><a href='#' style='float: right;'>收藏</a></p></div></div></div>";
+									"<p style='float: right;'><a href='javascript:;' style='float: right;'  onclick='collectDepartment(this,\"department\",\"collect\",\""+v.id+"\")'>收藏</a></p></div></div></div>";
 						str+=e_str;
 						});
 						$("#departments-dev").append(str);
+						
+						if(!jsValidateIsNull(str)){
+							var pageItemStr="<div   class='col-md-offset-4 col-md-4'><ul class='pagination'>";
+							var totalPage=d.obj.totalPage;
+							var currentPage=d.obj.currentPage;
+							console.debug(currentPage);
+							console.debug(totalPage);
+							var i=0;
+							var j=0;
+							i=currentPage-2;
+							j=currentPage+2;
+							i=i<=0?1:i;
+							j=j>totalPage?totalPage:j;
+							j=j<=5?j:5;
+							var k;
+							for  (k=i; k <=j; k++) {
+								pageItemStr+="<li><a href='javascript:void(0);' onclick='goPage("+k+",0)'>"+k+"</a></li>";
+							}
+							
+							pageItemStr+="</ul><div>";
+							$("#departments-dev").append(pageItemStr);
+						}
 					} 
 				}
 			});
@@ -285,18 +368,18 @@
 		function initRecDepartments(baseQuery){
 		var str="<h3>推荐科室</h3>";
 			$.ajax({
-				url:"department",
+				url:"department?for=json",
 				type:"GET",
 				data:baseQuery,
 				dataType:"json",
 				success:function(d){
 					if(d.success ){
 						$("#departments-rec-div").empty();
-						$.each(d.results,function(e,v){
+						$.each(d.obj.rows,function(e,v){
 							var e_str="";
 							e_str+="	<div class='thumbnail'  style='border: none; position: relative; padding-left: 60px; border-bottom: 1px solid #ededed; padding-top: 0px;''>"+
-									"<img src="+v.pic+" alt="+v.name+"  style='position: absolute; left: 0px; top: 15px; width: 58px; height: 70px;' onclick='show(\"department\",\""+v.id+"\")'>"+
-									"<div class='caption'><p class='text-info'  onclick='show(\"department\",\""+v.id+"\")'>"+v.name+"</p>"+
+									"<img src="+v.pic+" alt="+v.name+"  style='position: absolute; left: 0px; top: 15px; width: 58px; height: 70px;' onclick='doModelDomain(\"department\",null,\""+v.id+"\")'>"+
+									"<div class='caption'><p class='text-info click'  onclick='doModelDomain(\"department\",null,\""+v.id+"\")'>"+v.name+"</p>"+
 										"<p>已预约人数：<span class='text-showy'>0</span></p>"+
 										"<p>医院："+v.hospital.name+"</p></div></div>";
 							str+=e_str;
@@ -306,14 +389,15 @@
 				}
 			});
 		}
-	
 		$(function() {
 			initChooseClass({'name':'type','value':'分类'});
 			initChooseClass({'name':'level','value':'级别'});
 			
+			//初始下拉条件
+			initOrderDropDown();
 			
 			//初始化科室
-			initDepartments({"currentPage":1});
+			initDepartmentDiv({"currentPage":1});
 			
 			//初始化推荐科室
 			initRecDepartments({"currentPage":1,"pageSize":5,"orderStr":'comment'});

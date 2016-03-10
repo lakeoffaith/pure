@@ -45,6 +45,8 @@
          	from (SELECT d.* FROM doctor d 
 		left join department dep
 		on d.department_id=dep.id
+		left join hospital hos
+		on d.hospital_id=hos.id
          	<include refid="querySql"/>
          	<choose>
 				<when test="orderStr=='ghHighScore'">
@@ -63,6 +65,8 @@
 		SELECT count(d.id) FROM doctor  d
 		left join department dep
 		on d.department_id=dep.id
+		left join hospital hos
+		on d.hospital_id=hos.id
 		<include refid="querySql"></include>
 	
 	</select>
@@ -75,6 +79,9 @@
 			  <foreach collection="types" item="item" index="index"  open="(" close=")"  separator=",">
 			  		 #{item}
 			  </foreach>
+			</if>
+			<if test="cityId!=null">
+				and hos.city_id=#{cityId}
 			</if>
 		</where>
 	</sql>

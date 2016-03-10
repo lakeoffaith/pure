@@ -52,7 +52,7 @@ public class DepartmentServiceImpl  implements DepartmentService {
 			return new PageResult<Department>(totalCount, rows, baseQuery.getPageSize(), baseQuery.getCurrentPage());
 		}
 		
-		return null;
+		return new PageResult<>();
 	}
 	
 	
@@ -98,6 +98,11 @@ public class DepartmentServiceImpl  implements DepartmentService {
 	@Override
 	public Department get(Long id) {
 		return departmentMapper.get(id);
+	}
+
+	@Override
+	public void insertDepartmentJoinEmployee(Long department_id, Long employee_id, Long type) {
+			departmentMapper.insertDepartmentJoinEmployee(department_id,employee_id,type);
 	}
 
 

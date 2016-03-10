@@ -44,9 +44,9 @@
 					</ul> -->
 					<ul class="nav  nav-pills">
 						<li role="presentation" class="active"><a
-							href="hospital?type=html">医院</a></li>
-						<li role="presentation"><a href="department?type=html">科室</a></li>
-						<li role="presentation"><a href="doctor?type=html">医生</a></li>
+							href="hospital">医院</a></li>
+						<li role="presentation"><a href="department">科室</a></li>
+						<li role="presentation"><a href="doctor">医生</a></li>
 					</ul>
 
 					<div class="choose-city"
@@ -178,14 +178,8 @@
 	<script src="js/gh/citypop.js"></script>
 	<script src="js/model/domain.js"></script>
 	<script>
-	  //点击下一页
-	  function goPage(){
-		  
-	  }
-	  
-	
-		//点击顺序的下拉项重新查结果
-		$(function() {
+	//处理查询条件查询结果
+		function initOrderDropDown(){
 			$("#OrderDropdownDivId").find("ul.dropdown-menu").find("li").on(
 					"click",
 					function() {
@@ -200,7 +194,10 @@
 								show + "<span class='caret'></span>");
 						loadHospital();
 					});
-		});
+	}
+	
+	
+	
 		//分页数据
 		 function goPage(currentPage,pageSize){
 			 var ConditionBar = $("#searchConditionBar");
@@ -259,21 +256,7 @@
 			console.debug(baseQuery);
 			initHosDiv(baseQuery);
 		}
-
-		function checkExist(dataType, dataId, $ConditionBar) {
-			var flag = false;
-			$.each($ConditionBar.find("li"),
-					function(e, v) {
-						var jsonObjectV = JSON.parse($(v).attr("data"));
-						if (jsonObjectV.value == dataId
-								&& jsonObjectV.name == dataType) {
-							flag = true;
-						}
-					});
-			if (flag)
-				return true;
-			return false;
-		}
+		
 		/* 添加查询条件的标签*/
 		function addCondition(v) {
 			var dataId = $(v).attr("data-id"); //dataJson为json
@@ -291,6 +274,21 @@
 				loadHospital();
 			}
 		}
+		function checkExist(dataType, dataId, $ConditionBar) {
+			var flag = false;
+			$.each($ConditionBar.find("li"),
+					function(e, v) {
+						var jsonObjectV = JSON.parse($(v).attr("data"));
+						if (jsonObjectV.value == dataId
+								&& jsonObjectV.name == dataType) {
+							flag = true;
+						}
+					});
+			if (flag)
+				return true;
+			return false;
+		}
+
 		/*删除条件*/
 		function removeCondition(v) {
 			$(v).parent("li").remove();
@@ -377,11 +375,11 @@
 															+ v.pic
 															+ " alt="
 															+ v.name
-															+ " style='position: absolute; left: 0px; top: 30px; width: 150px; height: 100px;' onclick='show(\"hospital\",\""
+															+ " style='position: absolute; left: 0px; top: 30px; width: 150px; height: 100px;' onclick='doModelDomain(\"hospital\",null,\""
 															+ v.id
 															+ "\")'>"
 															+ "<div class='caption'  style='padding-right: 100px;''>"
-															+ "<h3 class='text-info  click'    onclick='show(\"hospital\",\"" 
+															+ "<h3 class='text-info  click'    onclick='doModelDomain(\"hospital\",null,\"" 
 															+ v.id
 															+ "\")'>"
 															+ v.name
@@ -409,7 +407,7 @@
 									j=currentPage+2;
 									i=i<=0?1:i;
 									j=j>totalPage?totalPage:j;
-									j=j<=5?5:j;
+									j=j<=5?j:5;
 									var k;
 									for  (k=i; k <=j; k++) {
 										pageItemStr+="<li><a href='javascript:void(0);' onclick='goPage("+k+",0)'>"+k+"</a></li>";
@@ -448,10 +446,10 @@
 															+ v.pic
 															+ " alt="
 															+ v.name
-															+ " style='position: absolute; left: 0px; top: 15px; width: 58px; height: 70px;'  onclick='show(\"hospital\",\""
+															+ " style='position: absolute; left: 0px; top: 15px; width: 58px; height: 70px;'  onclick='doModelDomain(\"hospital\",null,\""
 															+ v.id
 															+ "\")'>"
-															+ "<div class='caption'><p class='text-info click'  onclick='show(\"hospital\",\""
+															+ "<div class='caption'><p class='text-info click'  onclick='doModelDomain(\"hospital\",null,\""
 															+ v.id
 															+ "\")'>"
 															+ v.name
@@ -494,10 +492,10 @@
 															+ v.pic
 															+ "  alt="
 															+ v.name
-															+ " style='position: absolute; left: 0px; top: 15px; width: 58px; height: 70px;' onclick='show(\"hospital\",\""
+															+ " style='position: absolute; left: 0px; top: 15px; width: 58px; height: 70px;' onclick='doModelDomain(\"hospital\",null,\""
 															+ v.id
 															+ "\")'>"
-															+ "<div class='caption'  style='padding-right: 20px;''><p class='text-info click' onclick='show(\"hospital\",\""
+															+ "<div class='caption'  style='padding-right: 20px;''><p class='text-info click' onclick='doModelDomain(\"hospital\",null,\""
 															+ v.id
 															+ "\")'>"
 															+ v.name
@@ -523,6 +521,8 @@
 		}
 
 		$(function() {
+			
+			
 			//加载医院查询class
 			initHosChooseClass({
 				'name' : 'level',
@@ -532,7 +532,10 @@
 				'name' : 'type',
 				'value' : '类型'
 			});
-
+			
+			//初始下拉条件
+			initOrderDropDown();
+			
 			//加载医院列表
 			initHosDiv({"pageSize":10,"currentPage":1});
 

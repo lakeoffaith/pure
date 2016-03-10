@@ -3,6 +3,7 @@ package com.ijoy.common.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -38,6 +39,9 @@ public interface DepartmentMapper{
 	
 	@Select("SELECT DISTINCT(type) FROM department d where hospital_id=#{hospitalId}")
 	public List<String> findDepartmentTypeListByHospitalId(Long hospitalId);
+
+	@Insert("insert into department_employee(department_id,employee_id,type) values(#{0},#{1},#{2})")
+	public void insertDepartmentJoinEmployee(Long department_id, Long employee_id, Long type);
 	
 	
 	

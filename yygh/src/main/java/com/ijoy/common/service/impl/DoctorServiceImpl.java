@@ -43,7 +43,7 @@ public class DoctorServiceImpl  implements DoctorService {
 			return new PageResult<>(totalCount, rows, baseQuery.getPageSize(), baseQuery.getCurrentPage());
 		}
 		
-		return null;
+		return new PageResult<>();
 	}
 	
 	
@@ -82,6 +82,11 @@ public class DoctorServiceImpl  implements DoctorService {
 	@Override
 	public Doctor get(Long id) {
 		return doctorMapper.get(id);
+	}
+
+	@Override
+	public void insertDoctorJoinEmployee(long doctor_id, Long employee_id, long type) {
+			doctorMapper.insertDoctorJoinEmployee(doctor_id,employee_id,type);
 	}
 
 	

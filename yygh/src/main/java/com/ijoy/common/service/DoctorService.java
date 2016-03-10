@@ -19,6 +19,15 @@ public interface DoctorService extends BaseCurdService<Doctor> {
 	
 	public PageResult<Doctor> queryUserCollectDoctor(Employee employee,Long type,BaseQuery baseQuery);
 
+	/**
+	 *  insertDoctorJoinEmployee
+	 *  用户保存自己收藏 ，浏览，挂过号的医生
+	 * @param doctor_id
+	 * @param employee_id
+	 * @param type   1为收藏
+	 */ 
+	public void insertDoctorJoinEmployee(long doctor_id, Long employee_id, long type);
+
 	
 
 

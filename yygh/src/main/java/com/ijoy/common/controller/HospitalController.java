@@ -44,18 +44,19 @@ public class HospitalController {
 		
 	}
 	
-	@RequestMapping(params="type=html",method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView  show() throws Exception{
 		ModelAndView mv = new ModelAndView("hospital/hospital-search");
+		
 	return mv;
 	}
-	
-	
-	
-	@RequestMapping(value="/{id}",params="type=html",method=RequestMethod.GET)
-	public String show(@PathVariable Long id) throws Exception{
-		
-		return "hospital/show";
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public ModelAndView show(@PathVariable Long id) throws Exception{
+		ModelAndView mv=new ModelAndView("hospital/show");
+		Hospital hospital = hospitalService.get(id);
+		mv.addObject("hospital",hospital );
+		System.out.println("====================="+hospital);
+		return mv;
 	}
 	
 	@RequestMapping(value="/{id}",params="method=collect",method=RequestMethod.GET)
