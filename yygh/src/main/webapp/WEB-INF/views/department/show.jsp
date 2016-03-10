@@ -77,9 +77,9 @@
           		
             	<div class="dep-header">
                 	  <ol class="breadcrumb">
-                      <li><a href="#">Home</a></li>
-                      <li><a href="#">Library</a></li>
-                      <li class="active">Data</li>
+                      <li><a href="main">首页</a></li>
+					  <li><a href="hospital">广东省东升农场医院</a></li>
+					  <li class="active">儿科门诊 </li>
                     </ol>
                     
                     <ul class="list-inline" style="position:relative;">

@@ -78,9 +78,10 @@
 
 				<div class="dep-header">
 					<ol class="breadcrumb">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Library</a></li>
-						<li class="active">Data</li>
+						 <li><a href="main">首页</a></li>
+					  <li><a href="hospital">${doctor.hospital.name }</a></li>
+					    <li><a href="hospital">${doctor.department.name }</a></li>
+					  <li class="active">${doctor.name} </li>
 					</ol>
 
 					<ul class="list-inline" style="position: relative;">
@@ -141,7 +142,6 @@
 									<li class="next next-icon"><a><span
 											class="glyphicon glyphicon-menu-right"></span></a></li>
 								</ul>
-
 							</div>
 						</div>
 						<div class="schedule-body" style="margin-top: 20px;">
@@ -234,7 +234,7 @@
 					}
 					var day=new Date(d).getDate();
 					console.debug(mon+"-------------------"+days);
-					 var e_Val='{"name":"'+mon+'|'+day+'","value":"'+weekValue+'"},';  
+					 var e_Val='{"name":"'+mon+'|'+day+'","value":"'+weekValue+'","date":"'+d+'"},';  
 					result+=e_Val;
 				}
 				result=result.substring(0, result.length-1);
@@ -245,15 +245,25 @@
 				return JSON.parse(result);
 			}
 		function loadScheduleDate(jsonV){
+			//先清空
+			$(".schedule-date").find("li").remove();
+			//加上前后按钮
+			var listr="<li class='previous previous-icon disable'><a><span  class='glyphicon glyphicon-menu-left'></span></a></li>";
+			listr+="<li class='next next-icon' onclick='nextScheduleDate()'><a><span  class='glyphicon glyphicon-menu-right'></span></a></li>";
+			$(".schedule-date").find("ul").append(listr);
+			
+			
 			var startDate=jsonV.startDate;
 			var days=jsonV.days;
 			var jsOb=dateArrayWeek(startDate,days); 
 			console.debug(jsOb);
-			var listr="";	
+		    listr="";	
 			$.each(jsOb.results,function(e,v){
 					console.debug(v.name+"                  "+v.value);
-					listr+="<li class='nostyle'><span>"+v.name+"<br>&nbsp;"+v.value+"</span></li>";
+					listr+="<li class='nostyle' data-date="+v.date+"><span>"+v.name+"<br>&nbsp;"+v.value+"</span></li>";
 				}) ;
+			//清空
+			
 			$(".schedule-date").find("li:eq(0)").after(listr);
 		/* 	01/20<br>&nbsp;周三 
 			<div class="schedule-date "
@@ -424,16 +434,18 @@
 		function goUserCenter(){
 			location.href="use/center";
 		}
-		
-		$(function() {
-			//根据开始时间加载日期
-			loadScheduleDate({'startDate':new Date(),'days':7});
-			
+		//下一个7天的排班表
+		function nextScheduleDate(){
+			//获得第一个
+			var dateStr=$("ul.schedule").find("li.nostyle:eq(0)").attr("data-date");
+			var startDate=parseInt(dateStr);
+			startDate=	startDate+7*24*60*60*1000;
+			loadScheduleDate({'startDate':new Date(startDate),'days':7});
 			//根据doctor_id  ，startDate加载未来七天的schedule;
-			loadSchedule({'doctor_id':$(".schedule-item").attr("data-doctor_id"),'startDate':new Date()});
-			
-			
-			//点击预约 弹出确认对话框
+			loadSchedule({'doctor_id':$(".schedule-item").attr("data-doctor_id"),'startDate':new Date(startDate)});
+		}
+		//给新增的排班添加点击事件
+		function initScheduleLiClick(){
 			$(".schedule >li").on(
 					"click",
 					function() {
@@ -450,6 +462,19 @@
 							$("#myModal").modal('show');
 						}
 					});
+		}
+		
+		$(function() {
+			//根据开始时间加载日期
+			loadScheduleDate({'startDate':new Date(),'days':7});
+			
+			//根据doctor_id  ，startDate加载未来七天的schedule;
+			loadSchedule({'doctor_id':$(".schedule-item").attr("data-doctor_id"),'startDate':new Date()});
+			
+			
+			//点击预约 弹出确认对话框
+			initScheduleLiClick();
+			
 
 
 		})

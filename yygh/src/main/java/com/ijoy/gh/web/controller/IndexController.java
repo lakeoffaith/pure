@@ -53,9 +53,6 @@ public class IndexController{
 	public ModelAndView main() throws Exception {
 		System.out.println("16");
 		ModelAndView modelAndView = new ModelAndView("index/main");
-		
-		
-		
 		return modelAndView;
 	}
 	

@@ -23,7 +23,8 @@ public class DoctorQuery extends BaseQuery {
 	private String orderStr;
 
 	private String name;
-
+	
+	private Long cityId;
 
 	public List getTypes() {
 		return types;
@@ -63,6 +64,14 @@ public class DoctorQuery extends BaseQuery {
 
 	public void setDepartmentId(Long departmentId) {
 		this.departmentId = departmentId;
+	}
+
+	public Long getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(Long cityId) {
+		this.cityId = cityId;
 	}
 	
 

@@ -1,6 +1,7 @@
 package com.ijoy.common.domain;
 
 public class Doctor {
+	public static final long TYPE_COLLECT = 1L;
 	private Long id;
 	private String name;
 	private String pic;

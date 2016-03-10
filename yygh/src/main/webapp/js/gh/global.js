@@ -27,9 +27,7 @@ function dateFormat(dd){
 			}
 
 
-function show(name,id){
-location.href=name+"/"+id+"?type=html";
-}
+
 
 
 // JavaScript Document

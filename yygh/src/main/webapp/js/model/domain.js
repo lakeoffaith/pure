@@ -13,8 +13,10 @@ function doModelDomain(domainName,method, id){
 	var url=domainName;
 	url=id==null?url:url+"/"+id;
 	url=method==null?url:url+"?method="+method;
-	
-	if(method=='delete'){
+	if(method==null){
+		//定向到某个页面
+		location.href=url;
+	}else if(method=='delete'){
 		console.debug(url);
 		$.ajax({
 			url:url,
