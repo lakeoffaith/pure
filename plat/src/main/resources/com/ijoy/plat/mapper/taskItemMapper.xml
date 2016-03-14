@@ -10,7 +10,7 @@
     <result column="itemdescribe" property="itemdescribe"  />
     <result column="department" property="department" />
     <result column="state" property="state" />
-    <association property="employee" javaType="Employee" column="employee_id"  select="com.ijoy.plat.mapper.EmployeeMapper.get"></association>
+    <association property="employee"  javaType="PlatEmployee" column="employee_id"  select="com.ijoy.plat.mapper.PlatEmployeeMapper.get"></association>
 	</resultMap>
   <!-- getTaskItemListByTaskId -->
    <select id="getTaskItemListByTaskId" resultMap="taskItemResult" >

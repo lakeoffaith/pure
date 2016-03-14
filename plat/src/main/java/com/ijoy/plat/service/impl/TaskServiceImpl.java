@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ijoy.common.query.PageResult;
 import com.ijoy.plat.domain.Task;
 import com.ijoy.plat.mapper.TaskMapper;
-import com.ijoy.plat.query.PageResult;
 import com.ijoy.plat.query.TaskQuery;
 import com.ijoy.plat.service.ITaskService;
 

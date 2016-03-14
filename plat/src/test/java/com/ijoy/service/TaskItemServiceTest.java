@@ -5,7 +5,8 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ijoy.plat.domain.Employee;
+import com.ijoy.common.domain.Employee;
+import com.ijoy.plat.domain.PlatEmployee;
 import com.ijoy.plat.domain.TaskItem;
 import com.ijoy.plat.service.ITaskItemService;
 
@@ -31,9 +32,10 @@ public class TaskItemServiceTest extends BaseTest{
 	@Test
 	public void saveTest() {
 		TaskItem taskItem = new TaskItem();
-		Employee employee = new Employee();
+		PlatEmployee employee = new PlatEmployee();
+		PlatEmployee platEmployee=new PlatEmployee();
 		employee.setId(38L);
-		taskItem.setEmployee(employee);
+		taskItem.setPlatEmployee(employee);
 		taskItem.setState(1);
 		Long save = taskItemService.insert(taskItem);
 		System.out.println(save);

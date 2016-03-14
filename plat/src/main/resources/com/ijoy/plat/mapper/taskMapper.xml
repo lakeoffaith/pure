@@ -13,7 +13,7 @@
 		    <result column="state" property="state" />
 		    <result column="starttime" property="starttime" />
 		    <result column="endtime" property="endtime" />
-		    <association property="employee" column="employee_id" javaType="Employee"  select="com.ijoy.plat.mapper.EmployeeMapper.get"></association>
+		    <association property="employee" column="employee_id" javaType="PlatEmployee"  select="com.ijoy.plat.mapper.PlatEmployeeMapper.get"></association>
 		    <association property="taskItems"  column="id"  javaType="list" select="com.ijoy.plat.mapper.TaskItemMapper.getTaskItemListByTaskId"></association>
   		</resultMap>
          <!-- 获得全查询列表 -->

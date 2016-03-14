@@ -27,6 +27,7 @@ public class TaskItemController {
 	@ResponseBody
 	public  Ajaxresult  list(@Param("task_id") Long task_id){
 		List<TaskItem> taskItemListByTaskId = service.getTaskItemListByTaskId(task_id);
+		System.out.println(taskItemListByTaskId.get(0));
 		return new Ajaxresult(true, taskItemListByTaskId);
 	}
 	

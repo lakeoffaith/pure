@@ -1,6 +1,6 @@
 package com.ijoy.plat.query;
 
-
+import com.ijoy.common.query.BaseQuery;
 
 public class ApplicationQuery extends BaseQuery {
 	private String name;

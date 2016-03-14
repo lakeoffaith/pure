@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijoy.common.mapper.RoleMapper">
+	<resultMap type="Role" id="roleResult">
+		<id  column="id"  property="id"/>
+		<result column="name" property="name" />
+		<result column="describe" property="describe" />
+	</resultMap>
+     <!-- 通过用户的id查询对应的角色 -->
+  <select id="getRoleListByEmployeeID"   parameterType="long" resultMap="roleResult">
+    select r.id,r.name,r.describe from Role r
+    left join Employee_Role e_r on r.id=e_r.role_id
+    left join Employee e on e_r.employee_id=e.id
+    where e.id=#{id}
+  </select>
+  <!-- 通过角色名字查询对应的角色 -->
+  <select id="getRoleByName"  parameterType="string" resultMap="roleResult">
+    select r.id,r.name,r.describe from Role r
+    where r.name=#{name}
+  </select>
+ <!--  获得全查询列表 -->
+  <select id="getAll" resultMap="roleResult">
+    select r.id,r.name,r.describe from Role r
+  </select>
+  
+  
+  <!-- 根据id获得用户对象 -->
+    <select id="get" resultMap="roleResult"  parameterType="long">
+     select * from role where id=#{id}
+  </select> 
+  
+   <!-- 新增用户对象 -->
+   <insert id="insert"   parameterType="Role">
+   	  <selectKey   resultType="long"  keyProperty="id"  order="BEFORE">
+		select ROLE_SEQ.nextval as id from dual
+		</selectKey>
+      insert into Role (id,name,describe) values (#{id},#{name},#{describe})
+   </insert>
+   <!-- 删除用户对象 -->
+   <delete id="delete"  parameterType="long">
+     delete from Role where id=#{id}
+   </delete>
+   
+  <!--  更新用户对象 -->
+   <update id="update" parameterType="role">
+      update Role set name=#{name},describe=#{describe} where id=#{id}
+   </update>
+   <select id="queryRows"  parameterType="RoleQuery" resultMap="roleResult">
+         select *
+         	from (select a.*,rownum rnum
+         	from (select * 
+         	from role 
+         	<include refid="querySql"/>
+         	order by id,rowid)a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
+   </select>
+   <select id="queryTotalCount" parameterType="RoleQuery"  resultType="long">
+   		 select count(id)   from role 
+   		 <include refid="querySql"></include>
+   </select>
+	<sql id="querySql">
+		<where>
+			<if test="name!=null">
+				and name like '%' || #{name}  || '%'
+			</if>
+		</where>
+	</sql>
+</mapper>

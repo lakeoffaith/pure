@@ -38,10 +38,10 @@
 		<property name="dataSource" ref="dataSource"></property>
 	   <property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		<property name="mapperLocations"  value="classpath*:com/ijoy/**/mapper/*.xml"></property>
-	    <property name="typeAliasesPackage" value="com.ijoy.plat.domain,com.ijoy.plat.query"></property> 
+	    <property name="typeAliasesPackage" value="com.ijoy.plat.domain,com.ijoy.plat.query,com.ijoy.common.domain,com.ijoy.common.query"></property> 
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		 <property name="basePackage" value="com.ijoy.plat.mapper"></property> 
+		 <property name="basePackage" value="com.ijoy.common.mapper,com.ijoy.plat.mapper"></property> 
 	</bean>
 
 	<!-- 1.事务管理器 -->
@@ -57,7 +57,7 @@
 			</tx:attributes>
 	</tx:advice>
 	<aop:config>
-		<aop:pointcut expression="execution(* cn.ijoy.service..*(..))" id="pointcut"/>
+		<aop:pointcut expression="execution(* cn.ijoy.*.service..*(..))" id="pointcut"/>
 		<aop:advisor advice-ref="txadvice" pointcut-ref="pointcut"/>
 	</aop:config>
 		  <!-- 视图解析器:定义跳转的文件的前后缀 -->    
@@ -78,7 +78,7 @@
 <mvc:interceptors>
 			<mvc:interceptor>
 				 <mvc:mapping path="/*"/>
-				 <bean class="com.ijoy.plat.web.interceptor.AuthInterceptor">
+				 <bean class="com.ijoy.common.web.interceptor.AuthInterceptor">
 				 	<property name="excludedUrls">
 				 		<list>
 				 				<value>/loginInfo/login</value>
@@ -91,7 +91,7 @@
 	<bean   name="handleExceptionResolver"  class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 			<property name="exceptionMappings">
         <props>
-            <prop key="com.ijoy.plat.web.exception.AuthException">redirect:/loginInfo/login</prop>
+            <prop key="com.ijoy.common.web.exception.AuthException">redirect:/loginInfo/login</prop>
         </props>
     </property>
 	</bean>
