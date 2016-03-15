@@ -5,9 +5,9 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ijoy.common.query.PageResult;
 import com.ijoy.plat.domain.Application;
 import com.ijoy.plat.query.ApplicationQuery;
-import com.ijoy.plat.query.PageResult;
 import com.ijoy.plat.service.IApplicationService;
 
 

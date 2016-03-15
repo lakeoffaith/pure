@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijoy.common.mapper.MenuMapper">
+		<resultMap  type="Menu" id="menuResult">
+				<id column="id"  property="id"/>
+				<result column="parent_id"  property="parent_id"/>
+				<result column="name" property="name"  />
+	    <result column="url" property="url"  />
+	    <result column="orderid" property="orderid"  />
+	    <result column="type" property="type" />
+	    <result column="iconname" property="iconname" />
+	    <association property="childNum"  javaType="long"   column="id"  select="com.ijoy.common.mapper.MenuMapper.getChildNum"></association>
+		</resultMap>
+       <!-- 查看某个id是否有子类 -->
+       <select id="getChildNum"   parameterType="long"   resultType="long">
+       			select count(id) from menu where parent_id=#{id}
+       </select>
+       
+  <!-- 根据角色id和type来获得首页显示菜单的list  参数为数组 -->
+  <select id="getMenuListByRoleIDANDType" resultMap="menuResult" >
+    select  m.id,m.name,m.url,m.orderid,m.type,m.parent_id,m.iconname from Menu m 
+         left join Role_Menu r_m on m.id=r_m.menu_id
+    left join Role r on r_m.role_id=r.id
+   where r.id=#{0} and m.type=#{1}
+     order  by m.id
+  </select>
+ <!--  根据角色id来获得菜单list -->
+  <select id="getMenuListByRoleID" resultMap="menuResult" parameterType="long">
+    select  m.id,m.name,m.url,m.orderid,m.type,m.parent_id,m.iconname from Menu m 
+         left join Role_Menu r_m on m.id=r_m.menu_id
+    left join Role r on r_m.role_id=r.id
+   where r.id=#{id}
+
+     order  by m.id
+  </select>
+ 
+ <!-- 根据name来获得菜单 -->
+  <select id="getMenuByMenuName" resultMap="menuResult" parameterType="String">
+    select m.id,m.name,m.url,m.orderid,m.type,m.parent_id,m.iconname from Menu m 
+    where m.name=#{name}
+  </select>
+  <!-- 根据url来获得菜单 -->
+  <select id="getMenuByMenuUrl" resultMap="menuResult" parameterType="String">
+    select m.id,m.name,m.url,m.orderid,m.type,m.parent_id,m.iconname from Menu m 
+    where m.url=#{menuUrl}
+  </select>
+<!--   获得全查询列表 -->
+  <select id="getAll" resultMap="menuResult">
+    select m.id,m.name,m.url,m.orderid,m.type,m.parent_id,m.iconname from Menu m order  by m.id
+  </select>
+  
+  
+  <!-- 根据id获得用户对象 -->
+    <select id="get" resultMap="menuResult" >
+     select m.id,m.name,m.url,m.orderid,m.type,m.parent_id,m.iconname from Menu m where id=#{id}
+  </select> 
+  
+   
+ <!--   新增员工与菜单的中间表数据 -->
+   <insert id="insertRoleMenu">
+      insert into Role_Menu (role_id,menu_id) values (#{0},#{1})
+   </insert>
+  
+   <!-- 新增用户对象 -->
+   <insert id="insert" parameterType="menu">
+      insert into Menu (id,name,url,orderid,type,parent_id,iconname) values (menu_seq.nextval,#{name},#{url},#{orderid},#{type},#{parent_id},#{iconname})
+   </insert>
+    
+    <delete id="deleteAll">
+    	delete from menu
+    </delete>
+  <!--  删除员工与菜单的中间表数据 -->
+   <delete id="deleteRoleMenu">
+   		delete from Role_Menu where role_id=#{0} and menu_id=#{1}
+   </delete>
+ <!--   删除用户对象 -->
+   <delete id="delete">
+     delete from Menu where id=#{id}
+   </delete>
+   
+ <!--   更新用户对象 -->
+   <update id="update" parameterType="Menu">
+      update Menu set name=#{name} where id=#{id}
+   </update>
+   <select id="queryRows"  parameterType="MenuQuery" resultMap="menuResult">
+         select *
+         	from (select a.*,rownum rnum
+         	from (select * 
+         	from menu 
+         	<include refid="querySql"/>
+         	order by id,rowid)a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
+      </select>
+   <select id="queryTotalCount"  parameterType="MenuQuery"  resultType="long">
+   select count(id) 
+         	from menu
+         	<include refid="querySql"/>
+
+   </select>
+   <sql id="querySql">
+   			<where>
+   				<if test="parent_id!=null">
+   					and parent_id=#{parent_id}
+   				</if>
+   				<if test="name!=null">
+   					and name like '%' || #{name} || '%'
+   				</if>
+   			</where>
+   </sql>
+   
+    <select id="queryJoinRoleRows"  parameterType="MenuQuery" resultMap="menuResult">
+         select *
+         	from (select a.*,rownum rnum
+         	from (select * 
+         	from menu m 
+         	left join role_menu r_m
+         	on m.id=r_m.menu_id
+         	<include refid="queryJoinRoleSql"/>
+         	order by m.id,m.rowid)a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
+      </select>
+   <select id="queryJoinRoleTotalCount"  parameterType="MenuQuery"  resultType="long">
+   select count(m.id) 
+         	from menu m
+         	left join role_menu r_m
+         	on m.id=r_m.menu_id
+         	<include refid="queryJoinRoleSql"/>
+
+   </select>
+   <sql id="queryJoinRoleSql">
+   			<where>
+   				<if test="parent_id!=null">
+   					and m.parent_id=#{parent_id}
+   				</if>
+   				<if test="name!=null">
+   					and m.name like '%' || #{name} || '%'
+   				</if>
+   				<if test="roleid!=null">
+   					and r_m.role_id=#{roleid}
+   				</if>
+   			</where>
+   </sql>
+   
+</mapper>

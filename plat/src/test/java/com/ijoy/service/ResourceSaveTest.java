@@ -5,10 +5,10 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ijoy.plat.domain.Menu;
-import com.ijoy.plat.domain.Role;
-import com.ijoy.plat.service.IMenuService;
-import com.ijoy.plat.service.IRoleService;
+import com.ijoy.common.domain.Menu;
+import com.ijoy.common.domain.Role;
+import com.ijoy.common.service.IMenuService;
+import com.ijoy.common.service.IRoleService;
 
 public class ResourceSaveTest extends BaseTest{/*
 	@Autowired

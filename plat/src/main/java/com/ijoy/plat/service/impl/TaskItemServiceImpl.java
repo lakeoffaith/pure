@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ijoy.common.query.BaseQuery;
+import com.ijoy.common.query.PageResult;
 import com.ijoy.plat.domain.TaskItem;
 import com.ijoy.plat.mapper.TaskItemMapper;
-import com.ijoy.plat.query.BaseQuery;
-import com.ijoy.plat.query.PageResult;
 import com.ijoy.plat.service.ITaskItemService;
 
 @Service

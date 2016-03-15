@@ -18,6 +18,7 @@
 	<modules>
 		<module>yygh</module>
 		<module>plat</module>
+		<module>yzjc</module>
 	</modules>
 
 	<dependencies>

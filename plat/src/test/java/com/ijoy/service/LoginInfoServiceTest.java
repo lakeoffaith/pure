@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ijoy.common.comutil.MD5Util;
-import com.ijoy.plat.domain.LoginInfo;
-import com.ijoy.plat.service.ILoginInfoService;
+import com.ijoy.common.domain.LoginInfo;
+import com.ijoy.common.service.ILoginInfoService;
 
 
 public class LoginInfoServiceTest extends BaseTest{

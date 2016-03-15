@@ -5,10 +5,10 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ijoy.plat.domain.Employee;
-import com.ijoy.plat.domain.Role;
-import com.ijoy.plat.service.IEmployeeService;
-import com.ijoy.plat.service.IRoleService;
+import com.ijoy.common.domain.Employee;
+import com.ijoy.common.domain.Role;
+import com.ijoy.common.service.IEmployeeService;
+import com.ijoy.common.service.IRoleService;
 
 
 public class RoleServiceTest extends BaseTest{
@@ -23,6 +23,14 @@ public class RoleServiceTest extends BaseTest{
 		System.out.println(roles);
 		
 	}
+	@Test
+	public void insertTest(){
+		Role role = new Role();
+		role.setName("ceshi");
+		Long insert = roleService.insert(role);
+		System.out.println(insert);
+	}
+	
 	@Test
 	public void deleteTest() {
 		

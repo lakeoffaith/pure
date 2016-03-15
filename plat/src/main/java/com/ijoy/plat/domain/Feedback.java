@@ -6,7 +6,7 @@ public class Feedback {
 	private Long id;
 	private String content="";
 	private Date time=new Date();
-	private Employee employee;
+	private PlatEmployee employee;
 	public Long getId() {
 		return id;
 	}
@@ -25,10 +25,10 @@ public class Feedback {
 	public void setTime(Date time) {
 		this.time = time;
 	}
-	public Employee getEmployee() {
+	public PlatEmployee getPlatEmployee() {
 		return employee;
 	}
-	public void setEmployee(Employee employee) {
+	public void setPlatEmployee(PlatEmployee employee) {
 		this.employee = employee;
 	}
 	

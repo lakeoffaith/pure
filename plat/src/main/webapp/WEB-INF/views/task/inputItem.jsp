@@ -152,7 +152,7 @@
                               			</c:otherwise>
                               </c:choose>
                               <td class="hidden-phone">${item.department }</td>
-                              <td class="hidden-phone">${item.employee.name }</td>
+                            <td class="hidden-phone">${item.employee.name }</td> 
                               <td width="12%">
                                    <label class="btn btn-danger btn-xs" title="删除" onclick='deleteTaskItem(${item.id},this)'><i   class="icon-trash"></i></label>
                               </td>

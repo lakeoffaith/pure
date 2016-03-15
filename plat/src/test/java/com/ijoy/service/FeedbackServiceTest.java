@@ -5,10 +5,10 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ijoy.common.query.BaseQuery;
+import com.ijoy.common.query.PageResult;
 import com.ijoy.plat.domain.Feedback;
-import com.ijoy.plat.query.BaseQuery;
 import com.ijoy.plat.query.FeedbackQuery;
-import com.ijoy.plat.query.PageResult;
 import com.ijoy.plat.service.IFeedbackService;
 
 

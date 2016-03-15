@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -8,27 +8,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html class="login-bg">
 <head>
+	<base  href="<%=basePath%>"/>
 		<title>Detail Admin - Sign up</title>
     
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
     <!-- bootstrap -->
-    <link href="<%=path %>/css/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="<%=path %>/css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
-    <link href="<%=path %>/css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
+    <link href="css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
     <!-- libraries -->
     
     <!-- global styles -->
-    <link rel="stylesheet" type="text/css" href="<%=path %>/css/elements.css" />
+    <link rel="stylesheet" type="text/css" href="css/elements.css" />
 
     <!-- this page specific styles -->
-    <link rel="stylesheet" href="<%=path %>/css/signup.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/signup.css" type="text/css" media="screen" />
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script  src="<%=path %>/js/jquery.js" type="text/javascript"></script>
-	<script  src="<%=path %>/js/validation/jquery.validate.js" type="text/javascript"></script>
+	<script  src="js/jquery.js" type="text/javascript"></script>
+	<script  src="js/validation/jquery.validate.js" type="text/javascript"></script>
 	<!-- domain.js for domain -->
-     <script src="<%=path%>/js/model/domain.js"></script>
+     <script src="js/model/domain.js"></script>
 	<script type="text/javascript">
 	$().ready(function(){
 		$.validator.addMethod("stringCheck",function(value,element){
@@ -97,7 +98,7 @@
         </div>
 
         <div class="span3 already">
-            <a href="<%=basePath%>login.action">返回登录</a>
+            <a href="login.action">返回登录</a>
         </div>
     </div>
 

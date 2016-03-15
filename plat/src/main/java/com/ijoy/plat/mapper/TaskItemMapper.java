@@ -2,8 +2,8 @@ package com.ijoy.plat.mapper;
 
 import java.util.List;
 
+import com.ijoy.common.query.BaseQuery;
 import com.ijoy.plat.domain.TaskItem;
-import com.ijoy.plat.query.BaseQuery;
 
 public interface TaskItemMapper {
 	public Long insert(TaskItem t);

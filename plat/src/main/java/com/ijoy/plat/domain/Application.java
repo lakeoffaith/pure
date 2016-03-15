@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 
+
 public class Application {
 	private Long id;
 	private String name;
@@ -14,7 +15,7 @@ public class Application {
 	private int state;
 	private String docpath="";
 	private String url="";
-	private List<Employee> employeeList=new ArrayList();
+	private List<PlatEmployee> employeeList=new ArrayList();
 	public Long getId() {
 		return id;
 	}
@@ -59,10 +60,10 @@ public class Application {
 		this.docpath = docpath;
 	}
 	
-	public List<Employee> getEmployeeList() {
+	public List<PlatEmployee> getPlatEmployeeList() {
 		return employeeList;
 	}
-	public void setEmployeeList(List<Employee> employeeList) {
+	public void setPlatEmployeeList(List<PlatEmployee> employeeList) {
 		this.employeeList = employeeList;
 	}
 	

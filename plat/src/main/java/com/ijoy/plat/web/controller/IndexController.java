@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ijoy.common.comutil.UserContext;
-import com.ijoy.plat.domain.Employee;
+import com.ijoy.common.domain.Employee;
+import com.ijoy.common.service.IEmployeeService;
 import com.ijoy.plat.query.TaskItemQuery;
-import com.ijoy.plat.service.IEmployeeService;
 import com.ijoy.plat.service.ITaskItemService;
 
 @Controller

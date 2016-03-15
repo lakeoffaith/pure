@@ -14,7 +14,7 @@ public class Task {
 	private int state;
 	private Date starttime=new Date();
 	private Date endtime=new Date();
-	private Employee employee=new Employee(1L);
+	private PlatEmployee employee=new PlatEmployee(1L);
 	private List<TaskItem> taskItems=new ArrayList();
 	public Long getId() {
 		return id;
@@ -71,10 +71,10 @@ public class Task {
 	public void setEndtime(Date endtime) {
 		this.endtime = endtime;
 	}
-	public Employee getEmployee() {
+	public PlatEmployee getPlatEmployee() {
 		return employee;
 	}
-	public void setEmployee(Employee employee) {
+	public void setPlatEmployee(PlatEmployee employee) {
 		this.employee = employee;
 	}
 	

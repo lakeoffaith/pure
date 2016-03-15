@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ijoy.common.comutil.Ajaxresult;
+import com.ijoy.common.query.PageResult;
 import com.ijoy.plat.domain.Application;
 import com.ijoy.plat.query.ApplicationQuery;
-import com.ijoy.plat.query.PageResult;
 import com.ijoy.plat.service.IApplicationService;
 
 @Controller

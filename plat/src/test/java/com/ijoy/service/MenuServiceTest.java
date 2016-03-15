@@ -2,22 +2,16 @@ package com.ijoy.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ijoy.common.comutil.ListUtil;
-import com.ijoy.plat.domain.Menu;
-import com.ijoy.plat.domain.Role;
-import com.ijoy.plat.query.MenuQuery;
-import com.ijoy.plat.query.PageResult;
-import com.ijoy.plat.service.IMenuService;
+import com.ijoy.common.domain.Menu;
+import com.ijoy.common.domain.Role;
+import com.ijoy.common.query.MenuQuery;
+import com.ijoy.common.query.PageResult;
+import com.ijoy.common.service.IMenuService;
 
 
 public class MenuServiceTest extends BaseTest{
