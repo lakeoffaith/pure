@@ -2,6 +2,7 @@ package com.ijoy.common.web.controller;
 
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,11 +62,16 @@ public class RoleController {
 	//更新单个
 		//更新，保存
 		@RequestMapping(method=RequestMethod.POST)
-		public String save(@ModelAttribute("role") Role role){
+		public String save(@ModelAttribute("role") Role role,@RequestParam(value="ids",required=false) String menuIds){
+			System.out.println(menuIds);
 			if(role.getId()!=null){
 				service.update(role);
+				
+				service.insertJoinMenuAfterDelete(role.getId(),menuIds);
 			}else {
-				service.insert(role);
+			Long id=service.insert(role);
+			System.out.println(id);
+			service.insertJoinMenuAfterDelete(id, String.valueOf(id));
 			}
 			return  "redirect:role";
 		}

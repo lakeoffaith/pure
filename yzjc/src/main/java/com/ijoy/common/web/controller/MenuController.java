@@ -32,7 +32,6 @@ public class MenuController {
 	@RequestMapping(value="/load",method=RequestMethod.GET)
 	@ResponseBody
 		 public Ajaxresult loadMenu(HttpServletRequest request){
-		System.out.println("menu    load");
 					
 					//只查询menu.type ==1即为菜单的menu
 					List<Menu> menuList = service.getMenuListByRoleANDType(UserContext.getUser(request).getRole(),Menu.INDEXMENU);
@@ -59,7 +58,6 @@ public class MenuController {
 		
 	@RequestMapping(method=RequestMethod.GET)
 	public  ModelAndView  list(@ModelAttribute MenuQuery menuQuery){
-		System.out.println("list    "+menuQuery);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("common/menu/list");
 		mv.addObject("menuQuery", menuQuery);

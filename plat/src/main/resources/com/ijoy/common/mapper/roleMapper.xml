@@ -43,6 +43,7 @@
      delete from Role where id=#{id}
    </delete>
    
+   
   <!--  更新用户对象 -->
    <update id="update" parameterType="role">
       update Role set name=#{name},describe=#{describe} where id=#{id}

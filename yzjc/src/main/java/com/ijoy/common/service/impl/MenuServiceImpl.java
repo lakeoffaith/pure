@@ -9,7 +9,7 @@ import com.ijoy.common.domain.Menu;
 import com.ijoy.common.domain.Role;
 import com.ijoy.common.mapper.MenuMapper;
 import com.ijoy.common.mapper.RoleMapper;
-import com.ijoy.common.query.BaseQuery;
+import com.ijoy.common.query.MenuQuery;
 import com.ijoy.common.query.PageResult;
 import com.ijoy.common.service.IMenuService;
 @Service
@@ -108,12 +108,22 @@ public class MenuServiceImpl  implements IMenuService {
 
 
 	@Override
-	public PageResult<Menu> queryPage(BaseQuery baseQuery) {
-		 Long totalCount = mapper.queryTotalCount(baseQuery);
-		 if(totalCount>0){
-			 List<Menu> rows = mapper.queryRows(baseQuery);
-			 return new PageResult<>(totalCount, rows, baseQuery.getPageSize()	, baseQuery.getCurrentPage());
-		 }
+	public PageResult<Menu> queryPage(MenuQuery  baseQuery) {
+		Long totalCount;
+		 List<Menu> rows;
+		if(baseQuery.getRoleid()!=null && baseQuery.getRoleid()>0){
+				 totalCount=mapper.queryJoinRoleTotalCount(baseQuery);
+				if(totalCount>0){
+					 rows = mapper.queryJoinRoleRows(baseQuery);
+					 return new PageResult<>(totalCount, rows, baseQuery.getPageSize()	, baseQuery.getCurrentPage());
+				}
+		}else{
+			totalCount = mapper.queryTotalCount(baseQuery);
+			 if(totalCount>0){
+				 rows = mapper.queryRows(baseQuery);
+				 return new PageResult<>(totalCount, rows, baseQuery.getPageSize()	, baseQuery.getCurrentPage());
+			 }
+		}
 		return new PageResult<>();
 	}
 }

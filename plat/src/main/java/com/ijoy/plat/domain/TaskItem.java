@@ -59,14 +59,15 @@ public class TaskItem {
 	public PlatEmployee getEmployee() {
 		return employee;
 	}
-	public void setEmployee(PlatEmployee employee) {
-		this.employee = employee;
-	}
 	@Override
 	public String toString() {
 		return "TaskItem [id=" + id + ", itemCycle=" + itemCycle + ", itemtype=" + itemtype + ", itemdescribe="
 				+ itemdescribe + ", department=" + department + ", state=" + state + ", employee=" + employee
 				+ ", task_id=" + task_id + "]";
+	}
+	public void setPlatEmployee(PlatEmployee employee) {
+	this.employee=employee;
+		
 	}
 	
 		

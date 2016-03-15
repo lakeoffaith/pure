@@ -12,15 +12,15 @@ public class TreeJson implements Serializable {
 	private String iconCls;
 	private String state;
 	private String checked;
-	private List<TreeJson> children=new ArrayList();
+	private List<TreeJson> children=new ArrayList<>();
 	
 	//需要返回一个格式化了的list<treeJson>对象
 	public static List<TreeJson> formatJson(List<TreeJson> list){
 		
 		//返回的json对象
-		List<TreeJson> jsonlist=new ArrayList();
+		List<TreeJson> jsonlist=new ArrayList<>();
 		//存放节点
-		List<TreeJson> parentnodes=new ArrayList();
+		List<TreeJson> parentnodes=new ArrayList<>();
 		//根节点
 		TreeJson root=new TreeJson();
 		TreeJson node=new TreeJson();

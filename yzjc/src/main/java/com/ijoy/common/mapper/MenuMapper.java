@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ijoy.common.domain.Menu;
 import com.ijoy.common.query.BaseQuery;
+import com.ijoy.common.query.MenuQuery;
 
 public interface MenuMapper {
 	
@@ -26,4 +27,9 @@ public interface MenuMapper {
 	public Long queryTotalCount(BaseQuery baseQuery);
 
 	public List<Menu> queryRows(BaseQuery baseQuery);
+
+	
+	public Long queryJoinRoleTotalCount(MenuQuery baseQuery);
+
+	public List<Menu> queryJoinRoleRows(MenuQuery baseQuery);
 }

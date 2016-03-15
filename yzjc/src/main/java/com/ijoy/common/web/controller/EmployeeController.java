@@ -84,7 +84,6 @@ public class EmployeeController {
 		@RequestMapping(value="/{id}",params="method=delete",method=RequestMethod.GET)
 		@ResponseBody
 		public  Ajaxresult delete(@PathVariable Long id){
-			System.out.println(id);
 			try {
 				employeeService.delete(id);
 				return new Ajaxresult(true, "删除成功");

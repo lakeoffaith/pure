@@ -110,4 +110,39 @@
    				</if>
    			</where>
    </sql>
+   
+    <select id="queryJoinRoleRows"  parameterType="MenuQuery" resultMap="menuResult">
+         select *
+         	from (select a.*,rownum rnum
+         	from (select * 
+         	from menu m 
+         	left join role_menu r_m
+         	on m.id=r_m.menu_id
+         	<include refid="queryJoinRoleSql"/>
+         	order by m.id,m.rowid)a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum}
+      </select>
+   <select id="queryJoinRoleTotalCount"  parameterType="MenuQuery"  resultType="long">
+   select count(m.id) 
+         	from menu m
+         	left join role_menu r_m
+         	on m.id=r_m.menu_id
+         	<include refid="queryJoinRoleSql"/>
+
+   </select>
+   <sql id="queryJoinRoleSql">
+   			<where>
+   				<if test="parent_id!=null">
+   					and m.parent_id=#{parent_id}
+   				</if>
+   				<if test="name!=null">
+   					and m.name like '%' || #{name} || '%'
+   				</if>
+   				<if test="roleid!=null">
+   					and r_m.role_id=#{roleid}
+   				</if>
+   			</where>
+   </sql>
+   
 </mapper>

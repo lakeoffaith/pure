@@ -18,5 +18,12 @@ public interface IRoleService{
 	Role getByName(String string);
 
 	public PageResult<Role> queryPage(BaseQuery baseQuery);
+
+	/**
+	 * 修改角色和菜单的关系的时候，先删除角色对应的原有关系，再重新添加角色对应的关系。
+	 * @param id						角色id
+	 * @param menuIds    以逗号分割的菜单id字符串
+	 */
+	public void insertJoinMenuAfterDelete(Long id, String menuIds);
 }
 

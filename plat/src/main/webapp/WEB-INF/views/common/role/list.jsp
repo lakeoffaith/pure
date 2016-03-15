@@ -106,6 +106,7 @@
     								<input type="button" id="inputDomainID" class="hidden"   ></input>
                                    <label for="deleteDomainID" class="btn btn-danger btn-xs" title="删除" onclick="doModelDomain('role','delete','${r.id}')"><i class="icon-trash"></i></label>
     								<input type="button" id="deleteDomainID" class="hidden"></input>
+
                               </td>
                           </tr>
                           	</c:forEach>

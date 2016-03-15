@@ -5,6 +5,7 @@ import java.util.List;
 import com.ijoy.common.domain.Menu;
 import com.ijoy.common.domain.Role;
 import com.ijoy.common.query.BaseQuery;
+import com.ijoy.common.query.MenuQuery;
 import com.ijoy.common.query.PageResult;
 
 
@@ -26,7 +27,7 @@ public interface IMenuService{
 	void deleteAll();
 	List<Menu> getMenuByMenuName(String string);
 
-	public PageResult<Menu> queryPage(BaseQuery  baseQuery);
+	public PageResult<Menu> queryPage(MenuQuery  baseQuery);
 
 }
 

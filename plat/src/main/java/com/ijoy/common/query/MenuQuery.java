@@ -5,6 +5,18 @@ package com.ijoy.common.query;
 public class MenuQuery extends BaseQuery {
 	private String name;
   private Long parent_id;
+  
+  	private Long roleid;
+  	
+  	
+  	
+	public Long getRoleid() {
+		return roleid;
+	}
+
+	public void setRoleid(Long roleid) {
+		this.roleid = roleid;
+	}
 
 	public String getName() {
 		return name;

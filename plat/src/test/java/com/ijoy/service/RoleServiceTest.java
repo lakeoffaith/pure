@@ -24,6 +24,14 @@ public class RoleServiceTest extends BaseTest{
 		
 	}
 	@Test
+	public void insertTest(){
+		Role role = new Role();
+		role.setName("ceshi");
+		Long insert = roleService.insert(role);
+		System.out.println(insert);
+	}
+	
+	@Test
 	public void deleteTest() {
 		
 		//删除

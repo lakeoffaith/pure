@@ -27,46 +27,76 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
 
+
     <link href="css/res-style.css" rel="stylesheet" />
+
+    <link href="css/ijoy/tree/permissionTree.css" rel="stylesheet"/>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
+
     <![endif]-->
   </head>
 
   <body>
-     <div class="modal-dialog mid-modal"  role="document">
+     <div class="modal-dialog lg-modal"  role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">角色编辑</h4>
         </div>
         <div class="modal-body">
-         
-        <form action="role" class="form-horizontal" id="domainFormID" method="post">
-        <!-- //表单令牌 -->
-      				<!-- <s:token></s:token> -->
-            <c:if test="${role.id!=null }">
-           <div class="form-group hidden"  >
-                            	<label  class="col-sm-2  col-md-offset-1 control-label">序号</label>
-                            	<div class="col-sm-4">
-                            		<input  class="form-control"  name="id"  readonly="true"  value="${role.id}">
-                            	</div>
-                          </div>
-            </c:if>
-             <div class="form-group">
-							    <label  class="col-sm-2  col-md-offset-1 control-label">角色名称</label>
-							    <div class="col-sm-4">
-							      <input  class="form-control" name="name"  value="${role.name}">
-							    </div>
-							  </div>
-       <div class="form-group">
-                         		 <div class="col-sm-offset-2 col-sm-10">
-					                <button type="submit" class="btn btn-primary">确定保存</button>
-					              </div>
-                          </div> 
-          </form>
+        <div  class="container">
+            <div class="row">
+                <div class="col-md-6 "  >
+                        <form action="role" class="form-horizontal" id="domainFormID" method="post">
+                        <!-- //表单令牌 -->
+                        <!-- <s:token></s:token> -->
+                        <c:if test="${role.id!=null }">
+                            <div class="form-group hidden"  >
+
+                            <label  class="col-sm-2  col-md-offset-1 control-label">序号</label>
+                            <div class="col-sm-4">
+                            <input  class="form-control"  name="id"  readonly="true"  value="${role.id}">
+                            </div>
+                            </div>
+                        </c:if>
+                        <div class="form-group">
+                        <label  class="col-sm-2  col-md-offset-1 control-label">角色名称</label>
+                        <div class="col-sm-4">
+                        <input  class="form-control" name="name"  value="${role.name}">
+                        </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                         <button id="saveBtn" class="btn btn-primary">确定保存</button>
+                        </div>
+                        </div>
+    <input id="treeids" name="ids">
+                        </form>
+
+
+                </div>
+                <div  class="col-md-6">
+
+                        <lable>用户权限配置</lable>
+                        <div class="tree">
+                            <ul>
+                            <li class="active" data-id="1"><input type="checkbox"><span>管理系统</span>
+                            <ul  class="sub-tree" >
+                            <li ><input type="checkbox"><span>角色管理</span></li>
+                            </ul>
+                            </li>
+                            </ul>
+                        </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
            </div>
       </div>
     </div>
@@ -82,8 +112,34 @@
 
     <!--common script for all pages-->
     <script src="js/common-scripts.js"></script>
+    <script src="js/ijoy/global.js"></script>
+    <script src="js/ijoy/tree/permissionTree.js"></script>
 
-    
+    <script type="text/javascript">
+        //点击保存按钮时，先获得所选的权限，再提交表单
+        function inputTreeids(){
+            var ids=getTreeids($(".tree"));
+    console.debug("ids     "+ids);
+            $("#treeids").val(ids);
+        }
+        //根据角色id加载menu
+        $(function(){
+            var id=$("input[name=id]").val();
+            if(!jsValidateIsNull(id) && !jsValidateIsNull($(".tree"))){
+                var baseQuery={};
+                baseQuery.roleid=id;
+
+                loadTreeAjax(baseQuery,$(".tree"));
+             };
+
+            $("#saveBtn").on("click",function(){
+
+            inputTreeids();
+
+    });
+
+    });
+    </script>
    
   </body>
 </html>
