@@ -25,7 +25,7 @@ public class DepartmentController {
 	@ResponseBody
 	public Ajaxresult search(@ModelAttribute DepartmentQuery baseQuery) throws Exception{
 		System.out.println(baseQuery);
-		List departments = departmentService.queryDepartment(baseQuery).getRows();
+		List departments = departmentService.queryDepartmentPage(baseQuery).getRows();
 		return new Ajaxresult(true, departments);
 	}
 	

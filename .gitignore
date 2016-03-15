@@ -1,4 +1,8 @@
 *.class
 *.rar
 *.war
-*.~
+*~
+*.prefs
+*.classpath
+*.project
+*.component

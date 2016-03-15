@@ -12,14 +12,7 @@
 	<packaging>war</packaging>
 	<name>yygh</name>
 	<url>http://maven.apache.org</url>
-	<dependencies>
-			<!-- mysql -->
-		<dependency>
-		<groupId>mysql</groupId>
-		<artifactId>mysql-connector-java</artifactId>
-		<version>5.1.38</version>
-	</dependency>
-	</dependencies>
+
 	<build>
 		<finalName>gh-web</finalName>
 		<plugins>

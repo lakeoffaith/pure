@@ -12,13 +12,6 @@
   <packaging>war</packaging>
 <name>plat</name>
 	<url>http://maven.apache.org</url>
-		<dependencies>
-			<dependency>
-				<groupId>com.oracle</groupId>
-  <artifactId>oracle12</artifactId>
-  <version>12c.0</version>
-			</dependency>
-		</dependencies>
 	<build>
 		<finalName>plat</finalName>
 		<plugins>

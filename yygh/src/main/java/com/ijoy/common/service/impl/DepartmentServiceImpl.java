@@ -25,12 +25,12 @@ public class DepartmentServiceImpl  implements DepartmentService {
 	}
 	
 	@Override
-	public PageResult<Department> queryDepartment(BaseQuery basequery) {
+	public PageResult<Department> queryDepartmentPage(BaseQuery basequery) {
 		
 		
-		Long totalCount=departmentMapper.queryDepartmentTotalCount(basequery);
+		Long totalCount=departmentMapper.queryTotalCount(basequery);
 		if( totalCount>0){
-			List<Department> rows=departmentMapper.queryDepartmentRows(basequery);
+			List<Department> rows=departmentMapper.queryRows(basequery);
 			return new PageResult<Department>(totalCount, rows, basequery.getPageSize(), basequery.getCurrentPage());
 		}
 		return new PageResult<Department>();

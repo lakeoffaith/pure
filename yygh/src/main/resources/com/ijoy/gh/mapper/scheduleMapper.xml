@@ -7,7 +7,7 @@
 	<resultMap id="scheduleResult" type="Schedule">
 		<id column="id" property="id" />
 		<result column="numbers" property="numbers"  />
-		<result column="date" property="date" />
+		<result column="p_date" property="date" />
 		<result column="cost" property="cost" />
 		<result column="residueNumbers" property="residueNumbers" />
 		<result column="noonType" property="noonType" />
@@ -25,11 +25,11 @@
 				and doctor_id=#{doctorId}
 			</if>
 			<if test="startDate!=null">
-				and schedule_date>=#{startDate}
+				and p_date>=#{startDate}
 			</if>
 			<if test="endDate!=null">
 			<![CDATA[
-			and schedule_date<=#{endDate}
+			and p_date<=#{endDate}
 			]]>
 			</if>
 		</where>
@@ -47,14 +47,8 @@
          	from (select * 
          	from schedule 
          	<include refid="querySql"/>
-         	<choose>
-				<when test="orderStr=='ghHighScore'">
-					order by ghHighScore DESC,id,rowid
-				</when>
-				<otherwise>
-					order by ghtotal DESC,id,rowid
-				</otherwise>
-			</choose> )a
+         	order by p_date DESC
+              )a
          	where <![CDATA[ rownum <  #{endNum}]]>)
          	where rnum>=#{startNum}
 		</select>
@@ -65,7 +59,7 @@
 							and doctor_id=#{doctor_id}
 						</if>
 						<if test="startDate!=null and endDate!=null">
-								and date>=#{startDate} and date  <![CDATA[ <  ]]>  #{endDate}
+								and p_date>=#{startDate} and p_date  <![CDATA[ <  ]]>  #{endDate}
 						</if>
 				
 				</where>

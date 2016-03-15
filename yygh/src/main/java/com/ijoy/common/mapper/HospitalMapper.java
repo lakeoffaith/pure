@@ -28,9 +28,9 @@ public interface HospitalMapper{
 	@Select("select * from hospital order by id")
 	public List<Hospital> getAll();
 
-	public Long queryHospitalTotalCount(BaseQuery basequery);
+	public Long queryTotalCount(BaseQuery basequery);
 
-	public List<Hospital> queryHospitalRows(BaseQuery basequery);
+	public List<Hospital> queryRows(BaseQuery basequery);
 
 	public Long queryUserCollectHospitalTotalCount(
 			HashMap<String, Object> hashMap);

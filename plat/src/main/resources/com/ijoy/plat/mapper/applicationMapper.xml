@@ -38,6 +38,9 @@
    <update id="update" parameterType="Application">
       update Application set name=#{name},brief=#{brief},starttime=#{starttime},endtime=#{endtime},state=#{state},docpath=#{docpath} where id=#{id}
    </update>
+   
+   <!-- 只对应用表进行查找 -->
+   
    <select id="queryRows" parameterType="ApplicationQuery"  resultMap="applicationResult">
         select *
          	from (select a.*,rownum rnum
@@ -59,5 +62,43 @@
  			</if>
  		</where>
  </sql>
+		
+		<!-- 对应用表和用户表及中间表  2表进行联合查找 -->
+   
+   <select id="queryApplicationJoinEmployeeRows" parameterType="ApplicationQuery"  resultMap="applicationResult">
+         select *
+         	from (select a.*,rownum rnum
+         	from (select b.* 
+         	from application  b 
+         	left join employee_application e_a
+         	on e_a.application_id=b.id
+         	<include refid="queryApplicationJoinEmployeeSql"/>
+         	order by b.id)a
+         	where <![CDATA[ rownum <  #{endNum}]]>)
+         	where rnum>=#{startNum} 
+
+         	
+   </select>
+   <select id="queryApplicationJoinEmployeeTotalCount" parameterType="ApplicationQuery"  resultType="long">
+   	 select  count(b.id) from APPLICATION  b
+   		 	left join EMPLOYEE_APPLICATION e_a
+         	on e_a.APPLICATION_ID=b.id
+	   	    <include refid="queryApplicationJoinEmployeeSql"></include>
+   </select>
+ <sql id="queryApplicationJoinEmployeeSql">
+ 		<where>
+ 			<if test="name!=null">
+ 				and b.name like '%' || #{name} || '%'
+ 			</if>
+ 			<if test="employee_id!=null">
+ 				and e_a.employee_id=#{employee_id}
+ 			</if>
+ 			<if test="notEmployee_id!=null">
+ 				and (e_a.employee_id is  null or e_a.employee_id != #{notEmployee_id})
+ 			</if>
+ 		</where>
+ </sql>
+		
+		
 
 </mapper>

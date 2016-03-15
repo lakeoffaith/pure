@@ -10,26 +10,19 @@
 		<result column="type" property="type" />
 	</resultMap>
 
-<select id="queryDictionaryRows" parameterType="DictionaryQuery" resultMap="dictionaryResult">
+<select id="queryRows" parameterType="DictionaryQuery" resultMap="dictionaryResult">
 	
 		  select *
          	from (select a.*,rownum rnum
          	from (select * 
          	from dictionary 
          	<include refid="querySql"/>
-         	<choose>
-				<when test="orderStr=='ghHighScore'">
-					order by ghHighScore DESC,id,rowid
-				</when>
-				<otherwise>
-					order by ghtotal DESC,id,rowid
-				</otherwise>
-			</choose> )a
+          )a
          	where <![CDATA[ rownum <  #{endNum}]]>)
          	where rnum>=#{startNum}
 	</select>
 
-	<select id="queryDictionaryTotalCount" parameterType="DictionaryQuery" resultType="long">
+	<select id="queryTotalCount" parameterType="DictionaryQuery" resultType="long">
 		SELECT count(d.id) FROM dictionary  d
 		<include refid="querySql"></include>
 	
@@ -39,7 +32,7 @@
 	<sql id="querySql">		
 	<where>
 			<if test="type!=null">
-				and type like CONCAT('%',#{type},'%') 
+				and type like '%' || #{type} || '%'
 			</if>
 		</where>
 	</sql>

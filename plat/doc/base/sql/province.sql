@@ -1,0 +1,36 @@
+
+INSERT INTO PROVINCE(id,name,region_id) VALUES (1,'北京',1);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (3,'上海',2);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (5,'天津',1);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (7,'重庆',7);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (9,'安徽',2);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (27,'福建',2);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (37,'甘肃',6);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (52,'广东',5);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (74,'广西',5);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (89,'贵州',7);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (99,'海南',5);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (118,'河北',1);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (130,'河南',3);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (149,'黑龙江',4);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (163,'湖北',3);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (181,'湖南',3);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (196,'吉林',4);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (206,'江苏',2);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (220,'江西',3);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (232,'辽宁',4);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (247,'内蒙古',1);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (260,'宁夏',6);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (266,'青海',6);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (275,'山东',2);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (293,'山西',1);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (305,'陕西',6);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (316,'四川',7);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (338,'西藏',7);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (346,'新疆',6);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (362,'云南',7);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (379,'浙江',2);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (391,'香港',8);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (393,'澳门',8);
+INSERT INTO PROVINCE(id,name,region_id) VALUES  (395,'台湾',8);
+
