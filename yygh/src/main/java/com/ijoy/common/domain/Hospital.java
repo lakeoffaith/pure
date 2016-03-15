@@ -4,6 +4,8 @@ package com.ijoy.common.domain;
  * 挂号中的医院
  */
 public class Hospital {
+	
+	public static final Long TYPE_COLLECT=1L;    //收藏
 	private static final Long DEAFULT_GHTOTAL = 200L;
 	private static final String  DEAFULT_PIC = "images/gh/hos1.jpg";
 	private Long id;

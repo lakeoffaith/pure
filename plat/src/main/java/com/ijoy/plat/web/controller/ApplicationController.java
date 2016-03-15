@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ijoy.common.comutil.Ajaxresult;
+import com.ijoy.common.query.PageResult;
 import com.ijoy.plat.domain.Application;
 import com.ijoy.plat.query.ApplicationQuery;
 import com.ijoy.plat.service.IApplicationService;
@@ -34,7 +35,26 @@ public class ApplicationController {
 			map.put("application", application);
 		}
 	}
+	//返回json
+	@RequestMapping(params={"for=json"},method=RequestMethod.GET)
+	@ResponseBody
+	public Ajaxresult listJson(@ModelAttribute ApplicationQuery applicationQuery){
+		System.out.println(applicationQuery);
+		try {
+			PageResult<Application> page;
+			if (applicationQuery.getNotEmployee_id()!=null || applicationQuery.getEmployee_id()!=null) {
+				page= service.queryApplicationJoinEmployeePage(applicationQuery);
+			}else {
+				page=service.queryPage(applicationQuery);
+			}
+			
+			return new Ajaxresult(true, page.getRows());
+		} catch (Exception e) {
+			return new Ajaxresult(false, "用户获取没绑定的应用报错");
+		}
+	}
 	
+	//返回页面
 @RequestMapping(method=RequestMethod.GET)
 public  ModelAndView  list(@ModelAttribute ApplicationQuery applicationQuery){
 	System.out.println("list    "+applicationQuery);

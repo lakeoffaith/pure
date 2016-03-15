@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 
+
 public class Application {
 	private Long id;
 	private String name;
@@ -13,7 +14,8 @@ public class Application {
 	private Date endtime=new Date();
 	private int state;
 	private String docpath="";
-	private List<Employee> employeeList=new ArrayList();
+	private String url="";
+	private List<PlatEmployee> employeeList=new ArrayList();
 	public Long getId() {
 		return id;
 	}
@@ -58,11 +60,20 @@ public class Application {
 		this.docpath = docpath;
 	}
 	
-	public List<Employee> getEmployeeList() {
+	public List<PlatEmployee> getPlatEmployeeList() {
 		return employeeList;
 	}
-	public void setEmployeeList(List<Employee> employeeList) {
+	public void setPlatEmployeeList(List<PlatEmployee> employeeList) {
 		this.employeeList = employeeList;
+	}
+	
+	
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	@Override
 	public String toString() {

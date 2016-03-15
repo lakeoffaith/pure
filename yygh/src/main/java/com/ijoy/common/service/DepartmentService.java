@@ -31,5 +31,13 @@ public interface DepartmentService extends BaseCurdService<Department> {
 	
 	public List<String> findDepartmentTypeListByHospitalId(Long hospitalId);
 
+	/**
+	 * 用户收藏，浏览过的科室，挂过号的科室
+	 * @param 	department_id
+	 * @param    employee_id
+	 * @param typeCollect   1 为收藏
+	 */
+	public void insertDepartmentJoinEmployee(Long department_id, Long employee_id, Long type);
+
 
 }

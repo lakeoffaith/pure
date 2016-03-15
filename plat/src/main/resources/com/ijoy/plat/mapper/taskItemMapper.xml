@@ -10,7 +10,7 @@
     <result column="itemdescribe" property="itemdescribe"  />
     <result column="department" property="department" />
     <result column="state" property="state" />
-    <association property="employee" javaType="Employee" column="employee_id"  select="com.ijoy.plat.mapper.EmployeeMapper.get"></association>
+    <association property="employee"  javaType="PlatEmployee" column="employee_id"  select="com.ijoy.plat.mapper.PlatEmployeeMapper.get"></association>
 	</resultMap>
   <!-- getTaskItemListByTaskId -->
    <select id="getTaskItemListByTaskId" resultMap="taskItemResult" >
@@ -28,8 +28,8 @@
   </select> 
    <!-- 新增用户对象 -->
    <insert id="insert"   parameterType="TaskItem">
-      insert into TaskItem (task_id,itemCycle,itemtype,itemdescribe,department,state,employee_id)
-       values (#{task_id},#{itemCycle},#{itemtype},#{itemdescribe},#{department},#{state},#{employee.id})
+      insert into TaskItem (id,task_id,itemCycle,itemtype,itemdescribe,department,state,employee_id)
+       values (taskitem_seq.nextval,#{task_id},#{itemCycle},#{itemtype},#{itemdescribe},#{department},#{state},#{employee.id})
    </insert>
    
    <!-- 删除用户对象 -->
@@ -43,7 +43,7 @@
        itemCycle=#{itemCycle},itemtype=#{itemtype},itemdescribe=#{itemdescribe},department=#{department},state=#{state},employee_id=#{employee.id}
        where id=#{id}
    </update>
-   <select id="queryRows"  parameterType="ItemTaskQuery" resultMap="taskItemResult">
+   <select id="queryRows"  parameterType="TaskItemQuery" resultMap="taskItemResult">
          select *
          	from (select a.*,rownum rnum
          	from (select * 
@@ -53,14 +53,17 @@
          	where <![CDATA[ rownum <  #{endNum}]]>)
          	where rnum>=#{startNum}
    </select>
-   <select id="queryTotalCount"  parameterType="ItemTaskQuery"  resultType="long">
+   <select id="queryTotalCount"  parameterType="TaskItemQuery"  resultType="long">
    		 select count(id) from taskItem 
            <include refid="querySql"></include>
    </select>
    <sql id="querySql">
    	<where>
-   		<if test="itemdescribe!=null">
-   			and itemdescribe like CONCAT('%',#{itemdescribe},'%')
+   		<if test="name!=null">
+   			and name like '%' || #{name} || '%'
+   		</if>
+   		<if test="employee_id!=null">
+   			and employee_id=#{employee_id}
    		</if>
    	</where>
    </sql>

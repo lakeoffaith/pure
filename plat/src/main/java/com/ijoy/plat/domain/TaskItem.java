@@ -8,7 +8,7 @@ public class TaskItem {
 	private String itemdescribe;
 	private String department;
 	private int state=0;  //0 创建状态  1 认领状态  2  完成状态     -1非正常关闭状态
-	private Employee employee;
+	private PlatEmployee employee;
 	private Long task_id;    //归属于的任务id
 	public Long getId() {
 		return id;
@@ -46,12 +46,6 @@ public class TaskItem {
 	public void setState(int state) {
 		this.state = state;
 	}
-	public Employee getEmployee() {
-		return employee;
-	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
 	
 	public Long getTask_id() {
 		return task_id;
@@ -59,12 +53,21 @@ public class TaskItem {
 	public void setTask_id(Long task_id) {
 		this.task_id = task_id;
 	}
+	
+	
+	
+	public PlatEmployee getEmployee() {
+		return employee;
+	}
 	@Override
 	public String toString() {
-		return "TaskItem [id=" + id + ", itemCycle=" + itemCycle
-				+ ", itemtype=" + itemtype + ", itemdescribe=" + itemdescribe
-				+ ", department=" + department + ", state=" + state
-				+ ", employee=" + employee + ", task_id=" + task_id + "]";
+		return "TaskItem [id=" + id + ", itemCycle=" + itemCycle + ", itemtype=" + itemtype + ", itemdescribe="
+				+ itemdescribe + ", department=" + department + ", state=" + state + ", employee=" + employee
+				+ ", task_id=" + task_id + "]";
+	}
+	public void setPlatEmployee(PlatEmployee employee) {
+	this.employee=employee;
+		
 	}
 	
 		

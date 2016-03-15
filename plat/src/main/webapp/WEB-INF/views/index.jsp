@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -37,14 +37,14 @@
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-    	if(window.top!=window.self){
+<%--        <script type="text/javascript">
+  	if(window.top!=window.self){
     		 document.write=""; // write an empty text node to the document. (not sure why) 
     		  window.top.location=window.self.location; // set the parent document's location to this document's location.
     		  setTimeout( function(){document.body.innerHTML=""}, 0.01); // after 1 millisecond make this document's HTML empty. (Probably a memory leak fix) 
     		  window.self.onload = function(){document.body.innerHTML=""} // 
-    	}
-    </script>
+    	} 
+    </script> --%>
   </head>
   <body>
   <section id="container" class=""  >
@@ -67,7 +67,7 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="img/avatar1_s.jpg">
-                            <span class="username">${session.user.name}</span>
+                            <span class="username">${sessionScope.user.name }</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">

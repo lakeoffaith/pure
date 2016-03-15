@@ -17,11 +17,11 @@ public class UseController {
 	@Autowired
 	private OrderItemService orderItemService;
 	
-	@RequestMapping(value="center/{useId}",params="type=html",method=RequestMethod.GET)
+	@RequestMapping(value="center/{useId}",method=RequestMethod.GET)
 	public String centerHtml(@PathVariable Long useId)throws Exception{
 		return "use/center";
 	}
-	@RequestMapping(value="center/{useId}",method=RequestMethod.GET)
+	@RequestMapping(value="center/{useId}",params="for=json",method=RequestMethod.GET)
 	@ResponseBody
 	public Ajaxresult centerJson(@PathVariable Long useId)throws Exception{
 		OrderItemQuery orderItemQuery = new OrderItemQuery();

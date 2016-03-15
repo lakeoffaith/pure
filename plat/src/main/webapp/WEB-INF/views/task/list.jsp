@@ -106,6 +106,8 @@
     								<input type="button" id="inputDomainID" class="hidden"   ></input>
                                    <label for="deleteDomainID" class="btn btn-danger btn-xs" title="删除" onclick="doModelDomain('task','delete','${r.id}')"><i class="icon-trash"></i></label>
     								<input type="button" id="deleteDomainID" class="hidden"></input>
+    								<label for="AddItemDomainID" class="btn btn-danger btn-xs" title="增添" onclick="doModelDomain('task','goAddItem','${r.id}')"><i class="glyphicon glyphicon-plus"></i></label>
+    								<input type="button" id="AddItemDomainID" class="hidden"></input>
                               </td>
                           </tr>
                           	</c:forEach>

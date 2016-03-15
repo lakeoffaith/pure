@@ -23,20 +23,20 @@
         	<div class="col-md-10 col-md-offset-1">
           		<div class="hos-header">
                 	  <ol class="breadcrumb">
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Library</a></li>
-  <li class="active">Data</li>
+  <li><a href="main">首页</a></li>
+  <li><a href="hospital">医院</a></li>
+  <li class="active">${hospital.name} </li>
 </ol>
-                <h3>深圳百合医院 <small class="text-showy">三甲医院</small></h3>
+                <h3>${hospital.name}  <small class="text-showy">${hospital.level}</small></h3>
                 
                 <div class="thumbnail" style="border:none;position:relative;padding-left:170px;border-bottom:1px solid #ededed;" >
       <img src="images/gh/hos1.jpg" alt="..." style="position:absolute;left:0px;top:10px;width:150px;height:150px;">
       <div class="caption" style="padding-right:100px;">
-        <p>成都第二人民医院</p>
-        <p>地址：武侯区人民南路四段</p>
-        <p>官网：www.cd2yy.com</p>
-        <p>电话：02812345678</p>
-        <p>简介：成都市集医疗、科研、教学、预防、保健、康复服务为一体的现代化综合医院</p>
+        <p>医院：${hospital.name }</p>
+        <p>地址：${hospital.address }</p>
+        <p>官网：${hospital.url }</p>
+        <p>电话：${hospital.tel}</p>
+        <p>简介 : 集医疗、科研、教学、预防、保健、康复服务为一体的现代化综合医院</p>
        
         
         
@@ -50,7 +50,7 @@
                           <li>电话：0755-28177681</li>
                           <li>地址：深圳市龙岗区布吉深惠路359号</li>
                           
-                          <span class="float-right">已预约 <span class="h4 text-showy">36,900 </span> 人</span>
+                          <span class="float-right">已预约 <span class="h4 text-showy">${hospital.ghTotal }</span> 人</span>
                         </ul>
                         
                         
@@ -75,6 +75,8 @@
                 
                 <div class="hos-dep">
                 <div class="dep-item row" style="margin-top:12px;padding-bottom:12px;border-bottom:1px solid #ededed;">
+                		<div id="departmentUlDiv"  data-hospital_id="${hospital.id }">
+                		</div>
                 	<div class="header col-md-2" >
                     	<p class="h4">
                     	<span class="glyphicon glyphicon-euro text-info"></span> 妇科</p>
@@ -112,6 +114,32 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed --> 
 	<script src="js/bootstrap.js"></script>
     <script src="js/gh/global.js"></script>
+    <script src="js/model/domain.js"></script>
+   <script type="text/javascript">
+   //加载医院所拥有的科室
+   $(function(){
+	   var hospital_id=$("#departmentUlDiv").attr("data-hospital_id");
+	   var baseQuery={"hosId":hospital_id};
+	   $.ajax({
+		   url:"department?for=json",
+			data:baseQuery,
+			type:"get",
+			dataType:"json",
+			success:function(data){
+				if(data.success){
+					$("#departmentUlDiv").empty();
+					var str="<ul class='list-inline' style='padding-top:10px;'>";
+					$.each(data.obj.rows,function(e,v){
+						str+=" <li><a onclick='doModelDomain(\"department\",null,\""+v.id+"\")'>"+v.name+"</a></li>";
+					});
+					str+="</ul>"
+					$("#departmentUlDiv").append(str);
+				}
+			}
+	   });
+   });
+   
+   </script>
    
 </body>
 </html>

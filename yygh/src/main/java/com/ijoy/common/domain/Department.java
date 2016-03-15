@@ -4,6 +4,7 @@ package com.ijoy.common.domain;
  * 为挂号中的科室  domain
  */
 public class Department {
+	public static final Long  TYPE_COLLECT = 1l;
 	private Long id;
 	private String code;
 	private String pinyin;

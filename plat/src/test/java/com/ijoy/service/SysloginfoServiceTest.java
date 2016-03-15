@@ -5,8 +5,8 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ijoy.plat.domain.Sysloginfo;
-import com.ijoy.plat.service.ISysloginfoService;
+import com.ijoy.common.domain.Sysloginfo;
+import com.ijoy.common.service.ISysloginfoService;
 
 
 public class SysloginfoServiceTest extends BaseTest{

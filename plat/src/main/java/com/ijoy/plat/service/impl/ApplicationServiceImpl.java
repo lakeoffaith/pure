@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ijoy.common.query.BaseQuery;
+import com.ijoy.common.query.PageResult;
 import com.ijoy.plat.domain.Application;
 import com.ijoy.plat.mapper.ApplicationMapper;
-import com.ijoy.plat.query.BaseQuery;
-import com.ijoy.plat.query.PageResult;
 import com.ijoy.plat.service.IApplicationService;
 @Service
 public class ApplicationServiceImpl  implements IApplicationService {

@@ -86,7 +86,7 @@
 	</select>
 
 	<select id="queryTotalCount" parameterType="HospitalQuery" resultType="long">
-		SELECT count(h.id) FROM hospital  h
+		SELECT count(id) FROM hospital 
 		<include refid="querySql"></include>
 	
 	</select>

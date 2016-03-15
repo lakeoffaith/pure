@@ -39,12 +39,10 @@
     <style type="text/css">
     
     </style>
-    
-   
   </head>
 
   <body>
-  <section id="main-content">
+  <section id="main-content"  data-employee_id="${sessionScope.user.id }">
           <section class="wrapper ">
               <!--state overview start-->
               <div class="row" style="padding: 0px; ">
@@ -63,37 +61,38 @@
                                       <i class="icon-user"></i>
                                   </div>
                                   <div class="value">
-                                      <h4>1293689</h4>
+                                      <h4>${allEmployeeCount }</h4>
                                       <p>新用户</p>
                                   </div>
                               </section>
                           </div> 
-                          <div class="col-lg-3 col-md-3 col-sm-3">
+                          <div class="col-lg-3 col-md-3 col-sm-3" >
                               <section class="panel">
                                   <div class="symbol red">
                                       <i class="icon-user-md"></i>
                                   </div>
                                   <div class="value">
-                                      <h4>2489663</h4>
+                                      <h4>5673454</h4>
                                       <p>就诊人次</p>
                                   </div>
                               </section>
                           </div>
-                          <div class="col-lg-3 col-md-3 col-sm-3">
+                          <div class="col-lg-3 col-md-3 col-sm-3" >
                               <section class="panel">
                                   <div class="symbol yellow">
                                       <i class="icon-paste"></i>
                                   </div>
                                   <div class="value">
-                                      <h4>31</h4>
+                                      <h4>${ownTaskItemCount }</h4>
                                       <p>我的任务</p>
                                   </div>
                               </section>
                           </div>
-                          <div class="col-lg-3 col-md-3 col-sm-3">
+                          
+                          <div class="col-lg-3 col-md-3 col-sm-3"  id="ownApplicationDivId">
                               <section class="panel">
                                   <div class="symbol blue">
-                                      <i class="icon-unlock"></i>
+                                      <a href="application" ><i class="icon-unlock"></i></a>
                                   </div>
                                   <div class="value">
                                       <h4>6</h4>
@@ -230,7 +229,7 @@
                                   <div class="col-lg-12 col-md-12 col-sm-12">
                                       <section class="panel panel-m0">
                                           <div class="panel-body">
-                                              <ul class="summary-list">
+                                              <ul class="summary-list"  id="OwnApplicationUlId">
                                                  
                                                     <li>
                                                       <a href="javascript:;">
@@ -383,7 +382,7 @@
                       </section>
                       <!--revenue end-->
                   </div>
-                  <div id="examplefirst"  class="col-lg-12 col-md-12 col-sm-12" style="height: 250px;width: 100%;padding: 0px; "></div>
+                  <div id="examplefirst"  class="col-lg-12 col-md-12 col-sm-12" style="height: 250px;width: 100%;padding: 0px;margin-top: 200px "></div>
               </div>
     </section>
   </section>
@@ -414,11 +413,43 @@
     <script src="js/morris-script.js"></script>
     <script src="js/all-chartjs.js"></script>
     <script src="js/sparkline-chart.js"></script>
-   
+    <script type="text/javascript">
+                                          			function loadOwnApplication(employee_id,$ul){
+                                          				
+                                          				var baseQuery={};
+                                          				baseQuery.employee_id=employee_id;
+                                          				$.ajax({
+                                          					url:"application?"+"for=json",
+                                          					data:baseQuery,
+                                          					type:"get",
+                                          					dataType:"json",
+                                          					success:function(data){
+                                          						if(data.success){
+                                          							$ul.empty();
+                                          							str="";
+                                          							$.each(data.results,function(e,v){
+                                          								str+="<li onclick='goNewTab(\""+v.url+"\")'><img src='img/app14.png'>"+v.name+"</li>"
+                                          							});
+                                          							$ul.append(str);
+                                          							$("#ownApplicationDivId").find("h4").html(data.results.length);
+                                          						}
+                                          					}
+                                          				});
+                                          			}
+                                          		$(function(){
+                                          			employee_id=$("#main-content").attr("data-employee_id");
+                                          			loadOwnApplication(employee_id,$("#OwnApplicationUlId"));
+                                          			
+                                          		});
+                                          	
+                                          	</script>
   <script>
 
-      //owl carousel
-
+    /*   浏览器新打开一个tab */
+		function goNewTab(url){
+    	  window.open(url);
+      }	;
+      
       $(document).ready(function() {
           $("#owl-demo").owlCarousel({
               navigation : true,

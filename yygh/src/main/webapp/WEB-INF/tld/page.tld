@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"  
+      "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">  
+<taglib>  
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.1</jspversion> 
+	<shortname>page</shortname>
+	<uri>ption</uri>
+	<info>我的示例标签库</info>
+	<tag>
+		<name>htmlPage</name>
+		<tagclass>com.ijoy.common.page.PageTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>htmlPage Tag</info>
+		<attribute>
+			<name>pageNo</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>pageSize</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>totalSum</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>url</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showPage</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

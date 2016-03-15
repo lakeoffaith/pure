@@ -57,6 +57,10 @@
 	<div class="container-fluid" id="wrapper">
          <div class="row" style="margin-top:20px;">
         	<div class="col-md-10 col-md-offset-1">
+        	  <ol class="breadcrumb">
+                      <li><a href="main">首页</a></li>
+					  <li class="active">用户中心 </li>
+                    </ol>
             <div class="use_central " style="display: block;">
 	<div  class="col-md-3">
 	    <h2>用户中心</h2>
@@ -138,7 +142,7 @@
  
  function loadYyLog(userId){
 	 $.ajax({
-		 url:"use/center/2",
+		 url:"use/center/2?for=json",
 		 type:"GET",
 		 dataType:"json",
 		 success:function(data){

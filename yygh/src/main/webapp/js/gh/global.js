@@ -1,4 +1,18 @@
-	function dateFormat(dd){
+	
+/*点击关闭导航栏中平台中心，浏览器能跳到平台的tab页面中，并把当前页面关闭*/
+$(function(){
+	$(".conditionBar").find("span.glyphicon-remove").on("click",function(){
+		var userAgent = navigator.userAgent;
+		if (userAgent.indexOf("Firefox") != -1 || userAgent.indexOf("Chrome") !=-1) {
+		   window.location.href="http://localhost:8889/plat/index";
+		} else {
+		   window.opener = "http://localhost:8889/plat/index";
+		   window.open("", "_self");
+		   window.close();
+		};
+		});
+	});
+function dateFormat(dd){
 				var d=new Date(dd);
 				var year=d.getFullYear().toString();
 				var month=d.getMonth()+1;
@@ -13,9 +27,7 @@
 			}
 
 
-function show(name,id){
-location.href=name+"/"+id+"?type=html";
-}
+
 
 
 // JavaScript Document

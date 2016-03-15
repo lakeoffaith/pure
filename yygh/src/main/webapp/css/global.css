@@ -3,6 +3,13 @@
 .thumbnail {
 	margin-bottom: 0px;
 }
+a:focus, a:hover{
+	cursor: pointer;
+}
+
+li.click,p.click,h3.click{
+	cursor:pointer;
+}
 
 body {
 	position: absolute;

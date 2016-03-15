@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ijoy.common.query.BaseQuery;
+import com.ijoy.common.query.PageResult;
 import com.ijoy.plat.domain.TaskItem;
 import com.ijoy.plat.mapper.TaskItemMapper;
 import com.ijoy.plat.service.ITaskItemService;
@@ -21,32 +23,37 @@ public class TaskItemServiceImpl   implements ITaskItemService {
 
 	@Override
 	public Long insert(TaskItem t) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.insert(t);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+		mapper.delete(id);
 	}
 
 	@Override
 	public void update(TaskItem t) {
-		// TODO Auto-generated method stub
-		
+		mapper.update(t);
 	}
 
 	@Override
 	public TaskItem get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.get(id);
 	}
 
 	@Override
 	public List<TaskItem> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.getAll();
+	}
+
+	@Override
+	public PageResult<TaskItem> queryPage(BaseQuery baseQuery) {
+		Long count = mapper.queryTotalCount(baseQuery);
+		if(count>0){
+			List<TaskItem> rows = mapper.queryRows(baseQuery);
+			return new PageResult<>(count, rows, baseQuery.getPageSize(), baseQuery.getCurrentPage());
+		}
+		return new PageResult<>();
 	}
 	
 }

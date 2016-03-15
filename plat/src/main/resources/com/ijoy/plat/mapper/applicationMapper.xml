@@ -26,7 +26,7 @@
   
    <!-- 新增用户对象 -->
    <insert id="insert" parameterType="Application">
-      insert into Application (id,name,brief,starttime,endtime,state,docpath) values (application_seq.nextval,#{name},#{brief},#{starttime},#{endtime},#{state},#{docpath})
+      insert into Application (id,name,brief,starttime,endtime,state,docpath,url) values (application_seq.nextval,#{name},#{brief},#{starttime},#{endtime},#{state},#{docpath},#{url})
    </insert>
    
    <!-- 删除用户对象 -->
@@ -36,7 +36,7 @@
    
    <!-- 更新用户对象 -->
    <update id="update" parameterType="Application">
-      update Application set name=#{name},brief=#{brief},starttime=#{starttime},endtime=#{endtime},state=#{state},docpath=#{docpath} where id=#{id}
+      update Application set name=#{name},brief=#{brief},starttime=#{starttime},endtime=#{endtime},state=#{state},docpath=#{docpath},url=#{url} where id=#{id}
    </update>
    
    <!-- 只对应用表进行查找 -->

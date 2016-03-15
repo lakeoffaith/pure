@@ -1,0 +1,93 @@
+body,h3 {
+  font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Segoe UI","Microsoft Yahei",Tahoma,Arial,STHeiti,sans-serif;
+}
+.wrapper .breadcrumb{border-radius: 0px;padding: 5px 15px;}
+.wrapper {padding-top: 0px;padding-bottom: 5px;}
+#hero-graph, #hero-bar, #hero-area, #hero-donut {height: 263px}
+.revenue-head.has{background: #58c9f3;}
+.revenue-head.has span{background:#4FB5DB;}
+.revenue-head {line-height: 35px;}
+.revenue-head span {padding: 9px;}
+.revenue-head span.rev-combo {padding: 9px;}
+a.logo {font-size: 26px;margin-top: 10px;font-weight: 600;}
+a.logo span {padding-left:10px;color: #6E7E92}
+a.logo span.tlt2 {font-size: 26px;padding-left: 20px;color: #6E7E92}
+ul.summary-list > li {width: 9.5%;border-right: 0px solid #eaeaea;}
+ul.sidebar-menu li a {font-size: 18px;color:#BBBFC5}
+ul.sidebar-menu li a i {font-size: 18px;}
+ul.sidebar-menu li ul.sub li a {font-size: 16px;padding: 0 0 0 42px;}
+.summary-list img{display: block;padding-bottom:10px}
+.label {padding: 0.4em 0.6em;}
+.panel {
+  margin-bottom: 10px;
+  }
+.panel-m0{
+ 	  margin-bottom: 0px;
+ }
+.breadcrumb {
+  margin-bottom: 10px;
+}
+.state-overview .value {
+  padding-top: 5px;
+}
+.state-overview .symbol {
+  padding: 15px 15px;
+}
+.panel-body {
+  padding: 5px;
+}
+.panel-body.user-info{
+  padding: 15px;
+}
+.panel-heading {
+  padding: 5px 15px;
+}
+.weather{
+	padding: 40px 10px;
+}
+.weather-category ul li h5 {
+  margin: 12px 0 20px 0;
+}
+.summary-list img {
+  width: 46px;
+  height: 56px;
+}
+.state-overview .symbol i {
+  font-size: 36px;
+}
+.state-overview .value h4, .state-overview .value p {
+  margin: 0;
+  padding: 0;
+  color: #c6cad6;
+}
+.state-overview .value {
+  padding-top: 15px;
+}
+ul.summary-list > li > a {
+  padding: 5px 0;
+}
+.weather-category {
+  padding: 30px 0;
+}
+ul.summary-list {
+  font-size: 12px;
+}
+.table thead>tr>th.oprow-btn {
+    border-bottom: 1px solid #ddd;
+}
+.table thead>tr>th.oprow-btn button.btn{
+    float: left;
+}
+.table thead>tr>th.oprow-btn .date-label{
+    float: left;
+    line-height: 14px;
+    padding: 10px 0px 0px 15px;
+    margin-left: 50px;
+}
+.dataTables_length, .dataTables_filter {
+    padding: 15px 15px 0px 15px;
+}
+/* 李振纲修改table的css */
+.modal-dialog {
+    width:80%;
+}

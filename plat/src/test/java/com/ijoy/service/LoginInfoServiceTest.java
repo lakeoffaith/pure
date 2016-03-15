@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ijoy.common.comutil.MD5Util;
-import com.ijoy.plat.domain.LoginInfo;
-import com.ijoy.plat.service.ILoginInfoService;
+import com.ijoy.common.domain.LoginInfo;
+import com.ijoy.common.service.ILoginInfoService;
 
 
 public class LoginInfoServiceTest extends BaseTest{
@@ -103,5 +103,18 @@ public class LoginInfoServiceTest extends BaseTest{
 		String password="admin3";
 		String jm = MD5Util.JM(MD5Util.MD5(password));
 		System.out.println(jm);
+	}
+	
+	/*
+	 * 手动更新密码
+	 */
+	@Test
+	public void updatePassword(){
+		String password="admin3";
+		String jm = MD5Util.JM(MD5Util.MD5(password));
+		LoginInfo loginInfo = loginInfoService.get(2L);
+		loginInfo.setPassword(jm);
+		System.out.println(loginInfo);
+		loginInfoService.update(loginInfo);
 	}
 }

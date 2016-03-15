@@ -1,6 +1,6 @@
 package com.ijoy.plat.query;
 
-
+import com.ijoy.common.query.BaseQuery;
 
 public class FeedbackQuery extends BaseQuery {
 	private String content;

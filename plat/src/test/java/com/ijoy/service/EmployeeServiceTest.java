@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ijoy.plat.domain.Employee;
-import com.ijoy.plat.domain.Role;
-import com.ijoy.plat.query.ApplicationQuery;
-import com.ijoy.plat.service.IEmployeeService;
+import com.ijoy.common.domain.Employee;
+import com.ijoy.common.domain.Role;
+import com.ijoy.common.service.IEmployeeService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
