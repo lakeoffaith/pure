@@ -8,6 +8,13 @@
   <artifactId>yzjc</artifactId>
   <packaging>war</packaging>
   <url>http://maven.apache.org</url>
+  <dependencies>
+  			<dependency>
+  <groupId>com.github.abel533</groupId>
+  <artifactId>ECharts</artifactId>
+  <version>3.0.0</version>
+</dependency>
+  </dependencies>
   <build>
   			<finalName>yzjc</finalName>
   			<plugins>
