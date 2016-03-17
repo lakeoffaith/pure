@@ -9,10 +9,65 @@
 <html>
 	<head>
 		<base href="<%=basePath %>">
-		<script src="js/jquery.js"></script>
+	<link href="css/ijoy/roll/roll.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap" rel="stylesheet">
+	<style>
+			div.roll>ul{
+				list-style:none;
+	}
+			div.roll>ul >li{
+			display:inline;
+			height:inherit;
+
+
+
+	}
+	div.roll>ul >li:hover{
+	cursor:pointer;
+
+	}
+	.roll li.title{
+	background-color:yellow;
+	paddind:0px 3px;
+	}
+	</style>
+	<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 		<script src="echarts/echarts.js"></script>
 	</head>
 	<body>
+
+	<div  class="col-md-2">
+				<div class="roll">
+					<ul>
+						<li class="title">年份：</li>
+						<li class="pre"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></li>
+						<li>
+							2013
+						</li>
+						<li>2014</li>
+						<li>2015</li>
+						<li>2016</li>
+						<li class="next"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></li>
+					</ul>
+				</div>
+	</div>
+	<div  class="col-md-2">
+	<div class="roll">
+	<ul>
+	<li class="title">月份：</li>
+	<li class="pre"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></li>
+	<li>
+	一月
+	</li>
+	<li>二月</li>
+	<li>三月</li>
+	<li>四月</li>
+	<li class="next"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></li>
+	</ul>
+	</div>
+	</div>
 	<div id="psLine" style="width:600px;height:600px"></div>
 
 		<script type="text/javascript">

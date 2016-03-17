@@ -82,13 +82,7 @@
 
                         <lable>用户权限配置</lable>
                         <div class="tree">
-                            <ul>
-                            <li class="active" data-id="1"><input type="checkbox"><span>管理系统</span>
-                            <ul  class="sub-tree" >
-                            <li ><input type="checkbox"><span>角色管理</span></li>
-                            </ul>
-                            </li>
-                            </ul>
+
                         </div>
 
                 </div>
@@ -120,7 +114,11 @@
         function inputTreeids(){
             var ids=getTreeids($(".tree"));
     console.debug("ids     "+ids);
-            $("#treeids").val(ids);
+
+    $("#treeids").val(ids);
+
+
+
         }
         //根据角色id加载menu
         $(function(){

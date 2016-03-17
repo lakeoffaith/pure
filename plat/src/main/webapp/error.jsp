@@ -8,9 +8,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath %>" />
 <title>页面报错</title>
-    <script src="<%=path%>/js/jquery.js"></script>
+    <script src="js/jquery.js"></script>
      <!-- domain.js for domain -->
-     <script src="<%=path%>/js/model/domain.js"></script>
+     <script src="js/model/domain.js"></script>
 <script type="text/javascript"> 
 	var t = 5; 
 	function countDown(){ 
@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//time.value=t;
 	time.innerHTML = t;
 	if (t<=0) { 
-	top.location.href=pathjs+"index.action"; 
+	top.location.href="index.action"; 
 	clearInterval(inter); 
 	}; 
 	} 
@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body onload="countDown()">
 	<div align="center">
 		访问的页面找不到，<span id="time">5</span>秒后回到 主页面<br>
-		若5秒后，没有跳转<a href='javascript:window.top.location="<%=basePath%>index.action";document.body.innerHTML="";'>点击这里</a>
+		若5秒后，没有跳转<a href='javascript:window.top.location="index.action";document.body.innerHTML="";'>点击这里</a>
 	</div>
 
 </body>

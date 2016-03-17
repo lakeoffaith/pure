@@ -11,6 +11,7 @@ import com.github.abel533.echarts.axis.AxisLine;
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.SplitLine;
 import com.github.abel533.echarts.axis.ValueAxis;
+import com.github.abel533.echarts.code.Tool;
 import com.github.abel533.echarts.code.X;
 import com.github.abel533.echarts.code.Y;
 import com.github.abel533.echarts.series.Line;
@@ -66,7 +67,8 @@ public class IncomeServiceImpl  implements IncomeService{
 		option.xAxis(categoryAxis);
 		option.yAxis(new ValueAxis().name("IP")
 			    .axisLine(new AxisLine().show(true).lineStyle(new LineStyle().width(0))).max(400));
-
+		Tool values=Tool.dataView;
+		option.toolbox().feature(values).show();
 		//设置数据
 		option.series(line);
 		return option;

@@ -55,11 +55,14 @@ public class RoleServiceImpl  implements IRoleService {
 	@Override
 	public void insertJoinMenuAfterDelete(Long id, String menuIds) {
 				mapper.deleteJoinMenuById(id);
-				String[] strings = menuIds.split(",");
-				for (int i = 0; i < strings.length; i++) {
-					Long menuid=Long.valueOf(strings[i]);
-					mapper.insertJoinMenu(id, menuid);
+				if(StringUtils.isNotBlank(menuIds)){
+					String[] strings = menuIds.split(",");
+					for (int i = 0; i < strings.length; i++) {
+						Long menuid=Long.valueOf(strings[i]);
+						mapper.insertJoinMenu(id, menuid);
+					}
 				}
+			
 	}
 
 
