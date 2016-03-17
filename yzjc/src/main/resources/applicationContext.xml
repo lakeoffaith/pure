@@ -16,7 +16,17 @@
 	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
 
    <!-- 2、添加SpringMVC驱动 -->
-	 <mvc:annotation-driven/>
+	 <mvc:annotation-driven>
+	 <mvc:message-converters>
+	 			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  
+	 				<property name="supportedMediaTypes" value="application/json"/>
+                   <property name="objectMapper">  
+                       <bean class="com.ijoy.common.comutil.ObjectMappingCustomer"></bean>  
+                   </property>  
+               </bean>     
+	 </mvc:message-converters>
+	 		
+	 </mvc:annotation-driven>
 	 <!-- 3、静态资源兼容 -->
 	 <mvc:default-servlet-handler/>
      <context:property-placeholder location="classpath:jdbc.properties" />  
@@ -95,4 +105,6 @@
         </props>
     </property>
 	</bean>
+	
+	
 </beans>

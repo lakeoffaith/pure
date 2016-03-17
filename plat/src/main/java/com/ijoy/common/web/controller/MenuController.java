@@ -41,7 +41,8 @@ public class MenuController {
 @ResponseBody
      public  Ajaxresult queryList(@ModelAttribute MenuQuery baseQuery){
     	 List<Menu> results=service.queryPage(baseQuery).getRows();
-    	 return new Ajaxresult(true, results);
+    	 System.out.println(results);
+    	 return new Ajaxresult(true, results);	
      }
 	
 	  

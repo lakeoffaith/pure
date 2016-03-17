@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.ijoy.plat.mapper.IncomeMapper">
+
+<select id="queryIncome"  resultType="map">
+	select trunc(p_date)  name,sum(score) value from orderitem where to_char(p_date,'yyyy-mm')='2016-03' group by trunc(p_date)
+
+</select>
+
+ <sql id="querySql">
+ 		<where>
+ 			<if test="name!=null">
+ 				and b.name like '%' || #{name} || '%'
+ 			</if>
+ 			<if test="employee_id!=null">
+ 				and e_a.employee_id=#{employee_id}
+ 			</if>
+ 			<if test="notEmployee_id!=null">
+ 				and (e_a.employee_id is  null or e_a.employee_id != #{notEmployee_id})
+ 			</if>
+ 		</where>
+ </sql>
+		
+		
+
+</mapper>
