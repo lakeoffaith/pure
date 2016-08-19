@@ -1,6 +1,7 @@
 # pure
 
 ***put data to oracle***
+	- set lang and LNS_LANG
 	- lsnrctl start
 	- sqlplus / as sysdba
 	- startup

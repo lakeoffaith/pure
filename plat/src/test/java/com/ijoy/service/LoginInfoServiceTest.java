@@ -110,9 +110,9 @@ public class LoginInfoServiceTest extends BaseTest{
 	 */
 	@Test
 	public void updatePassword(){
-		String password="admin3";
+		String password="admin1";
 		String jm = MD5Util.JM(MD5Util.MD5(password));
-		LoginInfo loginInfo = loginInfoService.get(2L);
+		LoginInfo loginInfo = loginInfoService.get(1L);
 		loginInfo.setPassword(jm);
 		System.out.println(loginInfo);
 		loginInfoService.update(loginInfo);

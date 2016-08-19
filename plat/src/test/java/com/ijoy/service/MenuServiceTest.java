@@ -103,10 +103,10 @@ public class MenuServiceTest extends BaseTest{
 				Menu nMenu = nEntry.getValue();
 				
 				//如果有父类，且为当前层的
-			/*	if(nMenu!=null && type==nMenu.getType() && null!=nMenu.getParent_id()){
+				if(nMenu!=null && type==nMenu.getType() && null!=nMenu.getParent_id()){
 					menuMap.get(nMenu.getParent_id()).getChildren().add(nMenu);
 					iterator.remove();
-				}*/
+				}
 			}
 			type--;
 		}
@@ -126,15 +126,13 @@ public class MenuServiceTest extends BaseTest{
 		role.setId(1L);
 		List<Menu> menus= menuService.getMenuListByRole(role);
 		System.out.println("menus:"+menus);
-<<<<<<< HEAD
-	/*	List<Menu> menujson = Menu.formatJson(menus);
-		System.out.println(menujson);*/
+
 	}
-=======
+
 		List<Menu> menujson = Menu.formatJson(menus);
 		System.out.println(menujson);
 	*/}
->>>>>>> 42a50cfe0ed06dadc34a7d07b099896cddd5e479
+
 	/*
 	 * 全部菜单测试
 	 */
@@ -156,8 +154,8 @@ public class MenuServiceTest extends BaseTest{
 		System.out.println("menulist====="+menulist);
 		System.out.println("menuListByRole====="+menuListByRole);
 		ListUtil.dereplication(menulist, menuListByRole);
-	/*	List<Menu> menujson = Menu.formatJson(menulist);
-		System.out.println(menujson);*/
+		List<Menu> menujson = Menu.formatJson(menulist);
+		System.out.println(menujson);
 		
 	*/}
 	

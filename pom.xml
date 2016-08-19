@@ -9,7 +9,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>3.2.2.RELEASE</spring.version>
+		<spring.version>4.0.1.RELEASE</spring.version>
 		<mybatis.version>3.3.0</mybatis.version>
 		<mybatis-spring.version>1.2.2</mybatis-spring.version>
 	</properties>
@@ -30,8 +30,8 @@
 		<!-- oracle -->
 		<dependency>
 			<groupId>com.oracle</groupId>
-			<artifactId>oracle12</artifactId>
-			<version>12c.0</version>
+			<artifactId>ojdbc7</artifactId>
+			<version>12.1.0</version>
 		</dependency>
 		<!-- mybatis -->
 		<dependency>
@@ -85,7 +85,7 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.8.5</version>
+			<version>1.8.6</version>
 		</dependency>
 
 		<!-- log4j需要的jar包 -->

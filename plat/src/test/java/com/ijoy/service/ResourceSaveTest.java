@@ -19,7 +19,7 @@ public class ResourceSaveTest extends BaseTest{/*
 	
 	//添加插入菜单脚本
 	@Test
-	public void insertMenuTest(){/*
+	public void insertMenuTest(){
 		//清空数据Menu数据表
 		menuService.deleteAll();
 		//插入管理系统
@@ -91,16 +91,13 @@ public class ResourceSaveTest extends BaseTest{/*
 		menuService.insert(new Menu(65,"反馈编辑","feedback\\input.action",63L,2,2,""));
 		menuService.insert(new Menu(66,"反馈增加","feedback\\save.action",63L,3,2,""));
 		menuService.insert(new Menu(67,"反馈删除","feedback\\delete.action",63L,4,2,""));
-		
-		
-		
-		
-		
-	*/}
+	
+	}
 	
 	//更新中间表
 	@Test
 	public void rolemenuTest(){
+		/*
 		//给系统管理员设置所有权限。
 				Role role=roleService.getByName("系统管理员");
 				List<Menu> menuList=menuService.getAll();
@@ -111,7 +108,8 @@ public class ResourceSaveTest extends BaseTest{/*
 				Role r=roleService.getByName("普通用户");
 				List<Menu> menuList1=menuService.getMenuByMenuName("个人办公");
 				menuService.saveRoleMenu(r, menuList1);
+				
 	}
 
-	
-*/}
+	*/
+}
