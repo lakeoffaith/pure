@@ -1,5 +1,6 @@
 package com.ijoy.common.web.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ijoy.common.comutil.Ajaxresult;
+import com.ijoy.common.comutil.ApiResult;
 import com.ijoy.common.domain.Employee;
 import com.ijoy.common.query.EmployeeQuery;
 import com.ijoy.common.service.IEmployeeService;
@@ -35,6 +37,14 @@ public class EmployeeController {
 			map.put("employee", employee);
 		}
 	}
+	@RequestMapping(value="/api",method=RequestMethod.GET)
+	@ResponseBody
+	public ApiResult apiList(String token){
+		System.out.println("token="+token);
+		List employeeList= employeeService.queryEmployees(new EmployeeQuery()).getRows();
+		return new ApiResult(true,employeeList);
+	}
+	
 	@RequestMapping(method=RequestMethod.GET )
 	public  ModelAndView  list(@ModelAttribute  EmployeeQuery  employeeQuery){
 		ModelAndView mv = new ModelAndView();

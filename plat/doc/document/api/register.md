@@ -1,31 +1,16 @@
 ##ijoy User API
+
+####返回类型####
+com.ijoy.common.comutil.ApiResult
+
+    status:状态
+    ijoy:数据数组
+    msg:错误的消息
+
+
+####API登录####
 	
-####注册####
+com.ijoy.common.web.controller.LoginInfoController#apiCheck
 	
-    
-***url***:/loginInfo/register 
-    
-***request***:post   reponse:json
-    
-***needAuthorized***:false
-    
-    params
-    	name			昵称（qq,weibo等名称）
-        password			
-        qqid			
-        weiboid			openid
-        avatar			openid
-        type			登录的类型（qq为qq,weibo为weibo,weibo,手动为handle）
-        clientSID		注册的平台类型（yyghAndroid）
-   
-   
-   
-   	return
-    	{
-        	"id":3
-        	"status":true
-        }
-    	
-    id:用户在表中的id
-    status:注册状态
-    
+    -	检查存在用户，
+    -	生产token()

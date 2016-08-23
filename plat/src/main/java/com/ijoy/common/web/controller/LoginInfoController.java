@@ -1,5 +1,7 @@
 package com.ijoy.common.web.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ijoy.common.comutil.Ajaxresult;
+import com.ijoy.common.comutil.ApiResult;
 import com.ijoy.common.comutil.CookieUtil;
 import com.ijoy.common.comutil.MD5Util;
 import com.ijoy.common.comutil.UserContext;
@@ -27,6 +30,8 @@ import com.ijoy.common.service.IEmployeeService;
 import com.ijoy.common.service.ILoginInfoService;
 import com.ijoy.common.service.IMenuService;
 import com.ijoy.common.service.ISysloginfoService;
+
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/loginInfo")
@@ -48,6 +53,37 @@ public class LoginInfoController {
 		//默认不记住密码
 	    private boolean stringRegex(String in,String regex){
 	    	return in.matches(regex);
+	    }
+	    @RequestMapping(value="/check/api",method=RequestMethod.POST)
+	    @ResponseBody
+	    public ApiResult apiCheck(HttpServletRequest request){
+	    	StringBuffer jb=new StringBuffer();
+	    	String line=null;
+	    	try{
+	    		BufferedReader reader = request.getReader();
+	    		while((line=reader.readLine())!=null)
+	    			jb.append(line);
+	    	}catch(Exception e){
+	    		System.out.println("error");
+	    	}
+	    	System.out.println("jb="+jb);
+	    	try{
+	    		JSONObject jsonObject=JSONObject.fromObject(jb.toString());
+	    		System.out.println("jsonObject="+jsonObject);
+	    	}catch(Exception e){
+	    		System.out.println("error");
+	    	}
+	    	
+	    	System.out.println("request="+request.getHeader("Authorization"));
+	    	LoginInfo user=loginInfoService.findByLogin(new LoginInfo("admin1",MD5Util.JM(MD5Util.MD5("admin1"))));
+	    	if(user!=null){
+	    		//根据（user_id,生产时间，设备类型）
+	    		ApiResult result=new ApiResult(true,user);
+	    		result.setToken(user.getId()+":"+new Date().getTime()+":"+"android");
+	    		return result;
+	    	}
+	    	return new ApiResult(false,"登录失败");
+	    	
 	    }
 		// 处理登录请求
 	    @RequestMapping(value="/check",method=RequestMethod.POST)
